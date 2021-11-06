@@ -12,11 +12,19 @@ const FormLogin = () => {
           earum sequi autem, dolorem culpa atque nulla ipsa debitis,
         </p>
         <Form className="formLogin__formInput">
-          <Form.Group className="mb-3 formLogin__email" controlId="formBasicEmail">
+          <Form.Group
+            className="mb-3 formLogin__email"
+            controlId="formBasicEmail"
+            style={{ paddingBottom: "15px" }}
+          >
             <Form.Label>Email address</Form.Label>
             <Form.Control type="email" placeholder="Masukkan alamat email" />
           </Form.Group>
-          <Form.Group className="mb-3 formLogin__password" controlId="formBasicPassword">
+          <Form.Group
+            className="mb-3 formLogin__password"
+            controlId="formBasicPassword"
+            style={{ paddingBottom: "15px" }}
+          >
             <Form.Label>Kata Sandi</Form.Label>
             <Form.Control type="password" placeholder="Masukkan kata sandi" />
           </Form.Group>

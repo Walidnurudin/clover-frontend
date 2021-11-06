@@ -1,7 +1,7 @@
 .row__overlay {
   position: absolute;
   width: 100%;
-  height: 100%;
+  height: 93.8%;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -29,7 +29,7 @@
 }
 
 .row__image {
-  height: 100%;
+  height: 95%;
   width: 100%;
   object-fit: cover;
 }

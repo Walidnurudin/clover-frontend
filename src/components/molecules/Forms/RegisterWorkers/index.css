@@ -1,5 +1,7 @@
 .formSignUp {
-  padding: 10em 6em;
+  padding: 9em 6em 4em !important;
+  position: absolute;
+  background-color: #f6f7f8;
 }
 
 .formSignUp__formInput {

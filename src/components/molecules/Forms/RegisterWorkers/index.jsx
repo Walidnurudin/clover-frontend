@@ -12,23 +12,35 @@ const FormRegisterWorkers = () => {
           earum sequi autem, dolorem culpa atque nulla ipsa debitis,
         </p>
         <Form className="formSignUp__formInput">
-          <Form.Group className="mb-3 formSignUp__name">
+          <Form.Group className="mb-3 formSignUp__name" style={{ paddingBottom: "15px" }}>
             <Form.Label>Nama</Form.Label>
             <Form.Control type="text" placeholder="Masukkan nama panjang" />
           </Form.Group>
-          <Form.Group className="mb-3 formSignUp__email" controlId="formBasicEmail">
+          <Form.Group
+            className="mb-3 formSignUp__email"
+            controlId="formBasicEmail"
+            style={{ paddingBottom: "15px" }}
+          >
             <Form.Label>Email address</Form.Label>
             <Form.Control type="email" placeholder="Masukkan alamat email" />
           </Form.Group>
-          <Form.Group className="mb-3 formSignUp__phone">
+          <Form.Group className="mb-3 formSignUp__phone" style={{ paddingBottom: "15px" }}>
             <Form.Label>No handphone</Form.Label>
             <Form.Control type="text" placeholder="Masukkan no handphone" />
           </Form.Group>
-          <Form.Group className="mb-3 formSignUp__password" controlId="formBasicPassword">
+          <Form.Group
+            className="mb-3 formSignUp__password"
+            controlId="formBasicPassword"
+            style={{ paddingBottom: "15px" }}
+          >
             <Form.Label>Kata Sandi</Form.Label>
             <Form.Control type="password" placeholder="Masukkan kata sandi" />
           </Form.Group>
-          <Form.Group className="mb-3 formSignUp__confirmPassword" controlId="formBasicPassword">
+          <Form.Group
+            className="mb-3 formSignUp__confirmPassword"
+            controlId="formBasicPassword"
+            style={{ paddingBottom: "15px" }}
+          >
             <Form.Label>Konfirmasi kata Sandi</Form.Label>
             <Form.Control type="password" placeholder="Masukkan konfirmasi kata sandi" />
           </Form.Group>

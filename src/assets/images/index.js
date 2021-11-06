@@ -7,6 +7,13 @@ import Opinion1 from "./opinion1.png";
 import Opinion2 from "./opinion2.png";
 import Opinion3 from "./opinion3.png";
 
+// ICONS
+import map from "./icons/map.png";
+import ig from "./icons/ig.png";
+import linkedin from "./icons/linkedin.png";
+import mail from "./icons/mail.png";
+import phone from "./icons/phone.png";
+
 export {
   LandingPage1,
   LandingPage2,
@@ -15,5 +22,11 @@ export {
   TickYellow,
   Opinion1,
   Opinion2,
-  Opinion3
+  Opinion3,
+  // ICONS
+  map,
+  ig,
+  linkedin,
+  mail,
+  phone
 };

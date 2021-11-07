@@ -8,7 +8,7 @@ import { LogoPurple } from "../../../assets/images";
 const Navigation = () => {
   return (
     <>
-      <Navbar expand="lg">
+      <Navbar expand="lg" className="navigation__mobile">
         <Container fluid className="navigation">
           <Navbar.Brand href="#">
             <img src={LogoPurple} alt="" className="logo__purple" />

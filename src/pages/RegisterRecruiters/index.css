@@ -1,0 +1,13 @@
+.window {
+  width: 100%;
+  height: 195vh;
+}
+
+.column1 {
+  position: relative;
+}
+
+.column2 {
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+}

@@ -1,0 +1,40 @@
+.formSignUp {
+  padding: 9em 6em 4em !important;
+  position: absolute;
+  background-color: #f6f7f8;
+}
+
+.formSignUp__formInput {
+  padding-top: 2em;
+  color: #9ea0a5;
+}
+
+.formSignUp__forgotPass {
+  text-decoration: none;
+  color: #1f2a36;
+  justify-content: right !important;
+  text-align: right !important;
+  display: flex;
+  align-items: flex-end;
+  margin-top: 30px;
+}
+
+.formSignUp__button {
+  width: 100%;
+  background-color: #fbb017 !important;
+  border: none !important;
+  margin-top: 30px;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  font-size: 18px;
+}
+
+.formSignUp__login {
+  text-align: center;
+  margin-top: 30px;
+}
+
+.formSignUp__login a {
+  text-decoration: none;
+  color: #fbb017;
+}

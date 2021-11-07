@@ -33,7 +33,7 @@ function Hire() {
                   <div className="mb-3">
                     <label htmlFor="tujuan_pesan">Tujuan tentang pesan ini</label>
                     <select className="hire__form-tujuan-pesan">
-                      <option value="">Projek</option>
+                      <option value="">Project</option>
                     </select>
                   </div>
                   <div className="mb-3">

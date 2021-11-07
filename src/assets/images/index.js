@@ -7,6 +7,8 @@ import Profile from "./Profile.png";
 import Polygon from "./ArrowUp.png";
 import Union from "./Union.svg";
 import Bell from "./Bell.svg";
+import FormImage from "./FormImage.png";
+import MaskFormImage from "./MaskFormImage.png";
 
 export {
   LandingPage1,
@@ -17,5 +19,7 @@ export {
   Profile,
   Polygon,
   Union,
-  Bell
+  Bell,
+  FormImage,
+  MaskFormImage
 };

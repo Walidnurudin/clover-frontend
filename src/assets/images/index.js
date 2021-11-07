@@ -5,6 +5,8 @@ import TickPurple from "./tick-purple.png";
 import TickYellow from "./tick-yellow.png";
 import FormImage from "./FormImage.png";
 import MaskFormImage from "./MaskFormImage.png";
+import LogoPurple from "./logo-purple.png";
+import LogoWhite from "./logo-white.png";
 
 export {
   LandingPage1,
@@ -13,5 +15,7 @@ export {
   TickPurple,
   TickYellow,
   FormImage,
-  MaskFormImage
+  MaskFormImage,
+  LogoPurple,
+  LogoWhite
 };

@@ -7,6 +7,7 @@ import {
   TickPurple,
   TickYellow
 } from "../../assets/images";
+import Footer from "../../components/atoms/Footer";
 
 function LandingPage() {
   return (
@@ -110,6 +111,7 @@ function LandingPage() {
           </div>
         </section>
       </div>
+      <Footer />
     </>
   );
 }

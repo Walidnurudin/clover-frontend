@@ -13,6 +13,7 @@ import IcHomeMobile from "./home.svg";
 import IcSearchMobile from "./search.svg";
 import IcMessageMobile from "./message.svg";
 import IcProfileMobile from "./profile.svg";
+import IcSortList from "./list.svg";
 
 export {
   LandingPage1,
@@ -29,5 +30,6 @@ export {
   IcHomeMobile,
   IcMessageMobile,
   IcProfileMobile,
-  IcSearchMobile
+  IcSearchMobile,
+  IcSortList
 };

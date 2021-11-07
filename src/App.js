@@ -8,6 +8,7 @@ import Hire from "./pages/Hire";
 import Login from "./pages/Login";
 import RegisterWorkers from "./pages/RegisterWorkers";
 import RegisterRecruiters from "./pages/RegisterRecruiters";
+import ProfilePage from "./pages/ProfilePage";
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
         <Route path="/login" exact component={Login} />
         <Route path="/register-workers" exact component={RegisterWorkers} />
         <Route path="/register-recruiters" exact component={RegisterRecruiters} />
+        <Route path="/profile" exact component={ProfilePage} />
       </Switch>
     </Router>
   );

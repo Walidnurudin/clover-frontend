@@ -47,17 +47,21 @@ function Portofolio() {
                 Atau cari untuk mengupload file dari direktorimu.
               </p>
               <div className="row col-12 justify-content-center  margin-reset">
-                <div className="col-6 inputPortoImage__cond align-items-center row text-start">
-                  <div className="col-3">
+                <div className="col-lg-6 mb-3 mb-lg-0 col-12 inputPortoImage__cond align-items-center row text-start">
+                  <div className="col-lg-3 text-center col-12">
                     <img src={Expand} alt="" />
                   </div>
-                  <span className="col-9 ack-fsize-12">High-Res Image PNG, JPG or GIF </span>
+                  <span className="col-lg-9 text-center text-lg-start col-12 ack-fsize-12">
+                    High-Res Image PNG, JPG or GIF{" "}
+                  </span>
                 </div>
-                <div className="col-6 inputPortoImage__cond row align-items-center text-start">
-                  <div className="col-3">
+                <div className="col-lg-6 mb-3 mb-lg-0 col-12 inputPortoImage__cond row align-items-center text-start">
+                  <div className="col-lg-3 text-center col-12">
                     <img src={Photo} alt="" />
                   </div>
-                  <span className="col-9 ack-fsize-12">Size 1080x1920 or 600x800</span>
+                  <span className="col-lg-9 text-center text-lg-start col-12 ack-fsize-12">
+                    Size 1080x1920 or 600x800
+                  </span>
                 </div>
               </div>
             </div>

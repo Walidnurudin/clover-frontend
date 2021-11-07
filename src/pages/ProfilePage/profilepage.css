@@ -107,6 +107,17 @@
   border-radius: 4px;
 }
 
+.changePassInput {
+  border: 1px solid black;
+  border-radius: 4px;
+}
+
+.changePassInput input,
+.changePassInput input:focus {
+  border: none !important;
+  outline: none;
+}
+
 /* COLOR STYLE */
 .ack-bg-clr-prm {
   background-color: #5e50a1;
@@ -186,4 +197,8 @@
 /* TODO BACKGROUND */
 .ack-bg-white {
   background: #ffffff;
+}
+
+.hover-pointer:hover {
+  cursor: pointer;
 }

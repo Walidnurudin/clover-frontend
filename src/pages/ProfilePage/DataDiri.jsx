@@ -25,8 +25,8 @@ function DataDiri() {
         </label>
         <input type="text" placeholder="Masukkan Domisili" name="domisili" className="p-2 col-12" />
 
-        <div className="social-input mt-4 row">
-          <div className="col-4">
+        <div className="social-input mt-lg-4 row">
+          <div className="col-lg-4 col-12 mt-lg-0 mt-4">
             <label htmlFor="">IG</label>
             <input
               type="text"
@@ -36,7 +36,7 @@ function DataDiri() {
             />
           </div>
 
-          <div className="col-4">
+          <div className="col-lg-4 col-12 mt-lg-0 mt-4">
             <label htmlFor="">Github</label>
             <input
               type="text"
@@ -46,7 +46,7 @@ function DataDiri() {
             />
           </div>
 
-          <div className="col-4">
+          <div className="col-lg-4 col-12 mt-lg-0 mt-4">
             <label htmlFor="">Gitlab</label>
             <input
               type="text"

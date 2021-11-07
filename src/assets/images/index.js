@@ -13,6 +13,7 @@ import ig from "./icons/ig.png";
 import linkedin from "./icons/linkedin.png";
 import mail from "./icons/mail.png";
 import phone from "./icons/phone.png";
+import edit from "./icons/edit.png";
 
 export {
   LandingPage1,
@@ -28,5 +29,6 @@ export {
   ig,
   linkedin,
   mail,
-  phone
+  phone,
+  edit
 };

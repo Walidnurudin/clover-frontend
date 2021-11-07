@@ -9,6 +9,10 @@ import Union from "./Union.svg";
 import Bell from "./Bell.svg";
 import FormImage from "./FormImage.png";
 import MaskFormImage from "./MaskFormImage.png";
+import IcHomeMobile from "./home.svg";
+import IcSearchMobile from "./search.svg";
+import IcMessageMobile from "./message.svg";
+import IcProfileMobile from "./profile.svg";
 
 export {
   LandingPage1,
@@ -21,5 +25,9 @@ export {
   Union,
   Bell,
   FormImage,
-  MaskFormImage
+  MaskFormImage,
+  IcHomeMobile,
+  IcMessageMobile,
+  IcProfileMobile,
+  IcSearchMobile
 };

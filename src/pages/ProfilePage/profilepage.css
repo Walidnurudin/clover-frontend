@@ -1,0 +1,204 @@
+.padding-reset {
+  padding: 0px !important;
+}
+
+.margin-reset {
+  margin: 0px !important;
+}
+
+.profile-main {
+  background: #e5e5e5;
+}
+
+.dec-bg-blue {
+  height: 45%;
+  width: 100%;
+  background-color: #5e50a1;
+  position: absolute;
+  z-index: 0;
+}
+
+.user-profile__details {
+  /* background-color: pink; */
+  border-radius: 8px;
+}
+
+.editUserImage img {
+  object-fit: contain;
+}
+
+.user-profile__porto-exp {
+  /* background-color: aquamarine; */
+  height: 100%;
+  border-radius: 8px;
+}
+
+.porto-exp-container {
+  height: 100%;
+}
+
+.user-profile__details-image {
+  width: 150px;
+  height: 150px;
+  border-radius: 100%;
+  margin: auto;
+}
+
+.skills-list {
+  background-color: rgba(251, 176, 23, 0.6);
+  border: #fbb017 solid 1px;
+  border-radius: 4px;
+}
+
+.porto-container .porto-list img {
+  object-fit: cover;
+  width: 100%;
+  height: 100%;
+}
+
+.job-exp__list-img img {
+  width: 75%;
+}
+
+.data-diri {
+  height: 100%;
+}
+
+.updateForm__header {
+  border-bottom: 1px solid #c4c4c4;
+}
+
+.formDataDiri input {
+  border: 1px solid #e2e5ed;
+  border-radius: 4px;
+  font-size: 14px;
+}
+
+.formDataDiri textarea {
+  border: 1px solid #e2e5ed;
+  border-radius: 4px;
+  font-size: 14px;
+}
+
+.formDataDiri label {
+  color: #9ea0a5;
+}
+
+.portoInput {
+  border: 1px dashed #9ea0a5;
+  /* height: 348px; */
+}
+
+.inputPortoImage__cond img {
+  width: auto;
+}
+
+.btn-simpan {
+  background-color: #fbb017;
+  color: white;
+  border: none;
+  border-radius: 4px;
+}
+
+.btn-add-exp {
+  border: 1px solid #fbb017;
+  background-color: white !important;
+  color: #fbb017 !important;
+  border-radius: 4px;
+}
+
+.changePassInput {
+  border: 1px solid black;
+  border-radius: 4px;
+}
+
+.changePassInput input,
+.changePassInput input:focus {
+  border: none !important;
+  outline: none;
+}
+
+/* COLOR STYLE */
+.ack-bg-clr-prm {
+  background-color: #5e50a1;
+}
+
+.ack-fcolor-white {
+  color: white;
+}
+
+.ack-fcolor2 {
+  color: #9ea0a5;
+}
+
+/* TODO BTN */
+.ack-btn-prim {
+  background-color: #5e50a1;
+  width: 100%;
+  border-radius: 4px;
+  color: white;
+  border: none;
+}
+.ack-btn-2 {
+  background-color: white;
+  width: 100%;
+  border-radius: 4px;
+  color: #5e50a1;
+  border: solid 1px #5e50a1;
+}
+
+/* TODO FONT SIZE */
+.ack-fsize-12 {
+  font-size: 12px;
+}
+
+.ack-fsize-14 {
+  font-size: 14px;
+}
+
+.ack-fsize-16 {
+  font-size: 16px;
+}
+
+.ack-fsize-20 {
+  font-size: 20px;
+}
+
+.ack-fsize-22 {
+  font-size: 22px;
+}
+
+/* TODO FONT FAMILY */
+.ack-f-open-sans {
+  font-family: "Open sans";
+}
+
+/* TODO FONT WEIGHT */
+.ack-fw-700 {
+  font-weight: 700;
+}
+
+.ack-fw-600 {
+  font-weight: 600;
+}
+
+.ack-fw-400 {
+  font-weight: 400;
+}
+
+.ack-fw-300 {
+  font-weight: 300;
+}
+
+.ack-lh-24 {
+  line-height: 24px;
+}
+
+/* TODO BACKGROUND */
+.ack-bg-white {
+  background: #ffffff;
+}
+
+.hover-pointer:hover {
+  cursor: pointer;
+}

@@ -1,25 +1,17 @@
-import React from "react";
+import React, { useState } from "react";
 import "./index.css";
+import ProfileUser from "../../components/atoms/ProfileUser";
 function Hire() {
+  const [skills] = useState("Pyhton,Laravel,Golang,JavaScript,PHP,HTML,C++,Kotlin,Swift");
   return (
     <>
       <main className="hire__main">
         <section className="container">
           <div className="row">
-            <div className="col-md-4  mt-5">
-              {/* Profile User */}
-              <div className="card">
-                <div className="card-body">
-                  <p>
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempora voluptate
-                    blanditiis quo, alias doloribus nemo obcaecati repellendus reiciendis. Fuga
-                    molestias velit ex perspiciatis reiciendis. Inventore eum deleniti nam
-                    cupiditate ipsum.
-                  </p>
-                </div>
-              </div>
+            <div className="col-md-4 mt-5">
+              <ProfileUser skills={skills} />
             </div>
-            <section className="col-md-8  mt-5">
+            <section className="col-md-8 mt-5">
               {/* Form Hire */}
               <div className="hire__description">
                 <h3 className="hire__title-worker">Hubungi Lous Tomlinson</h3>

@@ -10,6 +10,7 @@ import RegisterWorkers from "./pages/RegisterWorkers";
 import RegisterRecruiters from "./pages/RegisterRecruiters";
 import ProfilePerusahaan from "./pages/ProfilePerusahaan";
 import EditProfilePerusahaan from "./pages/EditProfilePerusahaan";
+import ProfilePage from "./pages/ProfilePage";
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
         <Route path="/register-recruiters" exact component={RegisterRecruiters} />
         <Route path="/profile-perusahaan" exact component={ProfilePerusahaan} />
         <Route path="/edit-profile-perusahaan" exact component={EditProfilePerusahaan} />
+        <Route path="/profile" exact component={ProfilePage} />
       </Switch>
     </Router>
   );

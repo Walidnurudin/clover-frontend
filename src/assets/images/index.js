@@ -15,6 +15,7 @@ import IcHomeMobile from "./home.svg";
 import IcSearchMobile from "./search.svg";
 import IcMessageMobile from "./message.svg";
 import IcProfileMobile from "./profile.svg";
+import IcSortList from "./list.svg";
 
 import Opinion1 from "./opinion1.png";
 import Opinion2 from "./opinion2.png";
@@ -55,5 +56,6 @@ export {
   linkedin,
   mail,
   phone,
-  edit
+  edit,
+  IcSortList
 };

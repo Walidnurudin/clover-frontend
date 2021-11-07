@@ -17,7 +17,7 @@ const AuthLeft = () => {
           </h1>
         </span>
       </div>
-      <Image src={FormImage} alt="Landing page" className="row__image" />{" "}
+      <Image src={FormImage} alt="Landing page" className="row__image" />
     </>
   );
 };

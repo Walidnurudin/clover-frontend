@@ -1,0 +1,52 @@
+.hire__main {
+  background-color: #e5e5e5;
+}
+.hire__title-worker {
+  color: #1f2a36;
+  font-weight: 600;
+  font-size: 32px;
+}
+.hire__title-worker-paragraph {
+  color: #46505c;
+  margin: 10px 0px;
+  font-size: 18px;
+}
+.hire__form-recruiter {
+  margin: 45px 0px;
+}
+label {
+  display: block;
+  color: #9ea0a5;
+  font-size: 15px;
+}
+.hire__form-tujuan-pesan {
+  background-color: #ffffff;
+  border: 1px solid #e2e5ed;
+  border-radius: 4px;
+  width: 100%;
+  padding: 15px;
+  color: #858d96;
+  font-size: 14px;
+}
+.hire__form-pesan {
+  padding: 15px;
+  background-color: #ffffff;
+  border: 1px solid #e2e5ed;
+  border-radius: 4px;
+  width: 100%;
+  color: #858d96;
+  font-size: 14px;
+}
+.hire__form-pesan:focus {
+  outline: none;
+}
+.hire__form-button {
+  width: 100%;
+  border: none;
+  padding: 10px 0px;
+  background: #fbb017;
+  border-radius: 4px;
+  color: #ffffff;
+  font-weight: bold;
+  font-size: 16px;
+}

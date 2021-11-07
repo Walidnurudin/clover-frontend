@@ -10,6 +10,7 @@ import LoginRecruiters from "./pages/LoginRecruiters";
 import RegisterWorkers from "./pages/RegisterWorkers";
 import RegisterRecruiters from "./pages/RegisterRecruiters";
 import ResetPassword from "./pages/ResetPassword";
+import ConfirmPassword from "./pages/ConfirmPassword";
 import ProfilePerusahaan from "./pages/ProfilePerusahaan";
 import EditProfilePerusahaan from "./pages/EditProfilePerusahaan";
 import ProfilePage from "./pages/ProfilePage";
@@ -26,6 +27,7 @@ function App() {
         <Route path="/register-workers" exact component={RegisterWorkers} />
         <Route path="/register-recruiters" exact component={RegisterRecruiters} />
         <Route path="/reset-password" exact component={ResetPassword} />
+        <Route path="/confirm-password" exact component={ConfirmPassword} />
         <Route path="/profile-perusahaan" exact component={ProfilePerusahaan} />
         <Route path="/edit-profile-perusahaan" exact component={EditProfilePerusahaan} />
         <Route path="/profile" exact component={ProfilePage} />

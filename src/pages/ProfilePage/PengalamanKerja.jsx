@@ -12,7 +12,7 @@ function PengalamanKerja() {
         Pengalaman Kerja
       </p>
       <form className="px-4 formDataDiri row" onSubmit={(event) => submitDataDiri(event)}>
-        <div className="col-6">
+        <div className="col-lg-6 col-12">
           <label htmlFor="name" className="d-blok col-12 mt-4">
             Nama Perusahaan
           </label>
@@ -24,7 +24,7 @@ function PengalamanKerja() {
           />
         </div>
 
-        <div className="col-6">
+        <div className="col-lg-6 col-12">
           <label htmlFor="name" className="d-blok col-12 mt-4">
             Posisi
           </label>

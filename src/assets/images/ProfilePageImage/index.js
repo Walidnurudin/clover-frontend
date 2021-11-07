@@ -18,8 +18,10 @@ import Delete from "./icon/delete.png";
 import Cloud from "./cloud.png";
 import Expand from "./expand.png";
 import Photo from "./photo.png";
+import Eye from "./icon/eye.png";
 
 export {
+  Eye,
   Photo,
   Expand,
   Cloud,

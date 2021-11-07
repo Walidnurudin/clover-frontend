@@ -1,25 +1,32 @@
 import React from "react";
-import { Image } from "react-bootstrap";
+import { Container, Navbar, Button } from "react-bootstrap";
+import { Bell, Envelope } from "react-bootstrap-icons";
+import { Profile } from "../../../assets/images";
 import "./index.css";
-// import { FormImage, MaskFormImage } from "../../../assets/images";
+import { LogoPurple } from "../../../assets/images";
 
-const Navbar = () => {
+const Navigation = () => {
   return (
     <>
-      <div className="row__overlay">
-        <Image src={MaskFormImage} alt="App" className="row__overlay--mask" />
-        <span className="row__overlay--quote">
-          <h1>
-            Temukan developer <br />
-            berbakat & terbaik <br />
-            di berbagai bidang <br />
-            keahlian
-          </h1>
-        </span>
-      </div>
-      <Image src={FormImage} alt="Landing page" className="row__image" />{" "}
+      <Navbar expand="lg">
+        <Container fluid className="navigation">
+          <Navbar.Brand href="#">
+            <img src={LogoPurple} alt="" className="logo__purple" />
+          </Navbar.Brand>
+          <div className="navbar__item--right">
+            <Button className="button__signIn">Masuk</Button>
+            <Button className="button__signUp">Daftar</Button>
+          </div>
+
+          {/* <div className="navbar__item--right">
+            <Bell size={25} style={{ marginRight: "40px", color: "#9B9B9B" }} />
+            <Envelope size={25} style={{ marginRight: "40px", color: "#9B9B9B" }} />
+            <img src={Profile} alt="" className="user__pic" />
+          </div> */}
+        </Container>
+      </Navbar>
     </>
   );
 };
 
-export default Navbar;
+export default Navigation;

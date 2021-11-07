@@ -1,0 +1,26 @@
+.navigation {
+  padding: 1em 7em !important;
+  display: flex !important;
+  justify-content: space-between !important;
+}
+
+.logo__purple {
+  width: 120px;
+}
+
+.button__signIn {
+  color: #5e50a1 !important;
+  background-color: #ffffff !important;
+  border-color: #5e50a1 !important;
+  margin-right: 1em;
+}
+
+.button__signUp {
+  color: #ffffff !important;
+  background-color: #5e50a1 !important;
+  border-color: #5e50a1 !important;
+}
+
+.user__pic {
+  width: 35px;
+}

@@ -8,21 +8,24 @@ const Footer = () => {
     <>
       <Container fluid className="footer__row">
         <Row>
-          <Col sm={12} md={4}>
-            <img src={LogoWhite} alt="" />
+          <Col md={4}>
+            <img src={LogoWhite} alt="" className="logo__white" />
             <p>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Rerum quis earum magnam e
+              Lorem ipsum dolor sit amet, consectetur adipisicing elit. Enim dolorum impedit porro
+              animi corporis, beatae corrupti minima itaque ipsum temporibus magnam!
             </p>
           </Col>
         </Row>
         <hr />
         <Row className="footer__end">
-          <p className="footer__end">© 2020 Pewworld. All Rights Reserved.</p>
-          <div>
-            <ul>
-              <li>Telepon</li>
-              <li>Email</li>
-            </ul>
+          <div className="footer__end--item">
+            <div className="footer__end--left">
+              <p>© 2021 Clover-Hire. All Rights Reserved</p>
+            </div>
+            <div className="footer__end--right">
+              <p className="footer__end--right--phone">Telepon</p>
+              <p>Email</p>
+            </div>
           </div>
         </Row>
       </Container>

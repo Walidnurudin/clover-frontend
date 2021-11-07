@@ -26,6 +26,8 @@ import DataDiri from "./DataDiri";
 import PengalamanKerja from "./PengalamanKerja";
 import UbahPassword from "./UbahPassword";
 import ProfileUser from "../../components/atoms/ProfileUser";
+import Navbar from "../../components/atoms/Navbar";
+import Footer from "../../components/atoms/Footer";
 
 function ProfilePage() {
   const [skills, setSkills] = useState(
@@ -44,6 +46,7 @@ function ProfilePage() {
 
   return (
     <>
+      <Navbar />
       <main className="container-fluid profile-main padding-reset ack-f-open-sans">
         <div className="dec-bg-blue d-none d-lg-block"></div>
 
@@ -102,6 +105,7 @@ function ProfilePage() {
           </div>
         </div>
       </main>
+      <Footer />
     </>
   );
 }

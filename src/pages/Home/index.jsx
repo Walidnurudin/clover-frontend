@@ -10,7 +10,10 @@ import {
 } from "../../assets/images";
 import Pagination from "react-paginate";
 import { Search } from "react-bootstrap-icons";
+import Navbar from "../../components/atoms/Navbar";
+import Footer from "../../components/atoms/Footer";
 import "./index.css";
+
 function Home() {
   const [show, setShow] = useState(false);
   const [filterShow, setFilterShow] = useState(false);
@@ -54,6 +57,7 @@ function Home() {
     <>
       {!show ? (
         <>
+          <Navbar />
           <section className="homepage__container homepage__spacing homepage__banner">
             <section className="d-block d-md-none homepage__topmenu">
               <img src={Union} className="img-fluid" alt="Union" />
@@ -230,6 +234,7 @@ function Home() {
           <img src={Profile} className="img-fluid" width="25" height="23" alt="Profile" />
         </div>
       </section>
+      <Footer />
     </>
   );
 }

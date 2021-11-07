@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-
+import { withRouter } from "react-router-dom";
 import {
   userImage,
   Porto1,
@@ -19,8 +19,13 @@ import {
 } from "../../../assets/images/ProfilePageImage";
 
 function ProfileUser(props) {
+  const pathName = props.match.path;
   return (
-    <div className="col-lg-4 col-12 my-4 my-lg-0 position-relative">
+    <div
+      className={`${
+        pathName === "/profile" ? "col-lg-4" : null
+      } col-12 my-4 my-lg-0 position-relative`}
+    >
       <div className="user-profile__details ack-bg-white p-4">
         <div className="user-profile__details-image">
           <img src={userImage} alt="" />
@@ -80,12 +85,14 @@ function ProfileUser(props) {
           </>
         ) : (
           <>
-            <button
-              className="ack-btn-prim py-2 ack-fw-700 ack-fsize-16 my-2"
-              onClick={() => props.setIsUpdate(true)}
-            >
-              Update Profile
-            </button>
+            {pathName === "/profile" ? (
+              <button
+                className="ack-btn-prim py-2 ack-fw-700 ack-fsize-16 my-2"
+                onClick={() => props.setIsUpdate(true)}
+              >
+                Update Profile
+              </button>
+            ) : null}
             <div className="user-profile__skils my-5">
               <h3>Skils</h3>
               <div className="user-profile__skils-container d-flex flex-wrap">
@@ -128,4 +135,4 @@ function ProfileUser(props) {
   );
 }
 
-export default ProfileUser;
+export default withRouter(ProfileUser);

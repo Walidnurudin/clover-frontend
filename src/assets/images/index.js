@@ -11,6 +11,10 @@ import FormImage from "./FormImage.png";
 import MaskFormImage from "./MaskFormImage.png";
 import LogoPurple from "./logo-purple.png";
 import LogoWhite from "./logo-white.png";
+import IcHomeMobile from "./home.svg";
+import IcSearchMobile from "./search.svg";
+import IcMessageMobile from "./message.svg";
+import IcProfileMobile from "./profile.svg";
 
 export {
   LandingPage1,
@@ -25,5 +29,9 @@ export {
   FormImage,
   MaskFormImage,
   LogoPurple,
-  LogoWhite
+  LogoWhite,
+  IcHomeMobile,
+  IcMessageMobile,
+  IcProfileMobile,
+  IcSearchMobile
 };

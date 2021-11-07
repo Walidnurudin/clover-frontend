@@ -1,5 +1,12 @@
 import React, { useState } from "react";
-import { Profile, Union, Bell } from "../../assets/images";
+import {
+  Profile,
+  Union,
+  Bell,
+  IcHomeMobile,
+  IcSearchMobile,
+  IcMessageMobile
+} from "../../assets/images";
 import Pagination from "react-paginate";
 import { Search } from "react-bootstrap-icons";
 import "./index.css";
@@ -129,6 +136,20 @@ function Home() {
             pageClassName="homepage__pagination-page"
           />
         </section>
+      </section>
+      <section className="homepage__navigation-mobile d-flex d-md-none">
+        <div className="homepage__navigation-mobile-home">
+          <img src={IcHomeMobile} className="img-fluid" width="23" height="23" alt="Home" />
+        </div>
+        <div className="homepage__navigation-mobile-search">
+          <img src={IcSearchMobile} className="img-fluid" width="23" height="23" alt="Search" />
+        </div>
+        <div className="homepage__navigation-mobile-chat">
+          <img src={IcMessageMobile} className="img-fluid" width="23" height="23" alt="Chat" />
+        </div>
+        <div className="homepage__navigation-mobile-profile">
+          <img src={Profile} className="img-fluid" width="23" height="23" alt="Home" />
+        </div>
       </section>
     </>
   );

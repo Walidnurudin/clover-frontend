@@ -1,0 +1,78 @@
+.edit__profile__perusahaan {
+  position: relative;
+}
+
+.edit__profile__perusahaan--purple {
+  width: 100%;
+  height: 360px;
+  background: #5e50a1;
+}
+
+.edit__profile__perusahaan--white {
+  width: 100%;
+  height: 100vh;
+  background: #e5e5e5;
+}
+
+.edit__profile__perusahaan--main {
+  width: 100%;
+  position: absolute;
+  top: 150px;
+}
+
+.edit__profile__perusahaan--profile {
+  background-color: #fff;
+  border-radius: 8px;
+  padding: 30px;
+}
+
+.edit__profile__perusahaan--simpan {
+  background: #5e50a1 !important;
+  border-color: #5e50a1 !important;
+  color: #fff !important;
+}
+
+.edit__profile__perusahaan--batal {
+  color: #5e50a1 !important;
+  border-color: #5e50a1 !important;
+}
+
+/* FORM */
+
+.edit__profile__perusahaan--form {
+  background-color: #fff;
+  border-radius: 8px;
+  padding: 20px 30px 18px 30px;
+}
+
+.edit__profile__perusahaan--form h1 {
+  font-size: 22px;
+  line-height: 56px;
+}
+
+.form__perusahaan--item {
+  margin-bottom: 32px;
+}
+
+.form__perusahaan--item label {
+  margin-bottom: 4px;
+  font-size: 12px;
+}
+
+.form__perusahaan--item input {
+  padding: 15px;
+  width: 100%;
+  border: 1px solid #e2e5ed;
+  border-radius: 4px;
+  font-size: 14px;
+  outline: none;
+}
+
+.form__perusahaan--item textarea {
+  padding: 15px;
+  width: 100%;
+  border: 1px solid #e2e5ed;
+  border-radius: 4px;
+  font-size: 14px;
+  outline: none;
+}

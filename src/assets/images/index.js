@@ -16,6 +16,18 @@ import IcSearchMobile from "./search.svg";
 import IcMessageMobile from "./message.svg";
 import IcProfileMobile from "./profile.svg";
 
+import Opinion1 from "./opinion1.png";
+import Opinion2 from "./opinion2.png";
+import Opinion3 from "./opinion3.png";
+
+// ICONS
+import map from "./icons/map.png";
+import ig from "./icons/ig.png";
+import linkedin from "./icons/linkedin.png";
+import mail from "./icons/mail.png";
+import phone from "./icons/phone.png";
+import edit from "./icons/edit.png";
+
 export {
   LandingPage1,
   LandingPage2,
@@ -33,5 +45,15 @@ export {
   IcHomeMobile,
   IcMessageMobile,
   IcProfileMobile,
-  IcSearchMobile
+  IcSearchMobile,
+  Opinion1,
+  Opinion2,
+  Opinion3,
+  // ICONS
+  map,
+  ig,
+  linkedin,
+  mail,
+  phone,
+  edit
 };

@@ -15,24 +15,29 @@ import ProfilePerusahaan from "./pages/ProfilePerusahaan";
 import EditProfilePerusahaan from "./pages/EditProfilePerusahaan";
 import ProfilePage from "./pages/ProfilePage";
 
+import { Provider } from "react-redux";
+import store from "./stores/store";
+
 function App() {
   return (
-    <Router>
-      <Switch>
-        <Route path="/" exact component={LandingPage} />
-        <Route exact path="/home" component={Home} />
-        <Route exact path="/hire" component={Hire} />
-        <Route path="/login-workers" exact component={LoginWorkers} />
-        <Route path="/login-recruiters" exact component={LoginRecruiters} />
-        <Route path="/register-workers" exact component={RegisterWorkers} />
-        <Route path="/register-recruiters" exact component={RegisterRecruiters} />
-        <Route path="/reset-password" exact component={ResetPassword} />
-        <Route path="/confirm-password" exact component={ConfirmPassword} />
-        <Route path="/profile-perusahaan" exact component={ProfilePerusahaan} />
-        <Route path="/edit-profile-perusahaan" exact component={EditProfilePerusahaan} />
-        <Route path="/profile" exact component={ProfilePage} />
-      </Switch>
-    </Router>
+    <Provider store={store}>
+      <Router>
+        <Switch>
+          <Route path="/" exact component={LandingPage} />
+          <Route exact path="/home" component={Home} />
+          <Route exact path="/hire" component={Hire} />
+          <Route path="/login-workers" exact component={LoginWorkers} />
+          <Route path="/login-recruiters" exact component={LoginRecruiters} />
+          <Route path="/register-workers" exact component={RegisterWorkers} />
+          <Route path="/register-recruiters" exact component={RegisterRecruiters} />
+          <Route path="/reset-password" exact component={ResetPassword} />
+          <Route path="/confirm-password" exact component={ConfirmPassword} />
+          <Route path="/profile-perusahaan" exact component={ProfilePerusahaan} />
+          <Route path="/edit-profile-perusahaan" exact component={EditProfilePerusahaan} />
+          <Route path="/profile" exact component={ProfilePage} />
+        </Switch>
+      </Router>
+    </Provider>
   );
 }
 

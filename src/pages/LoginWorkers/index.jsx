@@ -2,7 +2,7 @@ import React from "react";
 import { Container, Row, Col } from "react-bootstrap";
 import "./index.css";
 import AuthLeft from "../../components/atoms/AuthLeft";
-import FormLogin from "../../components/molecules/Forms/Login";
+import FormLogin from "../../components/molecules/Forms/LoginWorkers";
 
 const Login = () => {
   return (

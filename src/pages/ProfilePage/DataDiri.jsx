@@ -15,6 +15,29 @@ function DataDiri(props) {
 
   const [dataDiriBaru, setDataDiriBaru] = useState({});
 
+  useEffect(() => {
+    setDataDiriBaru(props.dataUser);
+  }, []);
+
+  const {
+    description,
+    bidangPerusahaan,
+    domisili,
+    email,
+    github,
+    gitlab,
+    image,
+    instagram,
+    jobDesk,
+    jobStatus,
+    linkedin,
+    nama,
+    noHandphone,
+    perusahaan,
+    skill,
+    status
+  } = dataDiriBaru;
+
   const handleChangeData = (event) => {
     setDataDiriBaru({
       ...dataDiriBaru,
@@ -36,9 +59,10 @@ function DataDiri(props) {
         <input
           type="text"
           placeholder="Masukkan Nama Lengkap"
-          name="name"
+          name="nama"
           onChange={(event) => handleChangeData(event)}
           className="p-2 col-12"
+          value={nama ? nama : ""}
         />
 
         <label htmlFor="nama" className="d-blok col-12 mt-4">
@@ -50,6 +74,7 @@ function DataDiri(props) {
           name="jobDesk"
           onChange={(event) => handleChangeData(event)}
           className="p-2 col-12"
+          value={jobDesk ? jobDesk : ""}
         />
 
         <label htmlFor="name" className="d-blok col-12 mt-4">
@@ -61,6 +86,7 @@ function DataDiri(props) {
           name="domisili"
           onChange={(event) => handleChangeData(event)}
           className="p-2 col-12"
+          value={domisili ? domisili : ""}
         />
 
         <div className="social-input mt-lg-4 row">
@@ -72,6 +98,7 @@ function DataDiri(props) {
               name="instagram"
               onChange={(event) => handleChangeData(event)}
               className="p-2 col-12"
+              value={instagram ? instagram : ""}
             />
           </div>
 
@@ -83,6 +110,7 @@ function DataDiri(props) {
               name="github"
               onChange={(event) => handleChangeData(event)}
               className="p-2 col-12"
+              value={github ? github : ""}
             />
           </div>
 
@@ -94,6 +122,7 @@ function DataDiri(props) {
               name="gitlab"
               onChange={(event) => handleChangeData(event)}
               className="p-2 col-12"
+              value={gitlab ? gitlab : ""}
             />
           </div>
         </div>
@@ -108,6 +137,7 @@ function DataDiri(props) {
           onChange={(event) => handleChangeData(event)}
           placeholder="Tulis Deskripsi Singkat"
           rows="7"
+          value={description ? description : ""}
         ></textarea>
 
         <div className="col-12 d-flex justify-content-end ">

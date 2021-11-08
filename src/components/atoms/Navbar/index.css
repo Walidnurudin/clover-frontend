@@ -24,3 +24,9 @@
 .user__pic {
   width: 35px;
 }
+
+@media (max-width: 480px) {
+  .navigation__mobile {
+    display: none !important;
+  }
+}

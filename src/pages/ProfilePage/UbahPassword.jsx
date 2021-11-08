@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Modal, Button } from "react-bootstrap";
 import { Eye } from "../../assets/images/ProfilePageImage";
+import interceptorAxios from "../../utils/axios";
 import axios from "../../utils/axios";
 
 function UbahPassword(props) {
@@ -11,6 +12,13 @@ function UbahPassword(props) {
     newPassword: "",
     confirmPassword: ""
   });
+
+  const submitChangePass = () => {
+    axios.patch(
+      `auth/forgot-password/${localStorage.getItem("id")}/${localStorage.getItem("token")}`,
+      changePassData
+    );
+  };
 
   const handleChangePass = (event) => {
     setChangePassData({
@@ -88,7 +96,7 @@ function UbahPassword(props) {
             <Button
               className="ack-btn-prim"
               style={{ width: "40%" }}
-              onClick={handleChangePassword}
+              onClick={() => submitChangePass()}
             >
               Save Changes
             </Button>

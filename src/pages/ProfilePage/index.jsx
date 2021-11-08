@@ -29,7 +29,7 @@ function ProfilePage() {
 
   useEffect(() => {
     document.title = "Clover Hire | Profile";
-    axios.get("user/7ea4186d-bc42-4cbb-ba2f-1ea56aa08af8").then((res) => {
+    axios.get(`user/${localStorage.getItem("id")}`).then((res) => {
       setDataUser(res.data.data[0]);
     });
   }, []);
@@ -60,7 +60,7 @@ function ProfilePage() {
               {isUpdate ? (
                 <>
                   <div className="col-lg-8 col-12 data-diri position-relative">
-                    <DataDiri />
+                    <DataDiri dataUser={dataUser} />
                     <Skill Skills={skills} />
                     <PengalamanKerja />
                     <Portofolio />
@@ -73,18 +73,19 @@ function ProfilePage() {
                       <span
                         className={
                           showExp
-                            ? "me-4 ack-fsize-22 ack-fw-600 ack-fcolor2"
-                            : "me-4 ack-fsize-22 ack-fw-600 "
+                            ? "me-4 ack-fsize-22 ack-fw-600 ack-fcolor2 hover-pointer"
+                            : "me-4 ack-fsize-22 ack-fw-600 hover-pointer"
                         }
                         onClick={() => setShowExp(false)}
+                        style={{}}
                       >
                         Portofolio
                       </span>
                       <span
                         className={
                           showExp
-                            ? "me-4 ack-fsize-22 ack-fw-600"
-                            : "me-4 ack-fsize-22 ack-fw-600 ack-fcolor2"
+                            ? "me-4 ack-fsize-22 ack-fw-600 hover-pointer"
+                            : "me-4 ack-fsize-22 ack-fw-600 ack-fcolor2 hover-pointer"
                         }
                         onClick={() => setShowExp(true)}
                       >

@@ -1,41 +1,47 @@
-import React from "react";
-import {
-  userImage,
-  Porto1,
-  Porto2,
-  Porto3,
-  Porto4,
-  Porto5,
-  Porto6,
-  MapPin,
-  Phone,
-  Mail,
-  Instagram,
-  Github,
-  Gitlab,
-  Suitcase
-} from "../../assets/images/ProfilePageImage";
+import React, { useState, useEffect } from "react";
+import { Suitcase } from "../../assets/images/ProfilePageImage";
+import axios from "../../utils/axios";
 
 function ExpComp() {
-  return (
-    <div className="job-exp ">
+  const [userJobExp, setUserJobExp] = useState([]);
+  useEffect(() => {
+    axios
+      .get(`user/experience/${localStorage.getItem("id")}`)
+      .then((res) => {
+        // console.log(res.data.data);
+        setUserJobExp(res.data.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
+
+  useEffect(() => {
+    console.log(userJobExp);
+  }, [userJobExp]);
+
+  const { nama_perusahaan, posisi, tanggal_keluar, desription, tanggal_masuk } = userJobExp;
+
+  return userJobExp.map((item, index) => (
+    <div className="job-exp mb-4" key={index}>
       <div className="job-exp__list row">
         <div className="job-exp__list-img col-lg-2 col-3">
           <img src={Suitcase} alt="" />
         </div>
         <div className="job-exp__list-desc col-lg-10 col-9">
-          <p className="ack-fw-600 ack-fsize-20 margin-reset">Engineer</p>
-          <p className="ack-fw-400 ack-fsize-18 margin-reset">Tokopedia</p>
+          <p className="ack-fw-600 ack-fsize-20 margin-reset">{item.posisi ? item.posisi : ""}</p>
+          <p className="ack-fw-400 ack-fsize-18 margin-reset">
+            {item.nama_perusahaan ? item.nama_perusahaan : ""}
+          </p>
           <span className="ack-fcolor2 me-3 d-lg-inline d-block">July 2019 - January 2020</span>
           <span className="ack-fcolor2 me-3 d-lg-inline d-block">6 Months</span>
           <p className="my-4 ack-fw-400 ack-fsize-400 ack-lh-24">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum erat orci, mollis
-            nec gravida sed, ornare quis urna. Curabitur eu lacus fringilla, vestibulum risus at.
+            {item.description ? item.description : ""}
           </p>
         </div>
       </div>
     </div>
-  );
+  ));
 }
 
 export default ExpComp;

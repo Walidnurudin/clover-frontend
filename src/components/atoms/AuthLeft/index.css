@@ -16,6 +16,12 @@
   padding-bottom: 40px;
 }
 
+.row__overlay--logo {
+  width: 490px;
+  padding-bottom: 650px;
+  padding-right: 370px;
+}
+
 .row__overlay--quote {
   text-align: left;
   color: white;

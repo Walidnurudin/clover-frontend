@@ -57,7 +57,9 @@ function Home() {
     <>
       {!show ? (
         <>
-          <Navbar />
+          <div className="d-none d-md-block">
+            <Navbar />
+          </div>
           <section className="homepage__container homepage__spacing homepage__banner">
             <section className="d-block d-md-none homepage__topmenu">
               <img src={Union} className="img-fluid" alt="Union" />
@@ -234,7 +236,9 @@ function Home() {
           <img src={Profile} className="img-fluid" width="25" height="23" alt="Profile" />
         </div>
       </section>
-      <Footer />
+      <div className="d-none d-md-block">
+        <Footer />
+      </div>
     </>
   );
 }

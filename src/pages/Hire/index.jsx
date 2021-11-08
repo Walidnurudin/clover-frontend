@@ -1,14 +1,18 @@
 import React, { useState } from "react";
 import "./index.css";
 import ProfileUser from "../../components/atoms/ProfileUser";
+import Navbar from "../../components/atoms/Navbar";
+import Footer from "../../components/atoms/Footer";
+import axios from "axios";
 function Hire() {
   const [skills] = useState("Pyhton,Laravel,Golang,JavaScript,PHP,HTML,C++,Kotlin,Swift");
   return (
     <>
+      <Navbar />
       <main className="hire__main">
         <section className="container">
           <div className="row">
-            <div className="col-md-4 mt-5">
+            <div className="col-md-4 mt-5 mb-5">
               <ProfileUser skills={skills} />
             </div>
             <section className="col-md-8 mt-5">
@@ -48,6 +52,7 @@ function Hire() {
           </div>
         </section>
       </main>
+      <Footer />
     </>
   );
 }

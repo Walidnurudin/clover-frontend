@@ -4,15 +4,16 @@ import { Bell, Envelope } from "react-bootstrap-icons";
 import { Profile } from "../../../assets/images";
 import "./index.css";
 import { LogoPurple } from "../../../assets/images";
+import { Link } from "react-router-dom";
 
 const Navigation = () => {
   return (
     <>
       <Navbar expand="lg">
         <Container fluid className="navigation">
-          <Navbar.Brand href="#">
+          <Link to="/">
             <img src={LogoPurple} alt="" className="logo__purple" />
-          </Navbar.Brand>
+          </Link>
           <div className="navbar__item--right">
             <Button className="button__signIn">Masuk</Button>
             <Button className="button__signUp">Daftar</Button>

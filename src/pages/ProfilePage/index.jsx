@@ -4,24 +4,9 @@ import PortoComp from "./PortoComp";
 import ExpComp from "./ExpComp";
 import Portofolio from "./Portofolio";
 import Skill from "./Skill";
+import axios from "../../utils/axios";
 
-import {
-  userImage,
-  Porto1,
-  Porto2,
-  Porto3,
-  Porto4,
-  Porto5,
-  Porto6,
-  MapPin,
-  Phone,
-  Mail,
-  Instagram,
-  Github,
-  Gitlab,
-  Edit,
-  Suitcase
-} from "../../assets/images/ProfilePageImage";
+import { Edit } from "../../assets/images/ProfilePageImage";
 import DataDiri from "./DataDiri";
 import PengalamanKerja from "./PengalamanKerja";
 import UbahPassword from "./UbahPassword";
@@ -40,9 +25,18 @@ function ProfilePage() {
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
+  const [dataUser, setDataUser] = useState({});
+
   useEffect(() => {
     document.title = "Clover Hire | Profile";
+    axios.get("user/7ea4186d-bc42-4cbb-ba2f-1ea56aa08af8").then((res) => {
+      setDataUser(res.data.data[0]);
+    });
   }, []);
+
+  useEffect(() => {
+    console.log(dataUser);
+  }, [dataUser]);
 
   return (
     <>
@@ -60,6 +54,7 @@ function ProfilePage() {
                 skills={skills}
                 setIsUpdate={setIsUpdate}
                 setShow={setShow}
+                dataUser={dataUser}
               />
 
               {isUpdate ? (

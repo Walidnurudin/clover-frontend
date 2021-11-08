@@ -1,10 +1,22 @@
 import React, { useEffect, useState } from "react";
+import axios from "../../utils/axios";
 
 function PengalamanKerja() {
   const submitDataDiri = (event) => {
     event.preventDefault();
     window.alert("Memperbarui Data");
   };
+
+  useEffect(() => {
+    axios
+      .get("user/experience/1f217feb-bc79-45d5-a119-c6947f0cc39e")
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
 
   return (
     <div className="user-profile__porto-exp mb-4 ack-bg-white">
@@ -73,11 +85,17 @@ function PengalamanKerja() {
         </div>
 
         <div className="col-12 d-flex justify-content-end ">
-          <button type="submit" className="p-3 mb-4 col-12 btn-add-exp">
+          <button type="submit" className="p-3 col-12 btn-add-exp">
             Tambah Pengalaman Kerja
           </button>
         </div>
+
+        <div className="col-12">
+          <hr className="my-5" />
+        </div>
       </form>
+
+      <div style={{ height: "150px" }}> </div>
     </div>
   );
 }

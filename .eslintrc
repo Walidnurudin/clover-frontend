@@ -14,6 +14,12 @@
   },
   "plugins": ["react", "react-hooks", "prettier"],
   "rules": {
+    "prettier/prettier": [
+      "error",
+      {
+        "endOfLine": "auto"
+      }
+    ],
     "linebreak-style": ["error", "unix"],
     "quotes": ["error", "double", { "avoidEscape": true }],
     "semi": ["error", "always"],

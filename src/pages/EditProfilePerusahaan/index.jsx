@@ -1,14 +1,81 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./index.css";
 import { Opinion3, edit, map } from "../../assets/images";
+import { useSelector, useDispatch } from "react-redux";
+import { getUserById, updateUser } from "../../stores/actions/user";
+import { ToastContainer, toast } from "react-toastify";
+
+const initialState = {
+  nama: "",
+  bidangPerusahaan: "",
+  domisili: "",
+  description: "",
+  email: "",
+  instagram: "",
+  noHandphone: "",
+  linkedin: ""
+};
 
 function EditProfilePerusahaan() {
+  const [form, setForm] = useState(initialState);
+
+  const userState = useSelector((state) => state.user);
+  const dispatch = useDispatch();
+
+  const clearState = () => {
+    setForm({ ...initialState });
+  };
+
+  const notifSuccess = () =>
+    toast.success("Success update data", {
+      position: "top-center",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined
+    });
+
+  useEffect(() => {
+    dispatch(getUserById("34e36a65-5488-406d-a02e-591532b29f82")).then((res) => {
+      console.log(res);
+    });
+  }, []);
+
+  const changeText = (e) => {
+    setForm({
+      ...form,
+      [e.target.name]: e.target.value
+    });
+  };
+
   const handleSubmit = () => {
-    console.log("SUBMIT");
+    dispatch(updateUser("34e36a65-5488-406d-a02e-591532b29f82", form)).then((res) => {
+      console.log(res);
+      dispatch(getUserById("34e36a65-5488-406d-a02e-591532b29f82")).then((res) => {
+        console.log(res);
+
+        notifSuccess();
+        clearState();
+      });
+    });
   };
 
   return (
     <>
+      <ToastContainer
+        position="top-center"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+      />
+
       <div className="edit__profile__perusahaan">
         <div className="edit__profile__perusahaan--purple"></div>
         <div className="edit__profile__perusahaan--white"></div>
@@ -18,7 +85,13 @@ function EditProfilePerusahaan() {
               <div className="col-12 col-md-4">
                 <div className="edit__profile__perusahaan--profile">
                   <div className="text-center">
-                    <img src={Opinion3} alt="profile" width="150px" />
+                    <img
+                      src={
+                        `http://localhost:3001/uploads/user/${userState.users.image}` || Opinion3
+                      }
+                      alt="profile"
+                      width="150px"
+                    />
 
                     <div className="mt-3">
                       <img src={edit} alt="edit" width="16px" />
@@ -26,19 +99,17 @@ function EditProfilePerusahaan() {
                     </div>
                   </div>
 
-                  <h5 className="open-sans-600 mt-3">PT. Martabat Jaya Abadi</h5>
-                  <p className="mb-3 open-sans-400">Financial</p>
+                  <h5 className="open-sans-600 mt-3">{userState.users.nama}</h5>
+                  <p className="mb-3 open-sans-400">{userState.users.bidangPerusahaan || "-"}</p>
                   <div>
                     <img src={map} alt="map" width="16px" />
                     <span className="text-secondary ms-2 open-sans-400">
-                      Purwokerto, Jawa Tengah
+                      {userState.users.domisili || "-"}
                     </span>
                   </div>
 
                   <p className="text-secondary mb-4 mt-4 open-sans-400">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum erat orci,
-                    mollis nec gravida sed, ornare quis urna. Curabitur eu lacus fringilla,
-                    vestibulum risus at.
+                    {userState.users.description || "-"}
                   </p>
                 </div>
 
@@ -67,8 +138,11 @@ function EditProfilePerusahaan() {
                       </label>
                       <input
                         type="text"
+                        name="nama"
+                        value={form.nama}
                         placeholder="Masukan nama perusahaan"
                         className="open-sans-400"
+                        onChange={changeText}
                       />
                     </div>
 
@@ -76,34 +150,59 @@ function EditProfilePerusahaan() {
                       <label className="d-block text-secondary open-sans-400">Bidang</label>
                       <input
                         type="text"
+                        name="bidangPerusahaan"
+                        value={form.bidangPerusahaan}
                         placeholder="Masukan bidang perusahaan ex : Financial"
                         className="open-sans-400"
+                        onChange={changeText}
                       />
                     </div>
 
                     <div className="form__perusahaan--item">
                       <label className="d-block text-secondary open-sans-400">Domisili</label>
-                      <input type="text" placeholder="Masukan Domisili" className="open-sans-400" />
+                      <input
+                        type="text"
+                        placeholder="Masukan Domisili"
+                        className="open-sans-400"
+                        name="domisili"
+                        value={form.domisili}
+                        onChange={changeText}
+                      />
                     </div>
 
                     <div className="form__perusahaan--item">
                       <label className="d-block text-secondary open-sans-400">
                         Deskripsi singkat
                       </label>
-                      <textarea name="desc" placeholder="Tuliskan deskripsi singkat"></textarea>
+                      <textarea
+                        onChange={changeText}
+                        placeholder="Tuliskan deskripsi singkat"
+                        name="description"
+                        value={form.description}
+                      ></textarea>
                     </div>
 
                     <div className="form__perusahaan--item">
                       <label className="d-block text-secondary open-sans-400">Email</label>
-                      <input type="text" placeholder="Masukan email" className="open-sans-400" />
+                      <input
+                        type="text"
+                        placeholder="Masukan email"
+                        className="open-sans-400"
+                        name="email"
+                        value={form.email}
+                        onChange={changeText}
+                      />
                     </div>
 
                     <div className="form__perusahaan--item">
                       <label className="d-block text-secondary open-sans-400">Instagram</label>
                       <input
                         type="text"
+                        name="instagram"
                         placeholder="Masukan Username IG"
                         className="open-sans-400"
+                        value={form.instagram}
+                        onChange={changeText}
                       />
                     </div>
 
@@ -111,8 +210,11 @@ function EditProfilePerusahaan() {
                       <label className="d-block text-secondary open-sans-400">Nomor Telepon</label>
                       <input
                         type="text"
+                        name="noHandphone"
                         placeholder="Masukan nomor telepon"
                         className="open-sans-400"
+                        value={form.noHandphone}
+                        onChange={changeText}
                       />
                     </div>
 
@@ -120,8 +222,11 @@ function EditProfilePerusahaan() {
                       <label className="d-block text-secondary open-sans-400">Linkedin</label>
                       <input
                         type="text"
+                        name="linkedin"
                         placeholder="Masukan nama Linkedin"
                         className="open-sans-400"
+                        value={form.linkedin}
+                        onChange={changeText}
                       />
                     </div>
                   </form>

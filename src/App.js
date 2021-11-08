@@ -25,8 +25,8 @@ function App() {
           <Route path="/login" exact component={Login} />
           <Route path="/register-workers" exact component={RegisterWorkers} />
           <Route path="/register-recruiters" exact component={RegisterRecruiters} />
-          <Route path="/profile-perusahaan" exact component={ProfilePerusahaan} />
-          <Route path="/edit-profile-perusahaan" exact component={EditProfilePerusahaan} />
+          <Route path="/profile-recruiters" exact component={ProfilePerusahaan} />
+          <Route path="/edit-profile-recruiters" exact component={EditProfilePerusahaan} />
           <Route path="/profile" exact component={ProfilePage} />
         </Switch>
       </Router>

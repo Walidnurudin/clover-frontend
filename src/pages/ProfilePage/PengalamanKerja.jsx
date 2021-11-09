@@ -1,6 +1,9 @@
 import React, { useEffect, useState } from "react";
 import axios from "../../utils/axios";
 
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 function PengalamanKerja() {
   const submitDataDiri = (event) => {
     event.preventDefault();
@@ -8,22 +11,25 @@ function PengalamanKerja() {
     axios
       .post("user/experience", dataPengalamanBaru)
       .then((res) => {
-        console.log(res);
-        axios
-          .get(`user/experience/${localStorage.getItem("id")}`)
-          .then((res) => {
-            setSemuaDataPengalaman(res.data.data);
-
-            // console.log(res);
-          })
-          .catch((err) => {
-            console.log(err);
-          });
+        setDataPengalamanBaru();
+        toast.success(res.data.msg);
+        getPengalaman();
       })
-      .catch((err) => console.log(err));
+      .catch((err) => toast.error(err.msg));
   };
 
   const [semuaDataPengalaman, setSemuaDataPengalaman] = useState([]);
+
+  const getPengalaman = () => {
+    axios
+      .get(`user/experience/${localStorage.getItem("id")}`)
+      .then((res) => {
+        setSemuaDataPengalaman(res.data.data);
+      })
+      .catch((err) => {
+        toast.error(err.msg);
+      });
+  };
 
   useEffect(() => {
     axios
@@ -33,7 +39,7 @@ function PengalamanKerja() {
         // console.log(res);
       })
       .catch((err) => {
-        console.log(err);
+        setSemuaDataPengalaman([]);
       });
   }, []);
 
@@ -72,6 +78,7 @@ function PengalamanKerja() {
     axios
       .patch(`user/experience/${dataPengalamanBaru.id}`, dataPengalamanBaru)
       .then((res) => {
+        toast.success(res.data.msg);
         console.log(dataPengalamanBaru);
         axios
           .get(`user/experience/${localStorage.getItem("id")}`)
@@ -92,17 +99,22 @@ function PengalamanKerja() {
   const deleteExp = (data) => {
     axios.delete(`user/experience/${data}`).then((res) => {
       console.log(res);
+      setMsg(res.data.msg);
+      toast.success(res.data.msg);
       axios
         .get(`user/experience/${localStorage.getItem("id")}`)
         .then((res) => {
           setSemuaDataPengalaman(res.data.data);
+          // notify();
           // console.log(res);
         })
         .catch((err) => {
-          console.log(err);
+          setSemuaDataPengalaman([]);
         });
     });
   };
+
+  const [msg, setMsg] = useState("");
 
   useEffect(() => {}, [dataPengalamanBaru]);
 
@@ -125,7 +137,7 @@ function PengalamanKerja() {
             name="nama_perusahaan"
             className="p-2 col-12"
             onChange={(event) => handleInputPengalaman(event)}
-            value={dataPengalamanBaru ? dataPengalamanBaru.nama_perusahaan : ny}
+            value={dataPengalamanBaru ? dataPengalamanBaru.nama_perusahaan : ""}
           />
         </div>
 

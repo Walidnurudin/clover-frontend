@@ -4,24 +4,9 @@ import PortoComp from "./PortoComp";
 import ExpComp from "./ExpComp";
 import Portofolio from "./Portofolio";
 import Skill from "./Skill";
+import axios from "../../utils/axios";
 
-import {
-  userImage,
-  Porto1,
-  Porto2,
-  Porto3,
-  Porto4,
-  Porto5,
-  Porto6,
-  MapPin,
-  Phone,
-  Mail,
-  Instagram,
-  Github,
-  Gitlab,
-  Edit,
-  Suitcase
-} from "../../assets/images/ProfilePageImage";
+import { Edit } from "../../assets/images/ProfilePageImage";
 import DataDiri from "./DataDiri";
 import PengalamanKerja from "./PengalamanKerja";
 import UbahPassword from "./UbahPassword";
@@ -40,9 +25,18 @@ function ProfilePage() {
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
+  const [dataUser, setDataUser] = useState({});
+
   useEffect(() => {
     document.title = "Clover Hire | Profile";
+    axios.get(`user/${localStorage.getItem("id")}`).then((res) => {
+      setDataUser(res.data.data[0]);
+    });
   }, []);
+
+  useEffect(() => {
+    console.log(dataUser);
+  }, [dataUser]);
 
   return (
     <>
@@ -60,12 +54,13 @@ function ProfilePage() {
                 skills={skills}
                 setIsUpdate={setIsUpdate}
                 setShow={setShow}
+                dataUser={dataUser}
               />
 
               {isUpdate ? (
                 <>
                   <div className="col-lg-8 col-12 data-diri position-relative">
-                    <DataDiri />
+                    <DataDiri dataUser={dataUser} />
                     <Skill Skills={skills} />
                     <PengalamanKerja />
                     <Portofolio />
@@ -78,18 +73,19 @@ function ProfilePage() {
                       <span
                         className={
                           showExp
-                            ? "me-4 ack-fsize-22 ack-fw-600 ack-fcolor2"
-                            : "me-4 ack-fsize-22 ack-fw-600 "
+                            ? "me-4 ack-fsize-22 ack-fw-600 ack-fcolor2 hover-pointer"
+                            : "me-4 ack-fsize-22 ack-fw-600 hover-pointer"
                         }
                         onClick={() => setShowExp(false)}
+                        style={{}}
                       >
                         Portofolio
                       </span>
                       <span
                         className={
                           showExp
-                            ? "me-4 ack-fsize-22 ack-fw-600"
-                            : "me-4 ack-fsize-22 ack-fw-600 ack-fcolor2"
+                            ? "me-4 ack-fsize-22 ack-fw-600 hover-pointer"
+                            : "me-4 ack-fsize-22 ack-fw-600 ack-fcolor2 hover-pointer"
                         }
                         onClick={() => setShowExp(true)}
                       >

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Profile,
   Union,
@@ -13,30 +13,35 @@ import { Search } from "react-bootstrap-icons";
 import Navbar from "../../components/atoms/Navbar";
 import Footer from "../../components/atoms/Footer";
 import "./index.css";
+import {
+  searchUsers,
+  getAllUsers,
+  sortSkillUsers,
+  sortNameUsers,
+  sortLocationUsers
+} from "../../stores/actions/user";
+import { connect } from "react-redux";
+import { toast, ToastContainer } from "react-toastify";
+import { useHistory } from "react-router-dom";
 
-function Home() {
+function Home(props) {
+  const history = useHistory();
+  const [user, setUser] = useState(props.user.users);
   const [show, setShow] = useState(false);
   const [filterShow, setFilterShow] = useState(false);
-  const users = [
-    {
-      name: "Louis Tomlinson",
-      jobDesk: "Web developer - Freelance",
-      location: "Lorem ipsum",
-      skills: ["PHP", "NODEJS", "HTML"]
-    },
-    {
-      name: "Harry Styles",
-      jobDesk: "Web developer - Fulltime",
-      location: "Lorem ipsum",
-      skills: ["PHP", "NODEJS", "HTML"]
-    },
-    {
-      name: "Niall Horan",
-      jobDesk: "Web developer - Freelance",
-      location: "Lorem ipsum",
-      skills: ["PHP", "NODEJS", "HTML"]
-    }
-  ];
+  const [search, setSearch] = useState("");
+  const [sort] = useState("ASC");
+  const [page, setPage] = useState(1);
+  const [limit] = useState(3);
+  const [totalPage, setTotalPage] = useState("");
+
+  const listGetAllUsers = () => {
+    props.getAllUsers(page, limit).then((response) => {
+      setUser(response.value.data.data);
+      setTotalPage(response.value.data.pagination.totalPage);
+    });
+  };
+
   const handleShowSearch = (event) => {
     if (event.target.alt === "Search") {
       setShow(true);
@@ -52,6 +57,59 @@ function Home() {
       setFilterShow(false);
     }
   };
+
+  const findUser = async (event) => {
+    try {
+      const response = await props.searchUsers(search, page, limit);
+      setUser(response.value.data.data);
+      history.push(`/home?search=${search}`);
+      toast.success("Pencarian Ditemukan");
+    } catch (error) {
+      toast.error("Keywoard yang anda cari tidak ditemukan...");
+      new Error(error);
+    }
+  };
+
+  const findSortByName = async () => {
+    try {
+      const response = await props.sortNameUsers(sort, page, limit);
+      setUser(response.value.data.data);
+      history.push(`/home?sort=${sort}`);
+      setFilterShow(false);
+    } catch (error) {
+      new Error(error);
+    }
+  };
+  const findSortBySkill = async () => {
+    try {
+      const response = await props.sortSkillUsers(sort, page, limit);
+      setUser(response.value.data.data);
+      history.push(`/home?sort=${sort}`);
+      setFilterShow(false);
+    } catch (error) {
+      new Error(error);
+    }
+  };
+  const findSortByLocation = async () => {
+    try {
+      const response = await props.sortLocationUsers(sort, page, limit);
+      setUser(response.value.data.data);
+      history.push(`/home?sort=${sort}`);
+      setFilterShow(false);
+    } catch (error) {
+      new Error(error);
+    }
+  };
+
+  const changePagination = (event) => {
+    const selectedPage = event.selected + 1;
+    setPage(selectedPage, () => getAllUsers(page, limit));
+  };
+
+  useEffect(() => {
+    listGetAllUsers();
+  }, [page, limit, sort, search]);
+  // console.log(users.skill);
 
   return (
     <>
@@ -78,6 +136,7 @@ function Home() {
             </section>
           </section>
           <section className="homepage__main">
+            <ToastContainer />
             <section className="homepage__spacing homepage__main-search">
               <section className="homepage__search">
                 <div className="homepage__search-container-input">
@@ -85,6 +144,7 @@ function Home() {
                     type="text"
                     className="homepage__search-input"
                     placeholder="Search for any skill"
+                    onChange={(e) => setSearch(e.target.value)}
                   />
                   <Search />
                 </div>
@@ -95,7 +155,7 @@ function Home() {
                   </span>
                 </div>
                 <div className="homepage__search-container-button">
-                  <button type="submit" className="homepage__search-button">
+                  <button type="submit" className="homepage__search-button" onClick={findUser}>
                     Search
                   </button>
                 </div>
@@ -103,19 +163,28 @@ function Home() {
               {!filterShow ? null : (
                 <div className="homepage__search-search-filter-menu">
                   <div className="homepage__search-search-filter-menu-child">
-                    <button style={{ border: "none", backgroundColor: "transparent" }}>
+                    <button
+                      onClick={findSortByName}
+                      style={{ border: "none", backgroundColor: "transparent" }}
+                    >
                       Sortir Berdasarkan Nama
                     </button>
                     <hr />
                   </div>
                   <div className="homepage__search-search-filter-menu-child">
-                    <button style={{ border: "none", backgroundColor: "transparent" }}>
+                    <button
+                      onClick={findSortBySkill}
+                      style={{ border: "none", backgroundColor: "transparent" }}
+                    >
                       Sortir Berdasarkan Skill
                     </button>
                     <hr />
                   </div>
                   <div className="homepage__search-search-filter-menu-child">
-                    <button style={{ border: "none", backgroundColor: "transparent" }}>
+                    <button
+                      onClick={findSortByLocation}
+                      style={{ border: "none", backgroundColor: "transparent" }}
+                    >
                       Sortir Berdasarkan Lokasi
                     </button>
                     <hr />
@@ -137,44 +206,64 @@ function Home() {
             </section>
             <section className="homepage__spacing homepage__main-list-users">
               <h2 className="d-block d-md-none homepage__topmenu-title">Web Developer</h2>
-              {users.map((user, idx) => (
-                <div className="homepage__list-users-card" key={idx}>
-                  <img src={Profile} alt="" className="homepage__list-users-card-image img-fluid" />
-                  <div className="homepage__list-users-card-body">
-                    <div className="homepage__list-users-card-body-left">
-                      <h5>{user.name}</h5>
-                      <span>{user.jobDesk}</span>
-                      <span>{user.location}</span>
-                      <div className="homepage__list-users-card-body-skills">
-                        {user.skills.map((skill, idx) => (
-                          <div key={idx}>
-                            <div className="homepage__list-users-card-body-skills-category">
-                              {skill}
-                            </div>
-                          </div>
-                        ))}
-                        <span className="homepage__list-users-card-body-skills-more d-flex d-md-none">
-                          8+
+              {user.map((users, idx) => {
+                // const skillAsli = users.skill.map((value) => value);
+                // let temp;
+                // if (users.skill.length > 3) {
+                //   const parseMoreSkills = users.skill.pop();
+                //   temp = parseMoreSkills;
+                // }
+                // const moreSkills = temp === undefined ? null : temp.split();
+                return (
+                  <div className="homepage__list-users-card" key={idx}>
+                    <img
+                      src={Profile}
+                      alt=""
+                      className="homepage__list-users-card-image img-fluid"
+                    />
+                    <div className="homepage__list-users-card-body">
+                      <div className="homepage__list-users-card-body-left">
+                        <h5>{users.nama}</h5>
+                        <span>
+                          {users.jobDesk ? users.jobDesk : "-"}
+                          {" - "}
+                          {users.jobStatus ? users.jobStatus : null}
                         </span>
+                        <span>{users.domisili ? users.domisili : "-"}</span>
+                        <div className="homepage__list-users-card-body-skills">
+                          {users.skill.map((skills, idx) => {
+                            return (
+                              <div key={idx}>
+                                <div className="homepage__list-users-card-body-skills-category">
+                                  {skills}
+                                </div>
+                              </div>
+                            );
+                          })}
+                          <span className="homepage__list-users-card-body-skills-more d-flex d-md-none">
+                            8+
+                          </span>
+                        </div>
+                      </div>
+                      <div className="homepage__list-users-card-body-right">
+                        <button className="homepage__list-users-card-body-button">
+                          Lihat Profile
+                        </button>
                       </div>
                     </div>
-                    <div className="homepage__list-users-card-body-right">
-                      <button className="homepage__list-users-card-body-button">
-                        Lihat Profile
-                      </button>
-                    </div>
                   </div>
-                </div>
-              ))}
+                );
+              })}
             </section>
             <section className="homepage__spacing homepage__pagination">
               <Pagination
                 containerClassName="homepage__pagination"
                 previousLabel={"<"}
                 nextLabel={">"}
+                pageCount={totalPage}
+                onPageChange={changePagination}
                 previousClassName="homepage__pagination-previous"
                 nextClassName="homepage__pagination-next"
-                pageCount={3}
                 pageClassName="homepage__pagination-page"
               />
             </section>
@@ -243,4 +332,16 @@ function Home() {
   );
 }
 
-export default Home;
+const mapStateToProps = (state) => ({
+  user: state.user
+});
+
+const mapDispatchToProps = {
+  searchUsers,
+  getAllUsers,
+  sortSkillUsers,
+  sortNameUsers,
+  sortLocationUsers
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Home);

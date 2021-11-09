@@ -102,7 +102,7 @@ class FormLogin extends Component {
           </Form>
 
           <p className="formLogin__signUp">
-            Anda belum punya akun? <a href="/register-recruiters">Daftar disini</a>
+            Anda belum punya akun? <a href="/register-workers">Daftar disini</a>
           </p>
         </div>
       </>

@@ -4,6 +4,10 @@
   background-color: #f6f7f8;
 }
 
+.logo__mobile {
+  display: none;
+}
+
 .formSignUp__formInput {
   padding-top: 2em;
   color: #9ea0a5;
@@ -37,4 +41,16 @@
 .formSignUp__login a {
   text-decoration: none;
   color: #fbb017;
+}
+
+@media (max-width: 480px) {
+  .formSignUp {
+    padding: 5em 2em !important;
+  }
+
+  .logo__mobile {
+    display: block;
+    width: 120px;
+    padding-bottom: 30px;
+  }
 }

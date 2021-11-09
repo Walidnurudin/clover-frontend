@@ -1,11 +1,13 @@
 import React from "react";
-import { Form, Button } from "react-bootstrap";
+import { Form, Button, Image } from "react-bootstrap";
+import { LogoPurple } from "../../../../assets/images";
 import "./index.css";
 
 const ResetPassword = () => {
   return (
     <>
       <div className="formResetPassword">
+        <Image src={LogoPurple} className="logo__mobile" />
         <h1>Reset password</h1>
         <p>
           Enter your user accounts verified email address and we will send you a password reset

@@ -33,3 +33,9 @@ hr {
 .footer__end--right {
   display: flex;
 }
+
+@media (max-width: 480px) {
+  .footer__row {
+    display: none;
+  }
+}

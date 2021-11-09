@@ -33,6 +33,58 @@ const auth = (state = initialState, action) => {
         msg: action.payload.response.data.msg
       };
     }
+    case "REGISTER_WORKERS_PENDING": {
+      return {
+        ...state,
+        isLoading: true,
+        isError: false,
+        msg: ""
+      };
+    }
+    case "REGISTER_WORKERS_FULFILLED": {
+      return {
+        ...state,
+        isLoading: false,
+        isError: false,
+        idUser: action.payload.data.data.id,
+        msg: action.payload.data.msg
+      };
+    }
+    case "REGISTER_WORKERS_REJECTED": {
+      return {
+        ...state,
+        isLoading: false,
+        isError: true,
+        idUser: "",
+        msg: action.payload.response.data.msg
+      };
+    }
+    case "REGISTER_RECRUITERS_PENDING": {
+      return {
+        ...state,
+        isLoading: true,
+        isError: false,
+        msg: ""
+      };
+    }
+    case "REGISTER_RECRUITERS_FULFILLED": {
+      return {
+        ...state,
+        isLoading: false,
+        isError: false,
+        idUser: action.payload.data.data.id,
+        msg: action.payload.data.msg
+      };
+    }
+    case "REGISTER_RECRUITERS_REJECTED": {
+      return {
+        ...state,
+        isLoading: false,
+        isError: true,
+        idUser: "",
+        msg: action.payload.response.data.msg
+      };
+    }
     default: {
       return state;
     }

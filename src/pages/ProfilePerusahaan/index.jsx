@@ -4,6 +4,8 @@ import { useHistory } from "react-router";
 import { useSelector, useDispatch } from "react-redux";
 import { Opinion3, mail, ig, phone, linkedin, map } from "../../assets/images";
 import { getUserById } from "../../stores/actions/user";
+import Navbar from "../../components/atoms/Navbar";
+import Footer from "../../components/atoms/Footer";
 
 function ProfilePerusahaan() {
   const history = useHistory();
@@ -23,6 +25,7 @@ function ProfilePerusahaan() {
 
   return (
     <>
+      <Navbar />
       <div className="profile__perusahaan">
         <div className="container">
           <div className="profile__perusahaan--wrap">
@@ -72,6 +75,8 @@ function ProfilePerusahaan() {
           </div>
         </div>
       </div>
+
+      <Footer />
     </>
   );
 }

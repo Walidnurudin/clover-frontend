@@ -21,9 +21,9 @@ export const getUserById = (id) => {
   };
 };
 
-export const updateUser = (id, data) => {
+export const updateUser = (data) => {
   return {
     type: "UPDATE_USER",
-    payload: axios.patch(`user/${id}`, data)
+    payload: axios.patch("user", data)
   };
 };

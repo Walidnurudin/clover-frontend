@@ -9,7 +9,7 @@ import { Link } from "react-router-dom";
 const Navigation = () => {
   return (
     <>
-      <Navbar expand="lg">
+      <Navbar expand="lg" className="navigation__mobile">
         <Container fluid className="navigation">
           <Link to="/">
             <img src={LogoPurple} alt="" className="logo__purple" />

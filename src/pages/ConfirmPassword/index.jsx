@@ -2,9 +2,9 @@ import React from "react";
 import { Container, Row, Col } from "react-bootstrap";
 import "./index.css";
 import AuthLeft from "../../components/atoms/AuthLeft";
-import FormLogin from "../../components/molecules/Forms/Login";
+import FormConfirmPassword from "../../components/molecules/Forms/ConfirmPassword";
 
-const Login = () => {
+const ConfirmPassword = () => {
   return (
     <>
       <Container fluid className="window">
@@ -13,7 +13,7 @@ const Login = () => {
             <AuthLeft />
           </Col>
           <Col md={6} className="column2">
-            <FormLogin />
+            <FormConfirmPassword />
           </Col>
         </Row>
       </Container>
@@ -21,4 +21,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default ConfirmPassword;

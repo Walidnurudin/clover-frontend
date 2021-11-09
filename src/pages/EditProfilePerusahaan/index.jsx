@@ -4,6 +4,8 @@ import { Opinion3, edit, map } from "../../assets/images";
 import { useSelector, useDispatch } from "react-redux";
 import { getUserById, updateUser } from "../../stores/actions/user";
 import { ToastContainer, toast } from "react-toastify";
+import Navbar from "../../components/atoms/Navbar";
+import Footer from "../../components/atoms/Footer";
 
 const initialState = {
   nama: "",
@@ -51,7 +53,7 @@ function EditProfilePerusahaan() {
   };
 
   const handleSubmit = () => {
-    dispatch(updateUser("34e36a65-5488-406d-a02e-591532b29f82", form)).then((res) => {
+    dispatch(updateUser(form)).then((res) => {
       console.log(res);
       dispatch(getUserById("34e36a65-5488-406d-a02e-591532b29f82")).then((res) => {
         console.log(res);
@@ -75,6 +77,8 @@ function EditProfilePerusahaan() {
         draggable
         pauseOnHover
       />
+
+      <Navbar />
 
       <div className="edit__profile__perusahaan">
         <div className="edit__profile__perusahaan--purple"></div>
@@ -236,6 +240,8 @@ function EditProfilePerusahaan() {
           </div>
         </div>
       </div>
+
+      <Footer />
     </>
   );
 }

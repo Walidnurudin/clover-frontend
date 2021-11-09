@@ -10,7 +10,7 @@ const RecruitersRoute = ({ component: Component, ...rest }) => {
     <Route
       {...rest}
       render={(props) =>
-        isAuthenticated && userState.role === "Perekrut" ? (
+        isAuthenticated && userState.users.role === "Perekrut" ? (
           <Component {...props} />
         ) : (
           <Redirect to="/profile" />

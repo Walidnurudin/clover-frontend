@@ -22,7 +22,6 @@ const Navigation = () => {
   const handleLogout = () => {
     localStorage.clear();
     history.push("/");
-    console.log("Logout...");
   };
 
   const handleMenuLogged = () => {};

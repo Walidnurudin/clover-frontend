@@ -93,9 +93,12 @@ class FormLogin extends Component {
                 onChange={this.handleChangeForm}
               />
             </Form.Group>
-            <a href="/reset-password" className="formLogin__forgotPass">
-              Lupa kata sandi?
-            </a>
+            <div className="d-flex justify-content-between">
+              <div></div>
+              <a href="/reset-password" className="formLogin__forgotPass">
+                Lupa kata sandi?
+              </a>
+            </div>
             <Button className="formLogin__button" type="submit">
               Masuk
             </Button>

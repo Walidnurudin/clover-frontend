@@ -10,11 +10,6 @@
 .formLogin__forgotPass {
   text-decoration: none;
   color: #1f2a36;
-  justify-content: right !important;
-  text-align: right !important;
-  display: flex;
-  align-items: flex-end;
-  margin-top: 30px;
 }
 
 .formLogin__button {

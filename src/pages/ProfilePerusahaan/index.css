@@ -29,6 +29,10 @@
   position: absolute;
 }
 
+.profile__perusahaan--main img {
+  /* border-radius: 100%; */
+}
+
 .profile__perusahaan--main h1 {
   font-size: 22px;
   line-height: 56px;

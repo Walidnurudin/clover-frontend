@@ -3,7 +3,7 @@ import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 import { compose } from "redux";
 import { login } from "../../../../stores/actions/auth";
-import { getUserById } from "../../../../stores/actions/user";
+import { getUserProfile } from "../../../../stores/actions/user";
 import { Form, Button } from "react-bootstrap";
 import "./index.css";
 
@@ -35,7 +35,7 @@ class FormLogin extends Component {
       .then((res) => {
         localStorage.setItem("token", res.value.data.data.token);
         // localStorage.setItem("id", res.value.data.data.id);
-        this.props.getUserById(res.value.data.data.id).then((res) => {
+        this.props.getUserProfile(res.value.data.data.id).then((res) => {
           console.log("Userrr", res.action.payload.data.data[0].role);
           if (res.action.payload.data.data[0].role === "Pekerja") {
             this.props.history.push("/profile");
@@ -122,6 +122,6 @@ const mapStateToProps = (state) => ({
   auth: state.auth
 });
 
-const mapDispatchToProps = { login, getUserById };
+const mapDispatchToProps = { login, getUserProfile };
 
 export default compose(withRouter, connect(mapStateToProps, mapDispatchToProps))(FormLogin);

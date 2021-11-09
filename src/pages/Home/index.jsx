@@ -206,54 +206,58 @@ function Home(props) {
             </section>
             <section className="homepage__spacing homepage__main-list-users">
               <h2 className="d-block d-md-none homepage__topmenu-title">Web Developer</h2>
-              {user.map((users, idx) => {
-                // const skillAsli = users.skill.map((value) => value);
-                // let temp;
-                // if (users.skill.length > 3) {
-                //   const parseMoreSkills = users.skill.pop();
-                //   temp = parseMoreSkills;
-                // }
-                // const moreSkills = temp === undefined ? null : temp.split();
-                return (
-                  <div className="homepage__list-users-card" key={idx}>
-                    <img
-                      src={Profile}
-                      alt=""
-                      className="homepage__list-users-card-image img-fluid"
-                    />
-                    <div className="homepage__list-users-card-body">
-                      <div className="homepage__list-users-card-body-left">
-                        <h5>{users.nama}</h5>
-                        <span>
-                          {users.jobDesk ? users.jobDesk : "-"}
-                          {" - "}
-                          {users.jobStatus ? users.jobStatus : null}
-                        </span>
-                        <span>{users.domisili ? users.domisili : "-"}</span>
-                        <div className="homepage__list-users-card-body-skills">
-                          {users.skill.map((skills, idx) => {
-                            return (
-                              <div key={idx}>
-                                <div className="homepage__list-users-card-body-skills-category">
-                                  {skills}
-                                </div>
-                              </div>
-                            );
-                          })}
-                          <span className="homepage__list-users-card-body-skills-more d-flex d-md-none">
-                            8+
+              {user.length > 0 ? (
+                user.map((users, idx) => {
+                  // const skillAsli = users.skill.map((value) => value);
+                  // let temp;
+                  // if (users.skill.length > 3) {
+                  //   const parseMoreSkills = users.skill.pop();
+                  //   temp = parseMoreSkills;
+                  // }
+                  // const moreSkills = temp === undefined ? null : temp.split();
+                  return (
+                    <div className="homepage__list-users-card" key={idx}>
+                      <img
+                        src={Profile}
+                        alt=""
+                        className="homepage__list-users-card-image img-fluid"
+                      />
+                      <div className="homepage__list-users-card-body">
+                        <div className="homepage__list-users-card-body-left">
+                          <h5>{users.nama}</h5>
+                          <span>
+                            {users.jobDesk ? users.jobDesk : "-"}
+                            {" - "}
+                            {users.jobStatus ? users.jobStatus : null}
                           </span>
+                          <span>{users.domisili ? users.domisili : "-"}</span>
+                          <div className="homepage__list-users-card-body-skills">
+                            {users.skill?.map((skills, idx) => {
+                              return (
+                                <div key={idx}>
+                                  <div className="homepage__list-users-card-body-skills-category">
+                                    {skills}
+                                  </div>
+                                </div>
+                              );
+                            })}
+                            <span className="homepage__list-users-card-body-skills-more d-flex d-md-none">
+                              8+
+                            </span>
+                          </div>
+                        </div>
+                        <div className="homepage__list-users-card-body-right">
+                          <button className="homepage__list-users-card-body-button">
+                            Lihat Profile
+                          </button>
                         </div>
                       </div>
-                      <div className="homepage__list-users-card-body-right">
-                        <button className="homepage__list-users-card-body-button">
-                          Lihat Profile
-                        </button>
-                      </div>
                     </div>
-                  </div>
-                );
-              })}
+                  );
+                })
+              ) : (
+                <h1>Data bot found!</h1>
+              )}
             </section>
             <section className="homepage__spacing homepage__pagination">
               <Pagination

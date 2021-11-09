@@ -40,9 +40,9 @@ function EditProfilePerusahaan() {
     });
 
   useEffect(() => {
-    dispatch(getUserById("34e36a65-5488-406d-a02e-591532b29f82")).then((res) => {
-      console.log(res);
-    });
+    // dispatch(getUserById("34e36a65-5488-406d-a02e-591532b29f82")).then((res) => {
+    //   console.log(res);
+    // });
   }, []);
 
   const changeText = (e) => {
@@ -91,7 +91,8 @@ function EditProfilePerusahaan() {
                   <div className="text-center">
                     <img
                       src={
-                        `http://localhost:3001/uploads/user/${userState.users.image}` || Opinion3
+                        `http://localhost:3001/uploads/user/${userState.userProfile.image}` ||
+                        Opinion3
                       }
                       alt="profile"
                       width="150px"
@@ -103,17 +104,19 @@ function EditProfilePerusahaan() {
                     </div>
                   </div>
 
-                  <h5 className="open-sans-600 mt-3">{userState.users.nama}</h5>
-                  <p className="mb-3 open-sans-400">{userState.users.bidangPerusahaan || "-"}</p>
+                  <h5 className="open-sans-600 mt-3">{userState.userProfile.nama}</h5>
+                  <p className="mb-3 open-sans-400">
+                    {userState.userProfile.bidangPerusahaan || "-"}
+                  </p>
                   <div>
                     <img src={map} alt="map" width="16px" />
                     <span className="text-secondary ms-2 open-sans-400">
-                      {userState.users.domisili || "-"}
+                      {userState.userProfile.domisili || "-"}
                     </span>
                   </div>
 
                   <p className="text-secondary mb-4 mt-4 open-sans-400">
-                    {userState.users.description || "-"}
+                    {userState.userProfile.description || "-"}
                   </p>
                 </div>
 

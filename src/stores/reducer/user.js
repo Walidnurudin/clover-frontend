@@ -1,4 +1,5 @@
 const initialState = {
+  userProfile: {},
   users: [],
   isLoading: false,
   isError: false,
@@ -154,6 +155,35 @@ export default function user(state = initialState, action) {
         ...state,
         isLoading: false,
         isError: false,
+        message: action.payload.data.msg
+      };
+    }
+
+    // GET PROFILE
+    case "GET_PROFILE_PENDING": {
+      return {
+        ...state,
+        isLoading: false,
+        isError: false,
+        message: "",
+        userProfile: {}
+      };
+    }
+    case "GET_PROFILE_FULFILLED": {
+      return {
+        ...state,
+        isLoading: false,
+        isError: false,
+        userProfile: action.payload.data.data[0],
+        message: action.payload.data.msg
+      };
+    }
+    case "GET_PROFILE_REJECTED": {
+      return {
+        ...state,
+        isLoading: true,
+        isError: true,
+        userProfile: {},
         message: action.payload.data.msg
       };
     }

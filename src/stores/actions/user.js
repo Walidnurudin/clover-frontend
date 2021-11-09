@@ -40,6 +40,13 @@ export const sortLocationUsers = (sort, page, limit) => {
   };
 };
 
+export const getUserProfile = (id) => {
+  return {
+    type: "GET_PROFILE",
+    payload: axios.get(`user/${id}`)
+  };
+};
+
 export const getUserById = (id) => {
   return {
     type: "GET_USER_BY_ID",

@@ -66,7 +66,7 @@ function App() {
             {/* PEREKRUT */}
             <RecruitersRoute exact path="/home" component={Home} />
             <RecruitersRoute exact path="/hire" component={Hire} />
-            <RecruitersRoute path="/profile-recruiters" exact component={ProfilePerusahaan} />
+            <RecruitersRoute exact path="/profile-recruiters" component={ProfilePerusahaan} />
             <RecruitersRoute
               path="/edit-profile-recruiters"
               exact

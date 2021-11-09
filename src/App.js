@@ -15,28 +15,69 @@ import ProfilePerusahaan from "./pages/ProfilePerusahaan";
 import EditProfilePerusahaan from "./pages/EditProfilePerusahaan";
 import ProfilePage from "./pages/ProfilePage";
 
+// REDUX
 import { Provider } from "react-redux";
-import store from "./stores/store";
+import { store, persistor } from "./stores/store";
+
+import { PersistGate } from "redux-persist/integration/react";
+
+// ROUTE
+import PublicRoute from "./helpers/routes/PublicRoute";
+import RecruitersRoute from "./helpers/routes/RecruitersRoute";
+import WorkersRoute from "./helpers/routes/WorkersRoute";
 
 function App() {
   return (
     <Provider store={store}>
-      <Router>
-        <Switch>
-          <Route path="/" exact component={LandingPage} />
-          <Route exact path="/home" component={Home} />
-          <Route exact path="/hire" component={Hire} />
-          <Route path="/login-workers" exact component={LoginWorkers} />
-          <Route path="/login-recruiters" exact component={LoginRecruiters} />
-          <Route path="/register-workers" exact component={RegisterWorkers} />
-          <Route path="/register-recruiters" exact component={RegisterRecruiters} />
-          <Route path="/reset-password" exact component={ResetPassword} />
-          <Route path="/confirm-password" exact component={ConfirmPassword} />
-          <Route path="/profile-perusahaan" exact component={ProfilePerusahaan} />
-          <Route path="/edit-profile-perusahaan" exact component={EditProfilePerusahaan} />
-          <Route path="/profile" exact component={ProfilePage} />
-        </Switch>
-      </Router>
+      <PersistGate loading={null} persistor={persistor}>
+        <Router>
+          <Switch>
+            {/* PUBLIC */}
+            <PublicRoute path="/" exact component={LandingPage} />
+
+            {/* WITHOUT TOKEN */}
+            <PublicRoute restricted={true} path="/login-workers" exact component={LoginWorkers} />
+            <PublicRoute
+              restricted={true}
+              path="/login-recruiters"
+              exact
+              component={LoginRecruiters}
+            />
+            <PublicRoute
+              restricted={true}
+              path="/register-workers"
+              exact
+              component={RegisterWorkers}
+            />
+            <PublicRoute
+              restricted={true}
+              path="/register-recruiters"
+              exact
+              component={RegisterRecruiters}
+            />
+            <PublicRoute restricted={true} path="/reset-password" exact component={ResetPassword} />
+            <PublicRoute
+              restricted={true}
+              path="/confirm-password"
+              exact
+              component={ConfirmPassword}
+            />
+
+            {/* PEREKRUT */}
+            <RecruitersRoute exact path="/home" component={Home} />
+            <RecruitersRoute exact path="/hire" component={Hire} />
+            <RecruitersRoute path="/profile-recruiters" exact component={ProfilePerusahaan} />
+            <RecruitersRoute
+              path="/edit-profile-recruiters"
+              exact
+              component={EditProfilePerusahaan}
+            />
+
+            {/* PEKERJA */}
+            <WorkersRoute path="/profile" exact component={ProfilePage} />
+          </Switch>
+        </Router>
+      </PersistGate>
     </Provider>
   );
 }

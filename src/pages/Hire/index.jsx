@@ -1,14 +1,63 @@
 import React, { useState } from "react";
 import "./index.css";
 import ProfileUser from "../../components/atoms/ProfileUser";
-function Hire() {
+import Navbar from "../../components/atoms/Navbar";
+import Footer from "../../components/atoms/Footer";
+import { connect } from "react-redux";
+import { postHire } from "../../stores/actions/user";
+import { ToastContainer, toast } from "react-toastify";
+import { useHistory } from "react-router-dom";
+
+function Hire(props) {
+  const history = useHistory();
   const [skills] = useState("Pyhton,Laravel,Golang,JavaScript,PHP,HTML,C++,Kotlin,Swift");
+  const [hire, setHire] = useState({
+    user_id: "3232432",
+    tujuan_pesan: "",
+    pesan: ""
+  });
+  const [isLoading, setLoading] = useState(false);
+
+  const handlePostHire = async (event) => {
+    try {
+      setLoading(true);
+      event.preventDefault();
+      const { user_id, tujuan_pesan, pesan } = hire;
+      const setDataHire = { user_id, tujuan_pesan, pesan };
+      for (const value in setDataHire) {
+        if (setDataHire[value] === "") {
+          setLoading(false);
+          toast.warning("Form Hire Tidak Boleh Kosong...");
+          return false;
+        }
+      }
+      await props.postHire(setDataHire);
+      setLoading(false);
+      toast.success("Pesan berhasil dikirim ke pekerja, silahkan tunggu informasi selanjutnya!");
+      event.target.reset();
+      setDataHire({
+        user_id: "",
+        tujuan_pesan: "",
+        pesan: ""
+      });
+      history.push("/");
+      // console.log("POST HIRING RUNNING...", response);
+    } catch (error) {
+      new Error(error.mesage);
+    }
+  };
+  const handleChangeText = (event) => {
+    setHire({ ...hire, [event.target.name]: event.target.value });
+  };
+
   return (
     <>
+      <Navbar />
       <main className="hire__main">
         <section className="container">
+          <ToastContainer />
           <div className="row">
-            <div className="col-md-4 mt-5">
+            <div className="col-md-4 mt-5 mb-5">
               <ProfileUser skills={skills} />
             </div>
             <section className="col-md-8 mt-5">
@@ -21,11 +70,19 @@ function Hire() {
                 </p>
               </div>
               <div className="hire__form-recruiter">
-                <form>
+                <form onSubmit={handlePostHire}>
                   <div className="mb-3">
                     <label htmlFor="tujuan_pesan">Tujuan tentang pesan ini</label>
-                    <select className="hire__form-tujuan-pesan">
-                      <option value="">Project</option>
+                    <select
+                      className="hire__form-tujuan-pesan"
+                      name="tujuan_pesan"
+                      onChange={handleChangeText}
+                      disabled={isLoading}
+                    >
+                      <option hidden>Tujuan Pesan</option>
+                      <option value="Project">Project</option>
+                      <option value="Freelance">Freelance</option>
+                      <option value="Fulltime">Fulltime</option>
                     </select>
                   </div>
                   <div className="mb-3">
@@ -35,11 +92,14 @@ function Hire() {
                       cols="30"
                       rows="8"
                       placeholder="Deskripsikan/jelaskan lebih detail"
+                      onChange={handleChangeText}
+                      name="pesan"
+                      disabled={isLoading}
                     ></textarea>
                   </div>
                   <div className="mb-3">
                     <button type="submit" className="hire__form-button">
-                      Kirim
+                      {isLoading ? "Loading..." : "Kirim"}
                     </button>
                   </div>
                 </form>
@@ -48,8 +108,13 @@ function Hire() {
           </div>
         </section>
       </main>
+      <Footer />
     </>
   );
 }
 
-export default Hire;
+const mapDispatchToProps = {
+  postHire
+};
+
+export default connect(null, mapDispatchToProps)(Hire);

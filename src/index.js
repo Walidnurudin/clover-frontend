@@ -5,6 +5,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.bundle";
 import "react-toastify/dist/ReactToastify.css";
 import "./assets/css/styles.css";
+import "react-toastify/dist/ReactToastify.css";
 
 ReactDOM.render(
   <React.Fragment>

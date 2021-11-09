@@ -5,6 +5,7 @@ import { compose } from "redux";
 import { login } from "../../../../stores/actions/auth";
 import { Form, Button, Image } from "react-bootstrap";
 import { LogoPurple } from "../../../../assets/images";
+import { getUserById } from "../../../../stores/actions/user";
 import "./index.css";
 
 class FormLogin extends Component {
@@ -34,8 +35,13 @@ class FormLogin extends Component {
       .login(this.state.form)
       .then((res) => {
         localStorage.setItem("token", res.value.data.data.token);
-        localStorage.setItem("id", res.value.data.data.id);
-        this.props.history.push("/");
+        this.props.getUserById(res.value.data.data.id).then((res) => {
+          if (res.action.payload.data.data[0].role === "Pekerja") {
+            this.props.history.push("/profile");
+          } else {
+            this.props.history.push("/home");
+          }
+        });
       })
       .catch((err) => {
         this.setState({
@@ -119,6 +125,6 @@ const mapStateToProps = (state) => ({
   auth: state.auth
 });
 
-const mapDispatchToProps = { login };
+const mapDispatchToProps = { login, getUserById };
 
 export default compose(withRouter, connect(mapStateToProps, mapDispatchToProps))(FormLogin);

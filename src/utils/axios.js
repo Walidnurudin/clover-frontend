@@ -1,10 +1,9 @@
 import axios from "axios";
-
 const interceptorAxios = axios.create({
   baseURL: "http://localhost:3001/"
 });
 
-axios.interceptors.request.use(
+interceptorAxios.interceptors.request.use(
   function (config) {
     // Set Up Config authorization bearer
     config.headers = {
@@ -17,7 +16,7 @@ axios.interceptors.request.use(
   }
 );
 
-axios.interceptors.response.use(
+interceptorAxios.interceptors.response.use(
   function (response) {
     return response;
   },

@@ -22,6 +22,7 @@
 }
 
 .user__pic {
+  cursor: pointer;
   width: 35px;
 }
 

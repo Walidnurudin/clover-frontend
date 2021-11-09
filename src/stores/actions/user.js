@@ -39,12 +39,6 @@ export const sortLocationUsers = (sort, page, limit) => {
     payload: axios.get(`user?sortByName=domisili ${sort}&page=${page}&${limit}`)
   };
 };
-export const getAllUser = () => {
-  return {
-    type: "GET_ALL_USER",
-    payload: axios.get("user")
-  };
-};
 
 export const getUserById = (id) => {
   return {

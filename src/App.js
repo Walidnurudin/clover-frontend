@@ -20,9 +20,9 @@ import { Provider } from "react-redux";
 import store from "./stores/store";
 
 // ROUTE
-import PublicRoute from "./helpers/routes/PublicRoute";
-import RecruitersRoute from "./helpers/routes/RecruitersRoute";
-import WorkersRoute from "./helpers/routes/WorkersRoute";
+// import PublicRoute from "./helpers/routes/PublicRoute";
+// import RecruitersRoute from "./helpers/routes/RecruitersRoute";
+// import WorkersRoute from "./helpers/routes/WorkersRoute";
 
 function App() {
   return (
@@ -40,8 +40,8 @@ function App() {
           <Route path="/register-recruiters" exact component={RegisterRecruiters} />
           <Route path="/reset-password" exact component={ResetPassword} />
           <Route path="/confirm-password" exact component={ConfirmPassword} />
-          <Route path="/profile-perusahaan" exact component={ProfilePerusahaan} />
-          <Route path="/edit-profile-perusahaan" exact component={EditProfilePerusahaan} />
+          <Route path="/profile-recruiters" exact component={ProfilePerusahaan} />
+          <Route path="/edit-profile-recruiters" exact component={EditProfilePerusahaan} />
 
           {/* PEREKRUT */}
           <Route exact path="/hire" component={Hire} />

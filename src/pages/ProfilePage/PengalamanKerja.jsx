@@ -203,7 +203,7 @@ function PengalamanKerja() {
 
       <div className="row container margin-reset">
         {semuaDataPengalaman.map((item, index) => (
-          <div key={index} className="col-4 text-center my-3 " style={{}}>
+          <div key={index} className="col-lg-4 col-12 text-center my-3 " style={{}}>
             <div
               className="col-12 text-center p-2"
               style={{

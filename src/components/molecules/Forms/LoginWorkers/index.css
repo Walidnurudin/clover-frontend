@@ -2,6 +2,10 @@
   padding: 10em 6em;
 }
 
+.logo__mobile {
+  display: none;
+}
+
 .formLogin__formInput {
   padding-top: 2em;
   color: #9ea0a5;
@@ -10,11 +14,6 @@
 .formLogin__forgotPass {
   text-decoration: none;
   color: #1f2a36;
-  justify-content: right !important;
-  text-align: right !important;
-  display: flex;
-  align-items: flex-end;
-  margin-top: 30px;
 }
 
 .formLogin__button {
@@ -35,4 +34,16 @@
 .formLogin__signUp a {
   text-decoration: none;
   color: #fbb017;
+}
+
+@media (max-width: 480px) {
+  .formLogin {
+    padding: 5em 2em;
+  }
+
+  .logo__mobile {
+    display: block;
+    width: 120px;
+    padding-bottom: 30px;
+  }
 }

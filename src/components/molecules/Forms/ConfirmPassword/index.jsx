@@ -1,11 +1,13 @@
 import React from "react";
-import { Form, Button } from "react-bootstrap";
+import { Form, Button, Image } from "react-bootstrap";
+import { LogoPurple } from "../../../../assets/images";
 import "./index.css";
 
 const ConfirmPassword = () => {
   return (
     <>
       <div className="formConfirmPassword">
+        <Image src={LogoPurple} className="logo__mobile" />
         <h1>Halo, Clovers</h1>
         <p>You need to change your password to activate your account</p>
         <Form className="formConfirmPassword__formInput">

@@ -3,7 +3,9 @@ import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 import { compose } from "redux";
 import { login } from "../../../../stores/actions/auth";
-import { Form, Button } from "react-bootstrap";
+import { Form, Button, Image } from "react-bootstrap";
+import { LogoPurple } from "../../../../assets/images";
+import { getUserById } from "../../../../stores/actions/user";
 import "./index.css";
 
 class FormLogin extends Component {
@@ -33,8 +35,13 @@ class FormLogin extends Component {
       .login(this.state.form)
       .then((res) => {
         localStorage.setItem("token", res.value.data.data.token);
-        localStorage.setItem("id", res.value.data.data.id);
-        this.props.history.push("/");
+        this.props.getUserById(res.value.data.data.id).then((res) => {
+          if (res.action.payload.data.data[0].role === "Perekrut") {
+            this.props.history.push("/home");
+          } else {
+            this.props.history.push("/profile");
+          }
+        });
       })
       .catch((err) => {
         this.setState({
@@ -56,6 +63,7 @@ class FormLogin extends Component {
     return (
       <>
         <div className="formLogin">
+          <Image src={LogoPurple} className="logo__mobile" />
           <h1>Halo, Clovers</h1>
           <p>
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Excepturi nam quas similique
@@ -93,9 +101,12 @@ class FormLogin extends Component {
                 onChange={this.handleChangeForm}
               />
             </Form.Group>
-            <a href="/reset-password" className="formLogin__forgotPass">
-              Lupa kata sandi?
-            </a>
+            <div className="d-flex justify-content-between">
+              <div></div>
+              <a href="/reset-password" className="formLogin__forgotPass">
+                Lupa kata sandi?
+              </a>
+            </div>
             <Button className="formLogin__button" type="submit">
               Masuk
             </Button>

@@ -3,8 +3,9 @@ import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 import { compose } from "redux";
 import { login } from "../../../../stores/actions/auth";
-import { getUserProfile } from "../../../../stores/actions/user";
-import { Form, Button } from "react-bootstrap";
+import { Form, Button, Image } from "react-bootstrap";
+import { LogoPurple } from "../../../../assets/images";
+import { getUserById, getUserProfile } from "../../../../stores/actions/user";
 import "./index.css";
 
 class FormLogin extends Component {
@@ -64,6 +65,7 @@ class FormLogin extends Component {
     return (
       <>
         <div className="formLogin">
+          <Image src={LogoPurple} className="logo__mobile" />
           <h1>Halo, Clovers</h1>
           <p>
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Excepturi nam quas similique
@@ -101,9 +103,12 @@ class FormLogin extends Component {
                 onChange={this.handleChangeForm}
               />
             </Form.Group>
-            <a href="/reset-password" className="formLogin__forgotPass">
-              Lupa kata sandi?
-            </a>
+            <div className="d-flex justify-content-between">
+              <div></div>
+              <a href="/reset-password" className="formLogin__forgotPass">
+                Lupa kata sandi?
+              </a>
+            </div>
             <Button className="formLogin__button" type="submit">
               Masuk
             </Button>

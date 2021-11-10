@@ -11,8 +11,8 @@ const Footer = () => {
           <Col md={4}>
             <img src={LogoWhite} alt="" className="logo__white" />
             <p>
-              Lorem ipsum dolor sit amet, consectetur adipisicing elit. Enim dolorum impedit porro
-              animi corporis, beatae corrupti minima itaque ipsum temporibus magnam!
+              Temukan Developer Berbakat Dan Terbaik Di Berbagai Bidang Keahlian, untuk menyambut
+              perubahan revolusi 4.0
             </p>
           </Col>
         </Row>

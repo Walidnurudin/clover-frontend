@@ -63,7 +63,7 @@ function Hire(props) {
 
   return (
     <>
-      <Navbar />
+      <Navbar {...props} />
       <main className="hire__main">
         <section className="container">
           <ToastContainer />
@@ -74,7 +74,7 @@ function Hire(props) {
             <section className="col-md-8 mt-5">
               {/* Form Hire */}
               <div className="hire__description">
-                <h3 className="hire__title-worker">Hubungi Lous Tomlinson</h3>
+                <h3 className="hire__title-worker">Hubungi {dataUser.nama}</h3>
                 <p className="hire__title-worker-paragraph">
                   Lorem ipsum dolor sit amet, consectetur adipiscing elit. In euismod ipsum et dui
                   rhoncus auctor.

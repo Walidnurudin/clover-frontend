@@ -11,6 +11,7 @@ const Navigation = (props) => {
   const [show, setShow] = useState(false);
   const [menuOptionLogged, setMenuOptionLogged] = useState(false);
   const token = localStorage.getItem("token");
+  const role = localStorage.getItem("role");
 
   const handleProfileMenu = () => {
     if (show === false) {
@@ -38,13 +39,29 @@ const Navigation = (props) => {
   const handleLinkRegist = () => {
     history.push("/register-workers");
   };
+
+  const handleToProfile = () => {
+    if (role === "Pekerja") {
+      history.push("/profile");
+    } else {
+      history.push("/profile-recruiters");
+    }
+  };
   return (
     <>
       <Navbar expand="lg" className="navigation__mobile position-relative">
         <Container fluid className="navigation">
-          <Link to="/">
-            <img src={LogoPurple} alt="Clover Hire" className="logo__purple" />
-          </Link>
+          <div className="menu">
+            <Link to="/">
+              <img src={LogoPurple} alt="Clover Hire" className="logo__purple" />
+            </Link>
+            {token ? (
+              <Link to="/home" className="menu__home text-decoration-none text-dark fw-bold">
+                Home
+              </Link>
+            ) : null}
+          </div>
+
           {token ? (
             <div className="navbar__item--right">
               <Bell size={25} style={{ marginRight: "40px", color: "#9B9B9B" }} />
@@ -61,6 +78,21 @@ const Navigation = (props) => {
               </Button>
             </div>
           )}
+          {/* <button
+            onClick={handleToProfile}
+            style={{
+              right: "50px",
+              borderRadius: "4px",
+              backgroundColor: "#5e50a1",
+              border: "none",
+              color: "#fff",
+              fontWeight: "700",
+              fontSize: "14px",
+              padding: "12px 24px"
+            }}
+          >
+            Profil
+          </button> */}
         </Container>
       </Navbar>
       {!menuOptionLogged ? null : (

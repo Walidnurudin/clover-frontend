@@ -12,20 +12,26 @@ import Footer from "../../components/atoms/Footer";
 import Opinion from "../../components/molecules/Opinion";
 import { useHistory } from "react-router";
 
-function LandingPage() {
+function LandingPage(props) {
   const history = useHistory();
-  const role = "perekrut"; //|| perekrut <== ambil dari localstorage
+  const token = localStorage.getItem("token");
+  const role = "Perekrut"; //|| Perekrut <== ambil dari localstorage
 
   const startNow = () => {
-    if (role === "perekrut") {
+    if (role === "Perekrut") {
       history.push("/home");
     } else {
       history.push("/pekerja");
     }
   };
+  const handleNow = () => {
+    if (!token) {
+      history.push("/login-workers");
+    }
+  };
   return (
     <>
-      <Navbar />
+      <Navbar {...props} />
       <div className="container">
         <section>
           <div className="row landing__page--1">
@@ -79,8 +85,7 @@ function LandingPage() {
             <div className="col-12 col-md-6 align-self-center landing__page--3--desc mb-5">
               <h1 className="open-sans-600">Skill Tallent</h1>
               <p className="open-sans-400 mt-4 mb-5">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. In euismod ipsum et dui
-                rhoncus auctor.
+                Berbagai skill dan kemampuan yang anda bisa temukan disini
               </p>
               <div className="row">
                 <div className="col-6 d-flex flex-column">
@@ -146,10 +151,13 @@ function LandingPage() {
 
             <div className="d-flex justify-content-between join__now--content">
               <div>
-                <p className="open-sans-600">Lorem ipsum</p>
-                <p className="open-sans-600">dolor sit amet</p>
+                <p className="open-sans-600">Mulai perjalanan anda sekarang di</p>
+                <p className="open-sans-600">Clover Hire</p>
               </div>
-              <button className="btn btn-primary open-sans-700 align-self-center">
+              <button
+                className="btn btn-primary open-sans-700 align-self-center"
+                onClick={handleNow}
+              >
                 Mulai Dari Sekarang
               </button>
             </div>

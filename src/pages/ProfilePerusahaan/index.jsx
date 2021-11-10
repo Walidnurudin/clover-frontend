@@ -36,7 +36,11 @@ function ProfilePerusahaan() {
               <img
                 src={
                   userState.users.image !== null
-                    ? `http://localhost:3001/uploads/user/${userState.users.image}`
+                    ? `${
+                        process.env.REACT_APP_NAME === "dev"
+                          ? process.env.REACT_APP_DEV
+                          : process.env.REACT_APP_PROD
+                      }uploads/user/${userState.users.image}`
                     : Opinion3
                 }
                 alt="profile"

@@ -27,15 +27,35 @@ function ProfilePage() {
 
   const [dataUser, setDataUser] = useState({});
 
-  useEffect(() => {
-    document.title = "Clover Hire | Profile";
+  const getDataUser = () =>
     axios.get(`user/${localStorage.getItem("id")}`).then((res) => {
       setDataUser(res.data.data[0]);
     });
+
+  const [dataPortoUser, setDataPortoUser] = useState([]);
+
+  const getPortoFolioUser = () => {
+    axios.get(`portfolio/${localStorage.getItem("id")}`).then((res) => {
+      // console.log(res);
+      setDataPortoUser(res.data.data);
+    });
+  };
+
+  useEffect(() => {
+    // console.log(dataPortoUser);
+  }, [dataPortoUser]);
+
+  useEffect(() => {
+    getPortoFolioUser();
   }, []);
 
   useEffect(() => {
-    console.log(dataUser);
+    document.title = "Clover Hire | Profile";
+    getDataUser();
+  }, []);
+
+  useEffect(() => {
+    // console.log(dataUser);
   }, [dataUser]);
 
   return (
@@ -55,13 +75,14 @@ function ProfilePage() {
                 setIsUpdate={setIsUpdate}
                 setShow={setShow}
                 dataUser={dataUser}
+                getDataUser={getDataUser}
               />
 
               {isUpdate ? (
                 <>
                   <div className="col-lg-8 col-12 data-diri position-relative">
-                    <DataDiri dataUser={dataUser} />
-                    <Skill Skills={skills} />
+                    <DataDiri dataUser={dataUser} getDataUser={() => getDataUser()} />
+                    {/* <Skill Skills={dataUser.skill.split(",")} /> */}
                     <PengalamanKerja />
                     <Portofolio />
                   </div>
@@ -93,7 +114,7 @@ function ProfilePage() {
                       </span>
                     </div>
 
-                    {showExp ? <ExpComp /> : <PortoComp />}
+                    {showExp ? <ExpComp /> : <PortoComp dataPortoUser={dataPortoUser} />}
                   </div>
                 </div>
               )}

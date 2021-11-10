@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Modal, Button } from "react-bootstrap";
+import { toast, ToastContainer } from "react-toastify";
 import { Eye } from "../../assets/images/ProfilePageImage";
 import interceptorAxios from "../../utils/axios";
 import axios from "../../utils/axios";
@@ -14,10 +15,9 @@ function UbahPassword(props) {
   });
 
   const submitChangePass = () => {
-    axios.patch(
-      `auth/forgot-password/${localStorage.getItem("id")}/${localStorage.getItem("token")}`,
-      changePassData
-    );
+    axios.patch("user/update-password", changePassData).then((res) => {
+      toast.success("Success change password");
+    });
   };
 
   const handleChangePass = (event) => {
@@ -27,7 +27,7 @@ function UbahPassword(props) {
     });
   };
   useEffect(() => {
-    console.log(changePassData);
+    // console.log(changePassData);
   }, [changePassData]);
 
   return (
@@ -37,6 +37,7 @@ function UbahPassword(props) {
           <Modal.Title>Ubah Password</Modal.Title>
         </Modal.Header>
         <Modal.Body>
+          <ToastContainer />
           <form className="roow">
             <div className="col6">
               <label htmlFor="" className="col-12">

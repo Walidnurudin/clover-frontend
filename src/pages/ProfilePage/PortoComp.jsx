@@ -16,33 +16,20 @@ import {
   Suitcase
 } from "../../assets/images/ProfilePageImage";
 
-function PortoComp() {
+function PortoComp(props) {
+  // console.log(props.dataPortoUser);
+  const { dataPortoUser } = props;
   return (
     <div className="porto-container row">
-      <div className="porto-list d-flex flex-column text-center px-2 mb-4 col-12 col-lg-4">
-        <img src={Porto1} alt="" />
-        <p className="ack-fsize-14 ack-fw-400 my-1">Remainder App</p>
-      </div>
-      <div className="porto-list d-flex flex-column text-center px-2 mb-4 col-12 col-lg-4">
-        <img src={Porto2} alt="" />
-        <p className="ack-fsize-14 ack-fw-400 my-1">Remainder App</p>
-      </div>
-      <div className="porto-list d-flex flex-column text-center px-2 mb-4 col-12 col-lg-4">
-        <img src={Porto3} alt="" />
-        <p className="ack-fsize-14 ack-fw-400 my-1">Remainder App</p>
-      </div>
-      <div className="porto-list d-flex flex-column text-center px-2 mb-4 col-12 col-lg-4">
-        <img src={Porto4} alt="" />
-        <p className="ack-fsize-14 ack-fw-400 my-1">Remainder App</p>
-      </div>
-      <div className="porto-list d-flex flex-column text-center px-2 mb-4 col-12 col-lg-4">
-        <img src={Porto5} alt="" />
-        <p className="ack-fsize-14 ack-fw-400 my-1">Remainder App</p>
-      </div>
-      <div className="porto-list d-flex flex-column text-center px-2 mb-4 col-12 col-lg-4">
-        <img src={Porto6} alt="" />
-        <p className="ack-fsize-14 ack-fw-400 my-1">Remainder App</p>
-      </div>
+      {dataPortoUser.map((item, index) => (
+        <div
+          key={index}
+          className="porto-list d-flex flex-column mb-5 text-center px-2 col-12 col-lg-4"
+        >
+          <img src={`http://localhost:3001/images/${item.image}`} alt="" />
+          <p className="ack-fsize-14 ack-fw-400 my-2">{item.nama_aplikasi}</p>
+        </div>
+      ))}
     </div>
   );
 }

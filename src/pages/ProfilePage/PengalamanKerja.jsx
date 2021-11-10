@@ -7,7 +7,6 @@ import "react-toastify/dist/ReactToastify.css";
 function PengalamanKerja() {
   const submitDataDiri = (event) => {
     event.preventDefault();
-    setDataPengalamanBaru({ ...dataPengalamanBaru, user_id: localStorage.getItem("id") });
     axios
       .post("user/experience", dataPengalamanBaru)
       .then((res) => {
@@ -15,7 +14,10 @@ function PengalamanKerja() {
         toast.success(res.data.msg);
         getPengalaman();
       })
-      .catch((err) => toast.error(err.msg));
+      .catch((err) => {
+        console.log(err);
+        // toast.error(err.msg);
+      });
   };
 
   const [semuaDataPengalaman, setSemuaDataPengalaman] = useState([]);
@@ -48,6 +50,7 @@ function PengalamanKerja() {
   const handleInputPengalaman = (event) => {
     setDataPengalamanBaru({
       ...dataPengalamanBaru,
+      user_id: localStorage.getItem("id"),
       [event.target.name]: event.target.value
     });
   };
@@ -96,6 +99,12 @@ function PengalamanKerja() {
       });
   };
 
+  const confirmDelete = (data) => {
+    // confirm("hello");
+    const confirmDes = confirm(`Hapus Pengalaman ${data.posisi} di ${data.nama_perusahaan}`);
+    confirmDes ? deleteExp(data.id) : toast.info("Perintah Dibatalkan!");
+  };
+
   const deleteExp = (data) => {
     axios.delete(`user/experience/${data}`).then((res) => {
       console.log(res);
@@ -105,8 +114,6 @@ function PengalamanKerja() {
         .get(`user/experience/${localStorage.getItem("id")}`)
         .then((res) => {
           setSemuaDataPengalaman(res.data.data);
-          // notify();
-          // console.log(res);
         })
         .catch((err) => {
           setSemuaDataPengalaman([]);
@@ -132,6 +139,7 @@ function PengalamanKerja() {
             Nama Perusahaan
           </label>
           <input
+            required
             type="text"
             placeholder="Masukkan Nama Perusahaan"
             name="nama_perusahaan"
@@ -146,6 +154,7 @@ function PengalamanKerja() {
             Posisi
           </label>
           <input
+            required
             type="text"
             placeholder="Masukkan Posisi"
             onChange={(event) => handleInputPengalaman(event)}
@@ -160,6 +169,7 @@ function PengalamanKerja() {
             Taggal Masuk
           </label>
           <input
+            required
             type="date"
             placeholder="Masukkan Tanggal Masuk"
             name="tanggal_masuk"
@@ -174,6 +184,7 @@ function PengalamanKerja() {
             Taggal Keluar
           </label>
           <input
+            required
             type="date"
             placeholder="Masukkan Tanggal Keluar"
             name="tanggal_keluar"
@@ -188,6 +199,7 @@ function PengalamanKerja() {
             Deskripsi Singkat
           </label>
           <textarea
+            required
             name="description"
             className="col-12 p-2"
             id=""
@@ -232,7 +244,11 @@ function PengalamanKerja() {
               >
                 UPDATE
               </button>
-              <button onClick={() => deleteExp(item.id)} className="ack-btn-2 text-center p-2 my-1">
+              <button
+                // onClick={() => deleteExp(item.id)}
+                onClick={() => confirmDelete(item)}
+                className="ack-btn-2 text-center p-2 my-1"
+              >
                 DELETE
               </button>
             </div>

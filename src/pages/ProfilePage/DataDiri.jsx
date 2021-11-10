@@ -53,6 +53,14 @@ function DataDiri(props) {
     });
   };
 
+  const handleChangeNoHp = (event) => {
+    setDataDiriBaru({
+      ...dataDiriBaru,
+      noHandphone: event.target.value,
+      noHandPhone: event.target.value
+    });
+  };
+
   useEffect(() => {
     console.log(dataDiriBaru);
   }, [dataDiriBaru]);
@@ -106,9 +114,9 @@ function DataDiri(props) {
             type="text"
             placeholder="Masukkan Nomer Handphone"
             name="noHandPhone"
-            onChange={(event) => handleChangeData(event)}
+            onChange={(event) => handleChangeNoHp(event)}
             className="p-2 col-12"
-            value={noHandPhone ? noHandPhone : noHandphone ? noHandphone : ""}
+            value={noHandphone ? noHandphone : ""}
           />
 
           <div className="social-input mt-lg-4 row">

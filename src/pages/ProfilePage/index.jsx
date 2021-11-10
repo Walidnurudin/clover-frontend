@@ -82,7 +82,7 @@ function ProfilePage() {
                 <>
                   <div className="col-lg-8 col-12 data-diri position-relative">
                     <DataDiri dataUser={dataUser} getDataUser={() => getDataUser()} />
-                    <Skill Skills={skills} />
+                    <Skill Skills={dataUser.skill.split(",")} />
                     <PengalamanKerja />
                     <Portofolio />
                   </div>

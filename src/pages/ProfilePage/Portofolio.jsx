@@ -228,7 +228,7 @@ function Portofolio(props) {
                     process.env.REACT_APP_NAME === "dev"
                       ? process.env.REACT_APP_DEV
                       : process.env.REACT_APP_PROD
-                  }${item.image}`}
+                  }images/${item.image}`}
                   alt=""
                   className="portoImage"
                 />

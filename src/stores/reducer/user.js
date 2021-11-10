@@ -157,6 +157,30 @@ export default function user(state = initialState, action) {
         message: action.payload.data.msg
       };
     }
+    case "SORTFULLTIMEJOB_PENDING": {
+      return {
+        ...state,
+        isLoading: false,
+        isError: false,
+        message: ""
+      };
+    }
+    case "SORTFULLTIMEJOB_FULFILLED": {
+      return {
+        ...state,
+        isLoading: false,
+        isError: false,
+        message: action.payload.data.msg
+      };
+    }
+    case "SORTFULLTIMEJOB_REJECTED": {
+      return {
+        ...state,
+        isLoading: true,
+        isError: true,
+        message: action.payload.data.msg
+      };
+    }
     default: {
       return {
         ...state

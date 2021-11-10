@@ -10,8 +10,19 @@ import {
 import Navbar from "../../components/atoms/Navbar";
 import Footer from "../../components/atoms/Footer";
 import Opinion from "../../components/molecules/Opinion";
+import { useHistory } from "react-router";
 
 function LandingPage() {
+  const history = useHistory();
+  const role = "perekrut"; //|| perekrut <== ambil dari localstorage
+
+  const startNow = () => {
+    if (role === "perekrut") {
+      history.push("/home");
+    } else {
+      history.push("/pekerja");
+    }
+  };
   return (
     <>
       <Navbar />
@@ -24,7 +35,9 @@ function LandingPage() {
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit. In euismod ipsum et dui
                 rhoncus auctor.
               </p>
-              <button className="btn btn-primary open-sans-700">Mulai Dari Sekarang</button>
+              <button className="btn btn-primary open-sans-700" onClick={startNow}>
+                Mulai Dari Sekarang
+              </button>
             </div>
             <div className="col-12 col-md-6 landing__page--1--img">
               <img src={LandingPage1} alt="image" />

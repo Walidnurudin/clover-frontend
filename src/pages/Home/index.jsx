@@ -18,7 +18,8 @@ import {
   getAllUsers,
   sortSkillUsers,
   sortNameUsers,
-  sortLocationUsers
+  sortLocationUsers,
+  sortFullTimeJobUsers
 } from "../../stores/actions/user";
 import { connect } from "react-redux";
 import { toast, ToastContainer } from "react-toastify";
@@ -31,12 +32,17 @@ function Home(props) {
   const [filterShow, setFilterShow] = useState(false);
   const [search, setSearch] = useState("");
   const [sort] = useState("ASC");
+  const [jobFreelance] = useState("Freelance");
+  const [jobFulltime] = useState("Fulltime");
   const [page, setPage] = useState(1);
   const [limit] = useState(3);
   const [totalPage, setTotalPage] = useState("");
+  const [isLoading, setLoading] = useState(false);
+  const [role] = useState("Pekerja");
 
   const listGetAllUsers = () => {
-    props.getAllUsers(page, limit).then((response) => {
+    props.getAllUsers(role, page, limit).then((response) => {
+      setLoading(false);
       setUser(response.value.data.data);
       setTotalPage(response.value.data.pagination.totalPage);
     });
@@ -60,7 +66,9 @@ function Home(props) {
 
   const findUser = async (event) => {
     try {
-      const response = await props.searchUsers(search, page, limit);
+      setLoading(true);
+      const response = await props.searchUsers(role, search, page, limit);
+      setLoading(false);
       setUser(response.value.data.data);
       history.push(`/home?search=${search}`);
       toast.success("Pencarian Ditemukan");
@@ -72,7 +80,9 @@ function Home(props) {
 
   const findSortByName = async () => {
     try {
-      const response = await props.sortNameUsers(sort, page, limit);
+      setLoading(true);
+      const response = await props.sortNameUsers(role, sort, page, limit);
+      setLoading(false);
       setUser(response.value.data.data);
       history.push(`/home?sort=${sort}`);
       setFilterShow(false);
@@ -82,7 +92,9 @@ function Home(props) {
   };
   const findSortBySkill = async () => {
     try {
-      const response = await props.sortSkillUsers(sort, page, limit);
+      setLoading(true);
+      const response = await props.sortSkillUsers(role, sort, page, limit);
+      setLoading(false);
       setUser(response.value.data.data);
       history.push(`/home?sort=${sort}`);
       setFilterShow(false);
@@ -92,7 +104,9 @@ function Home(props) {
   };
   const findSortByLocation = async () => {
     try {
-      const response = await props.sortLocationUsers(sort, page, limit);
+      setLoading(true);
+      const response = await props.sortLocationUsers(role, sort, page, limit);
+      setLoading(false);
       setUser(response.value.data.data);
       history.push(`/home?sort=${sort}`);
       setFilterShow(false);
@@ -103,12 +117,41 @@ function Home(props) {
 
   const changePagination = (event) => {
     const selectedPage = event.selected + 1;
-    setPage(selectedPage, () => getAllUsers(page, limit));
+    setPage(selectedPage, () => getAllUsers(role, page, limit));
   };
 
+  const findFreelance = async () => {
+    try {
+      setLoading(true);
+      const response = await props.sortFullTimeJobUsers(role, jobFreelance, page, limit);
+      setLoading(false);
+      setUser(response.value.data.data);
+      setFilterShow(false);
+    } catch (error) {
+      new Error(error);
+    }
+  };
+  const findFulltime = async () => {
+    try {
+      setLoading(true);
+      const response = await props.sortFullTimeJobUsers(role, jobFulltime, page, limit);
+      setLoading(false);
+      setUser(response.value.data.data);
+      setFilterShow(false);
+    } catch (error) {
+      new Error(error);
+    }
+  };
+
+  const linkToProfile = (user_id) => {
+    history.push("/profile", { user_id });
+  };
   useEffect(() => {
+    // if (role !== "Pekerja") {
+    //   history.push("/");
+    // }
     listGetAllUsers();
-  }, [page, limit, sort, search]);
+  }, [role, page, limit, sort, search]);
   // console.log(users.skill);
 
   return (
@@ -190,13 +233,19 @@ function Home(props) {
                     <hr />
                   </div>
                   <div className="homepage__search-search-filter-menu-child">
-                    <button style={{ border: "none", backgroundColor: "transparent" }}>
+                    <button
+                      style={{ border: "none", backgroundColor: "transparent" }}
+                      onClick={findFreelance}
+                    >
                       Sortir Berdasarkan Freelance
                     </button>
                     <hr />
                   </div>
                   <div className="homepage__search-search-filter-menu-child">
-                    <button style={{ border: "none", backgroundColor: "transparent" }}>
+                    <button
+                      style={{ border: "none", backgroundColor: "transparent" }}
+                      onClick={findFulltime}
+                    >
                       Sortir Berdasarkan Fulltime
                     </button>
                     <hr />
@@ -206,54 +255,63 @@ function Home(props) {
             </section>
             <section className="homepage__spacing homepage__main-list-users">
               <h2 className="d-block d-md-none homepage__topmenu-title">Web Developer</h2>
-              {user.map((users, idx) => {
-                // const skillAsli = users.skill.map((value) => value);
-                // let temp;
-                // if (users.skill.length > 3) {
-                //   const parseMoreSkills = users.skill.pop();
-                //   temp = parseMoreSkills;
-                // }
-                // const moreSkills = temp === undefined ? null : temp.split();
-                return (
-                  <div className="homepage__list-users-card" key={idx}>
-                    <img
-                      src={Profile}
-                      alt=""
-                      className="homepage__list-users-card-image img-fluid"
-                    />
-                    <div className="homepage__list-users-card-body">
-                      <div className="homepage__list-users-card-body-left">
-                        <h5>{users.nama}</h5>
-                        <span>
-                          {users.jobDesk ? users.jobDesk : "-"}
-                          {" - "}
-                          {users.jobStatus ? users.jobStatus : null}
-                        </span>
-                        <span>{users.domisili ? users.domisili : "-"}</span>
-                        <div className="homepage__list-users-card-body-skills">
-                          {users.skill.map((skills, idx) => {
-                            return (
-                              <div key={idx}>
-                                <div className="homepage__list-users-card-body-skills-category">
-                                  {skills}
-                                </div>
-                              </div>
-                            );
-                          })}
-                          <span className="homepage__list-users-card-body-skills-more d-flex d-md-none">
-                            8+
+              {isLoading ? (
+                <div className="spinner-border text-primary mx-auto" role="status">
+                  <span className="visually-hidden">Loading...</span>
+                </div>
+              ) : (
+                user.map((users, idx) => {
+                  // const skillAsli = users.skill.map((value) => value);
+                  // let temp;
+                  // if (users.skill.length > 3) {
+                  //   const parseMoreSkills = users.skill.pop();
+                  //   temp = parseMoreSkills;
+                  // }
+                  // const moreSkills = temp === undefined ? null : temp.split();
+                  return (
+                    <div className="homepage__list-users-card" key={idx}>
+                      <img
+                        src={Profile}
+                        alt=""
+                        className="homepage__list-users-card-image img-fluid"
+                      />
+                      <div className="homepage__list-users-card-body">
+                        <div className="homepage__list-users-card-body-left">
+                          <h5>{users.nama}</h5>
+                          <span>
+                            {users.jobDesk ? users.jobDesk : "-"}
+                            {" - "}
+                            {users.jobStatus ? users.jobStatus : null}
                           </span>
+                          <span>{users.domisili ? users.domisili : "-"}</span>
+                          <div className="homepage__list-users-card-body-skills">
+                            {users.skill.map((skills, idx) => {
+                              return (
+                                <div key={idx}>
+                                  <div className="homepage__list-users-card-body-skills-category">
+                                    {skills}
+                                  </div>
+                                </div>
+                              );
+                            })}
+                            <span className="homepage__list-users-card-body-skills-more d-flex d-md-none">
+                              8+
+                            </span>
+                          </div>
+                        </div>
+                        <div className="homepage__list-users-card-body-right">
+                          <button
+                            className="homepage__list-users-card-body-button"
+                            onClick={() => linkToProfile(users.id)}
+                          >
+                            Lihat Profile
+                          </button>
                         </div>
                       </div>
-                      <div className="homepage__list-users-card-body-right">
-                        <button className="homepage__list-users-card-body-button">
-                          Lihat Profile
-                        </button>
-                      </div>
                     </div>
-                  </div>
-                );
-              })}
+                  );
+                })
+              )}
             </section>
             <section className="homepage__spacing homepage__pagination">
               <Pagination
@@ -277,7 +335,7 @@ function Home(props) {
         >
           <section className="homepage__mobile-navigation-search-main d-flex d-md-none">
             <div className="homepage__mobile-navigation-search">
-              <input type="text" placeholder="Android Developer" />
+              <input type="text" placeholder="Golang Java React" />
             </div>
             <div className="homepage__mobile-navigation-filter">
               <button onClick={handleFilterMobile}>
@@ -285,6 +343,22 @@ function Home(props) {
               </button>
             </div>
           </section>
+          {/* CARD USERS MOBILE */}
+          {/* <div className="homepage__mobile-navigation-list-users">
+            <h5>Android Developer</h5>
+            <div className="homepage__mobile-navigation-list-users-container">
+              <div className="homepage__mobile-navigation-list-users-card">
+                <div className="homepage__mobile-navigation-list-users-card-parent-image">
+                  <p>
+                    Lorem, ipsum dolor sit amet consectetur adipisicing elit. Debitis qui, libero
+                    similique saepe animi consequuntur exercitationem mollitia eaque totam facilis
+                    veniam vero optio cumque voluptate aut possimus amet repellat dolores.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div> */}
+          <div className="homepage__mobile-navigation"></div>
           {!filterShow ? null : (
             <div className="homepage__mobile-rectangle">
               <div>
@@ -341,7 +415,8 @@ const mapDispatchToProps = {
   getAllUsers,
   sortSkillUsers,
   sortNameUsers,
-  sortLocationUsers
+  sortLocationUsers,
+  sortFullTimeJobUsers
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Home);

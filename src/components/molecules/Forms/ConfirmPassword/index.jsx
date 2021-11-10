@@ -1,21 +1,69 @@
-import React from "react";
+import React, { useState } from "react";
 import { Form, Button } from "react-bootstrap";
+import { connect } from "react-redux";
+import { toast, ToastContainer } from "react-toastify";
+import { resetPassword } from "../../../../stores/actions/auth";
+import { useHistory } from "react-router-dom";
 import "./index.css";
 
-const ConfirmPassword = () => {
+const FormConfirmPassword = (props) => {
+  const history = useHistory();
+  const [formResetPassword, setResetPassword] = useState({
+    newPassword: "",
+    confirmPassword: ""
+  });
+  const user_id = props.user_id;
+  const token = props.user_token;
+  const handleChangeFormResetPass = (event) => {
+    setResetPassword({ ...formResetPassword, [event.target.name]: event.target.value });
+  };
+  const handleResetPassword = async (event) => {
+    try {
+      event.preventDefault();
+      const { newPassword, confirmPassword } = formResetPassword;
+      const setFormResetPassword = { newPassword, confirmPassword };
+
+      for (const valueReset in setFormResetPassword) {
+        if (setFormResetPassword[valueReset] === "") {
+          toast.error("Write your new password...");
+          return false;
+        }
+      }
+      const response = await props.resetPassword(user_id, token, setFormResetPassword);
+      toast.success(`${response.value.data.msg}`);
+      setTimeout(() => {
+        history.push("/login");
+      }, 2000);
+      event.target.reset();
+      setFormResetPassword({
+        newPassword: "",
+        confirmPassword: ""
+      });
+    } catch (error) {
+      if (error.message === "Cannot read properties of undefined (reading 'msg')") {
+        toast.error("Password dont match!");
+      }
+    }
+  };
   return (
     <>
       <div className="formConfirmPassword">
         <h1>Halo, Clovers</h1>
         <p>You need to change your password to activate your account</p>
-        <Form className="formConfirmPassword__formInput">
+        <ToastContainer />
+        <Form className="formConfirmPassword__formInput" onSubmit={handleResetPassword}>
           <Form.Group
             className="mb-3 formConfirmPassword__password"
             controlId="formBasicPassword"
             style={{ paddingBottom: "15px" }}
           >
             <Form.Label>Kata Sandi</Form.Label>
-            <Form.Control type="password" placeholder="Masukkan kata sandi" />
+            <Form.Control
+              type="password"
+              placeholder="Masukkan kata sandi"
+              name="newPassword"
+              onChange={handleChangeFormResetPass}
+            />
           </Form.Group>
           <Form.Group
             className="mb-3 formConfirmPassword__password"
@@ -23,13 +71,28 @@ const ConfirmPassword = () => {
             style={{ paddingBottom: "15px" }}
           >
             <Form.Label>Konfirmasi kata Sandi</Form.Label>
-            <Form.Control type="password" placeholder="Masukkan konfirmasi kata sandi" />
+            <Form.Control
+              type="password"
+              placeholder="Masukkan konfirmasi kata sandi"
+              name="confirmPassword"
+              onChange={handleChangeFormResetPass}
+            />
           </Form.Group>
+          <Button className="formConfirmPassword__button" type="submit">
+            Reset password
+          </Button>
         </Form>
-        <Button className="formConfirmPassword__button">Reset password</Button>
       </div>
     </>
   );
 };
 
-export default ConfirmPassword;
+const mapStateToProps = (state) => ({
+  auth: state.auth
+});
+
+const mapDispatchToProps = {
+  resetPassword
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(FormConfirmPassword);

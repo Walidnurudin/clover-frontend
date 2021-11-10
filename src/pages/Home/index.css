@@ -331,4 +331,19 @@
     border-radius: 4px;
     padding: 12px;
   }
+
+  /* LIST USERS */
+  .homepage__mobile-navigation-list-users-container {
+    display: flex;
+  }
+  .homepage__mobile-navigation-list-users {
+    padding: 0px 12px;
+  }
+  .homepage__mobile-navigation-list-users-card {
+    background-color: #ffffff;
+    margin: 0px 8px;
+    padding: 8px 12px;
+    box-shadow: 0px 8px 16px rgba(214, 214, 214, 0.25);
+    border-radius: 4px;
+  }
 }

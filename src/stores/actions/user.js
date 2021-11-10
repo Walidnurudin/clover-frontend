@@ -1,9 +1,9 @@
 import axios from "../../utils/axios";
 
-export const getAllUsers = (page, limit) => {
+export const getAllUsers = (role, page, limit) => {
   return {
     type: "GETALLUSERS",
-    payload: axios.get(`user?page=${page}&limit=${limit}`)
+    payload: axios.get(`user?role=${role}&page=${page}&limit=${limit}`)
   };
 };
 
@@ -14,28 +14,35 @@ export const postHire = (data) => {
   };
 };
 
-export const searchUsers = (search, page, limit) => {
+export const searchUsers = (role, search, page, limit) => {
   return {
     type: "SEARCHUSERS",
-    payload: axios.get(`user?searchSkill=${search}&page=${page}&limit=${limit}`)
+    payload: axios.get(`user?role=${role}&searchSkill=${search}&page=${page}&limit=${limit}`)
   };
 };
 
-export const sortSkillUsers = (sort, page, limit) => {
+export const sortSkillUsers = (role, sort, page, limit) => {
   return {
     type: "SORTSKILL",
-    payload: axios.get(`user?sortByName=skill ${sort}&page=${page}&${limit}`)
+    payload: axios.get(`user?role=${role}&sortByName=skill ${sort}&page=${page}&${limit}`)
   };
 };
-export const sortNameUsers = (sort, page, limit) => {
+export const sortNameUsers = (role, sort, page, limit) => {
   return {
     type: "SORTNAME",
-    payload: axios.get(`user?sortByName=nama ${sort}&page=${page}&${limit}`)
+    payload: axios.get(`user?role=${role}&sortByName=nama ${sort}&page=${page}&${limit}`)
   };
 };
-export const sortLocationUsers = (sort, page, limit) => {
+export const sortLocationUsers = (role, sort, page, limit) => {
   return {
     type: "SORTLOCATION",
-    payload: axios.get(`user?sortByName=domisili ${sort}&page=${page}&${limit}`)
+    payload: axios.get(`user?role=${role}&sortByName=domisili ${sort}&page=${page}&${limit}`)
+  };
+};
+
+export const sortFullTimeJobUsers = (role, jobSort, page, limit) => {
+  return {
+    type: "SORTFULLTIMEJOB",
+    payload: axios.get(`user?role=${role}&jobStatus=${jobSort}&page=${page}&limit=${limit}`)
   };
 };

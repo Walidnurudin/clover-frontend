@@ -33,6 +33,78 @@ const auth = (state = initialState, action) => {
         msg: action.payload.response.data.msg
       };
     }
+    case "LOGOUT_PENDING": {
+      return {
+        ...state,
+        isLoading: false,
+        isError: false,
+        msg: ""
+      };
+    }
+    case "LOGOUT_FULFILLED": {
+      return {
+        ...state,
+        isLoading: false,
+        isError: false,
+        msg: action.payload.data.msg
+      };
+    }
+    case "LOGOUT_REJECTED": {
+      return {
+        ...state,
+        isLoading: true,
+        isError: true,
+        msg: action.payload.data.msg
+      };
+    }
+    case "CBFORGOTPASS_PENDING": {
+      return {
+        ...state,
+        isLoading: false,
+        isError: false,
+        msg: ""
+      };
+    }
+    case "CBFORGOTPASS_FULFILLED": {
+      return {
+        ...state,
+        isLoading: false,
+        isError: false,
+        msg: action.payload.data.msg
+      };
+    }
+    case "CBFORGOTPASS_REJECTED": {
+      return {
+        ...state,
+        isLoading: true,
+        isError: true,
+        msg: action.payload.data.msg
+      };
+    }
+    case "RESETPASSWORD_PENDING": {
+      return {
+        ...state,
+        isLoading: false,
+        isError: false,
+        msg: ""
+      };
+    }
+    case "RESETPASSWORD_FULFILLED": {
+      return {
+        ...state,
+        isLoading: false,
+        isError: false,
+        msg: action.payload.data.msg
+      };
+    }
+    case "RESETPASSWORD_REJECTED": {
+      return {
+        ...state,
+        isLoading: true,
+        isError: true,
+        msg: action.payload.data.msg
+      };
+    }
     default: {
       return state;
     }

@@ -29,7 +29,8 @@ import ProfileUser from "../../components/atoms/ProfileUser";
 import Navbar from "../../components/atoms/Navbar";
 import Footer from "../../components/atoms/Footer";
 
-function ProfilePage() {
+function ProfilePage(props) {
+  console.log(props);
   const [skills, setSkills] = useState(
     "Pyhton,Laravel,Golang,JavaScript,PHP,HTML,C++,Kotlin,Swift"
   );

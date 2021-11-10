@@ -1,8 +1,13 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import "./index.css";
 import { Opinion3, edit, map } from "../../assets/images";
 import { useSelector, useDispatch } from "react-redux";
-import { getUserById, updateUser } from "../../stores/actions/user";
+import {
+  getUserById,
+  updateUser,
+  updateUserImage,
+  getUserProfile
+} from "../../stores/actions/user";
 import { ToastContainer, toast } from "react-toastify";
 import Navbar from "../../components/atoms/Navbar";
 import Footer from "../../components/atoms/Footer";
@@ -20,12 +25,19 @@ const initialState = {
 
 function EditProfilePerusahaan() {
   const [form, setForm] = useState(initialState);
+  const [image, setImage] = useState("");
 
+  const inputFile = useRef(null);
   const userState = useSelector((state) => state.user);
   const dispatch = useDispatch();
 
   const clearState = () => {
     setForm({ ...initialState });
+  };
+
+  const onButtonClick = () => {
+    // `current` points to the mounted file input element
+    inputFile.current.click();
   };
 
   const notifSuccess = () =>
@@ -40,10 +52,39 @@ function EditProfilePerusahaan() {
     });
 
   useEffect(() => {
-    // dispatch(getUserById("34e36a65-5488-406d-a02e-591532b29f82")).then((res) => {
+    // dispatch(getUserById()).then((res) => {
     //   console.log(res);
     // });
   }, []);
+
+  const handleFile = (e) => {
+    console.log(e.target.files[0]);
+    setImage({
+      image: e.target.files[0]
+    });
+
+    const formData = new FormData();
+    for (const data in image) {
+      formData.append(data, image[data]);
+    }
+
+    // UNTUK MENGECEK DATA DI DALAM FORMDATA
+    for (const data of formData.entries()) {
+      // [
+      //   [property, value],
+      //   [],
+      // ]
+      console.log(data[0] + ", " + data[1]);
+    }
+
+    dispatch(updateUserImage(formData)).then((res) => {
+      dispatch(getUserProfile(userState.userProfile.id)).then((res) => {
+        console.log(res);
+
+        notifSuccess();
+      });
+    });
+  };
 
   const changeText = (e) => {
     setForm({
@@ -55,7 +96,7 @@ function EditProfilePerusahaan() {
   const handleSubmit = () => {
     dispatch(updateUser(form)).then((res) => {
       console.log(res);
-      dispatch(getUserById("34e36a65-5488-406d-a02e-591532b29f82")).then((res) => {
+      dispatch(getUserProfile(userState.userProfile.id)).then((res) => {
         console.log(res);
 
         notifSuccess();
@@ -91,17 +132,27 @@ function EditProfilePerusahaan() {
                   <div className="text-center">
                     <img
                       src={
-                        `http://localhost:3001/uploads/user/${userState.userProfile.image}` ||
-                        Opinion3
+                        userState.userProfile.image !== null
+                          ? `http://localhost:3001/uploads/user/${userState.userProfile.image}`
+                          : Opinion3
                       }
                       alt="profile"
                       width="150px"
                     />
 
-                    <div className="mt-3">
+                    <div className="mt-3" onClick={onButtonClick}>
                       <img src={edit} alt="edit" width="16px" />
                       <span className="open-sans-600 text-secondary ms-2">Edit</span>
                     </div>
+
+                    <input
+                      type="file"
+                      id="file"
+                      name="image"
+                      onChange={handleFile}
+                      ref={inputFile}
+                      style={{ display: "none" }}
+                    />
                   </div>
 
                   <h5 className="open-sans-600 mt-3">{userState.userProfile.nama}</h5>

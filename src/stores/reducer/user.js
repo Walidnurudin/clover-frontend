@@ -217,6 +217,32 @@ export default function user(state = initialState, action) {
       };
     }
 
+    // UPDATE USER IMAGE
+    case "UPDATE_USER_IMAGE_PENDING": {
+      return {
+        ...state,
+        isLoading: false,
+        isError: false,
+        message: ""
+      };
+    }
+    case "UPDATE_USER_IMAGE_FULFILLED": {
+      return {
+        ...state,
+        isLoading: false,
+        isError: false,
+        message: action.payload.data.msg
+      };
+    }
+    case "UPDATE_USER_IMAGE_REJECTED": {
+      return {
+        ...state,
+        isLoading: true,
+        isError: true,
+        message: action.payload.data.msg
+      };
+    }
+
     // UPDATE USER
     case "UPDATE_USER_PENDING": {
       return {

@@ -54,6 +54,13 @@ export const getUserById = (id) => {
   };
 };
 
+export const updateUserImage = () => {
+  return {
+    type: "UPDATE_USER_IMAGE",
+    payload: axios.patch("user/update-image")
+  };
+};
+
 export const updateUser = (data) => {
   return {
     type: "UPDATE_USER",

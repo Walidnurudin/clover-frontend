@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { withRouter } from "react-router-dom";
+import { withRouter, Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { compose } from "redux";
 import { login } from "../../../../stores/actions/auth";
@@ -67,10 +67,7 @@ class FormLogin extends Component {
         <div className="formLogin">
           <Image src={LogoPurple} className="logo__mobile" />
           <h1>Halo, Clovers</h1>
-          <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Excepturi nam quas similique
-            earum sequi autem, dolorem culpa atque nulla ipsa debitis,
-          </p>
+          <p>Masukan alamat email dan kata sandi anda untuk dapat mengakses clover hire</p>
           {this.state.isError && <div className="alert alert-danger">{msg}</div>}
           <Form
             className="formLogin__formInput"
@@ -105,9 +102,9 @@ class FormLogin extends Component {
             </Form.Group>
             <div className="d-flex justify-content-between">
               <div></div>
-              <a href="/reset-password" className="formLogin__forgotPass">
+              <Link to="/reset-password" className="formLogin__forgotPass">
                 Lupa kata sandi?
-              </a>
+              </Link>
             </div>
             <Button className="formLogin__button" type="submit">
               Masuk
@@ -115,7 +112,7 @@ class FormLogin extends Component {
           </Form>
 
           <p className="formLogin__signUp">
-            Anda belum punya akun? <a href="/register-recruiters">Daftar disini</a>
+            Anda belum punya akun? <Link to="/register-recruiters">Daftar disini</Link>
           </p>
         </div>
       </>

@@ -7,7 +7,7 @@ import { getUserById } from "../../stores/actions/user";
 import Navbar from "../../components/atoms/Navbar";
 import Footer from "../../components/atoms/Footer";
 
-function ProfilePerusahaan() {
+function ProfilePerusahaan(props) {
   const history = useHistory();
 
   const userState = useSelector((state) => state.user);
@@ -25,7 +25,7 @@ function ProfilePerusahaan() {
 
   return (
     <>
-      <Navbar />
+      <Navbar {...props} />
       <div className="profile__perusahaan">
         <div className="container">
           <div className="profile__perusahaan--wrap">
@@ -36,7 +36,11 @@ function ProfilePerusahaan() {
               <img
                 src={
                   userState.userProfile.image !== null
-                    ? `http://localhost:3001/uploads/user/${userState.userProfile.image}`
+                    ? `${
+                        process.env.REACT_APP_NAME === "dev"
+                          ? process.env.REACT_APP_DEV
+                          : process.env.REACT_APP_PROD
+                      }/uploads/user/${userState.userProfile.image}`
                     : Opinion3
                 }
                 alt="profile"

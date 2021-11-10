@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { withRouter } from "react-router-dom";
+import { Link, withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 import { compose } from "redux";
 import { registerWorkers } from "../../../../stores/actions/auth";
@@ -77,10 +77,7 @@ class FormRegisterWorkers extends Component {
         <div className="formSignUp">
           <Image src={LogoPurple} className="logo__mobile" />
           <h1>Halo, Clovers</h1>
-          <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Excepturi nam quas similique
-            earum sequi autem, dolorem culpa atque nulla ipsa debitis,
-          </p>
+          <p>Jadilah orang pertama yang dapat terhubung ke perusahaan2 terkemuka di negeri ini</p>
           {this.state.isError && <div className="alert alert-danger">{msg}</div>}
           <Form
             className="formSignUp__formInput"
@@ -149,7 +146,7 @@ class FormRegisterWorkers extends Component {
             </Button>
           </Form>
           <p className="formSignUp__login">
-            Anda sudah punya akun? <a href="/login-workers">Masuk disini</a>
+            Anda sudah punya akun? <Link to="/login-workers">Masuk disini</Link>
           </p>
           <ToastContainer
             position="bottom-right"

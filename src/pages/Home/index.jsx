@@ -27,7 +27,7 @@ import { useHistory } from "react-router-dom";
 
 function Home(props) {
   const history = useHistory();
-  const [user, setUser] = useState(props.user.users);
+  const [user, setUser] = useState([]);
   const [show, setShow] = useState(false);
   const [filterShow, setFilterShow] = useState(false);
   const [search, setSearch] = useState("");
@@ -40,10 +40,9 @@ function Home(props) {
   const [isLoading, setLoading] = useState(false);
   const [role] = useState("Pekerja");
 
-  console.log("USER", props);
-
   const listGetAllUsers = () => {
     props.getAllUsers(role, page, limit).then((response) => {
+      console.log("value response =>", response);
       setLoading(false);
       setUser(response.value.data.data);
       setTotalPage(response.value.data.pagination.totalPage);
@@ -156,22 +155,13 @@ function Home(props) {
     listGetAllUsers();
   }, [role, page, limit, sort, search]);
 
-  useEffect(() => {
-    // if (role !== "Pekerja") {
-    //   history.push("/");
-    // }
-
-    console.log("GETTT");
-    listGetAllUsers();
-  }, []);
-  // console.log(users.skill);
-
+  console.log(user);
   return (
     <>
       {!show ? (
         <>
           <div className="d-none d-md-block">
-            <Navbar />
+            <Navbar {...props} />
           </div>
           <section className="homepage__container homepage__spacing homepage__banner">
             <section className="d-block d-md-none homepage__topmenu">
@@ -267,63 +257,57 @@ function Home(props) {
             </section>
             <section className="homepage__spacing homepage__main-list-users">
               <h2 className="d-block d-md-none homepage__topmenu-title">Web Developer</h2>
-              {isLoading ? (
-                <div className="spinner-border text-primary mx-auto" role="status">
-                  <span className="visually-hidden">Loading...</span>
-                </div>
-              ) : (
-                user.map((users, idx) => {
-                  // const skillAsli = users.skill.map((value) => value);
-                  // let temp;
-                  // if (users.skill.length > 3) {
-                  //   const parseMoreSkills = users.skill.pop();
-                  //   temp = parseMoreSkills;
-                  // }
-                  // const moreSkills = temp === undefined ? null : temp.split();
-                  return (
-                    <div className="homepage__list-users-card" key={idx}>
-                      <img
-                        src={Profile}
-                        alt=""
-                        className="homepage__list-users-card-image img-fluid"
-                      />
-                      <div className="homepage__list-users-card-body">
-                        <div className="homepage__list-users-card-body-left">
-                          <h5>{users.nama}</h5>
-                          <span>
-                            {users.jobDesk ? users.jobDesk : "-"}
-                            {" - "}
-                            {users.jobStatus ? users.jobStatus : null}
-                          </span>
-                          <span>{users.domisili ? users.domisili : "-"}</span>
-                          <div className="homepage__list-users-card-body-skills">
-                            {users.skill?.map((skills, idx) => {
-                              return (
-                                <div key={idx}>
-                                  <div className="homepage__list-users-card-body-skills-category">
-                                    {skills}
-                                  </div>
+              {user.map((users, idx) => {
+                // const skillAsli = users.skill.map((value) => value);
+                // let temp;
+                // if (users.skill.length > 3) {
+                //   const parseMoreSkills = users.skill.pop();
+                //   temp = parseMoreSkills;
+                // }
+                // const moreSkills = temp === undefined ? null : temp.split();
+                return (
+                  <div className="homepage__list-users-card" key={idx}>
+                    <img
+                      src={Profile}
+                      alt=""
+                      className="homepage__list-users-card-image img-fluid"
+                    />
+                    <div className="homepage__list-users-card-body">
+                      <div className="homepage__list-users-card-body-left">
+                        <h5>{users.nama}</h5>
+                        <span>
+                          {users.jobDesk ? users.jobDesk : "-"}
+                          {" - "}
+                          {users.jobStatus ? users.jobStatus : null}
+                        </span>
+                        <span>{users.domisili ? users.domisili : "-"}</span>
+                        <div className="homepage__list-users-card-body-skills">
+                          {users.skill?.map((skills, idx) => {
+                            return (
+                              <div key={idx}>
+                                <div className="homepage__list-users-card-body-skills-category">
+                                  {skills}
                                 </div>
-                              );
-                            })}
-                            <span className="homepage__list-users-card-body-skills-more d-flex d-md-none">
-                              8+
-                            </span>
-                          </div>
-                        </div>
-                        <div className="homepage__list-users-card-body-right">
-                          <button
-                            className="homepage__list-users-card-body-button"
-                            onClick={() => linkToProfile(users.id)}
-                          >
-                            Lihat Profile
-                          </button>
+                              </div>
+                            );
+                          })}
+                          <span className="homepage__list-users-card-body-skills-more d-flex d-md-none">
+                            8+
+                          </span>
                         </div>
                       </div>
+                      <div className="homepage__list-users-card-body-right">
+                        <button
+                          className="homepage__list-users-card-body-button"
+                          onClick={() => linkToProfile(users.id)}
+                        >
+                          Lihat Profile
+                        </button>
+                      </div>
                     </div>
-                  );
-                })
-              )}
+                  </div>
+                );
+              })}
             </section>
             <section className="homepage__spacing homepage__pagination">
               <Pagination

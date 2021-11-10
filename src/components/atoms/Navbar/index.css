@@ -7,6 +7,12 @@
 .logo__purple {
   width: 120px;
 }
+.menu {
+  display: flex;
+}
+.menu__home {
+  margin: 5px 92px;
+}
 
 .button__signIn {
   color: #5e50a1 !important;

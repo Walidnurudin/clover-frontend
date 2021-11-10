@@ -75,7 +75,18 @@ function ProfileUser(props) {
       >
         <div className="user-profile__details ack-bg-white p-4">
           <div className="user-profile__details-image">
-            <img src={image ? `http://localhost:3001/uploads/user/${image}` : userImage} alt="" />
+            <img
+              src={
+                image
+                  ? `${
+                      process.env.REACT_APP_NAME === "dev"
+                        ? process.env.REACT_APP_DEV
+                        : process.env.REACT_APP_PROD
+                    }/uploads/user/${image}`
+                  : userImage
+              }
+              alt=""
+            />
           </div>
 
           {props.isUpdate ? (

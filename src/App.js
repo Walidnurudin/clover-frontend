@@ -55,13 +55,12 @@ function App() {
               exact
               component={RegisterRecruiters}
             />
-            <PublicRoute restricted={true} path="/reset-password" exact component={ResetPassword} />
             <PublicRoute
-              restricted={true}
-              path="/confirm-password"
+              path="/callback/confirm-password/:id/:token"
               exact
               component={ConfirmPassword}
             />
+            <PublicRoute restricted={true} path="/reset-password" exact component={ResetPassword} />
 
             {/* PEREKRUT */}
             <RecruitersRoute exact path="/home" component={Home} />

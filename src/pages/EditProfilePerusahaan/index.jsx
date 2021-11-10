@@ -40,8 +40,19 @@ function EditProfilePerusahaan() {
     inputFile.current.click();
   };
 
-  const notifSuccess = () =>
-    toast.success("Success update data", {
+  const notifSuccess = (msg) =>
+    toast.success(msg, {
+      position: "top-center",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined
+    });
+
+  const notifError = (msg) =>
+    toast.error(msg, {
       position: "top-center",
       autoClose: 5000,
       hideProgressBar: false,
@@ -52,9 +63,9 @@ function EditProfilePerusahaan() {
     });
 
   useEffect(() => {
-    // dispatch(getUserById()).then((res) => {
-    //   console.log(res);
-    // });
+    dispatch(getUserById(userState.userProfile.id)).then((res) => {
+      console.log(res);
+    });
   }, []);
 
   const handleFile = (e) => {
@@ -62,6 +73,8 @@ function EditProfilePerusahaan() {
     setImage({
       image: e.target.files[0]
     });
+
+    console.log("IMAGE", image);
 
     const formData = new FormData();
     for (const data in image) {
@@ -77,12 +90,18 @@ function EditProfilePerusahaan() {
       console.log(data[0] + ", " + data[1]);
     }
 
-    dispatch(updateUserImage(formData)).then((res) => {
-      dispatch(getUserProfile(userState.userProfile.id)).then((res) => {
-        console.log(res);
+    console.log(formData);
 
-        notifSuccess();
-      });
+    dispatch(updateUserImage(formData)).then((res) => {
+      if (userState.isError) {
+        notifError(userState.msg);
+      } else {
+        dispatch(getUserById(userState.userProfile.id)).then((res) => {
+          console.log(res);
+
+          notifSuccess();
+        });
+      }
     });
   };
 
@@ -96,7 +115,7 @@ function EditProfilePerusahaan() {
   const handleSubmit = () => {
     dispatch(updateUser(form)).then((res) => {
       console.log(res);
-      dispatch(getUserProfile(userState.userProfile.id)).then((res) => {
+      dispatch(getUserById(userState.userProfile.id)).then((res) => {
         console.log(res);
 
         notifSuccess();
@@ -132,8 +151,8 @@ function EditProfilePerusahaan() {
                   <div className="text-center">
                     <img
                       src={
-                        userState.userProfile.image !== null
-                          ? `http://localhost:3001/uploads/user/${userState.userProfile.image}`
+                        userState.users.image !== null
+                          ? `http://localhost:3001/uploads/user/${userState.users.image}`
                           : Opinion3
                       }
                       alt="profile"
@@ -155,19 +174,17 @@ function EditProfilePerusahaan() {
                     />
                   </div>
 
-                  <h5 className="open-sans-600 mt-3">{userState.userProfile.nama}</h5>
-                  <p className="mb-3 open-sans-400">
-                    {userState.userProfile.bidangPerusahaan || "-"}
-                  </p>
+                  <h5 className="open-sans-600 mt-3">{userState.users.nama}</h5>
+                  <p className="mb-3 open-sans-400">{userState.users.bidangPerusahaan || "-"}</p>
                   <div>
                     <img src={map} alt="map" width="16px" />
                     <span className="text-secondary ms-2 open-sans-400">
-                      {userState.userProfile.domisili || "-"}
+                      {userState.users.domisili || "-"}
                     </span>
                   </div>
 
                   <p className="text-secondary mb-4 mt-4 open-sans-400">
-                    {userState.userProfile.description || "-"}
+                    {userState.users.description || "-"}
                   </p>
                 </div>
 

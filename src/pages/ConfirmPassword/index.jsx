@@ -4,7 +4,8 @@ import "./index.css";
 import AuthLeft from "../../components/atoms/AuthLeft";
 import FormConfirmPassword from "../../components/molecules/Forms/ConfirmPassword";
 
-const ConfirmPassword = () => {
+const ConfirmPassword = (props) => {
+  const { id, token } = props.match.params;
   return (
     <>
       <Container fluid className="window">
@@ -13,7 +14,7 @@ const ConfirmPassword = () => {
             <AuthLeft />
           </Col>
           <Col md={6} className="column2">
-            <FormConfirmPassword />
+            <FormConfirmPassword user_id={id} user_token={token} />
           </Col>
         </Row>
       </Container>

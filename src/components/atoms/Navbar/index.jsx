@@ -6,9 +6,10 @@ import "./index.css";
 import { LogoPurple } from "../../../assets/images";
 import { Link, useHistory } from "react-router-dom";
 
-const Navigation = () => {
+const Navigation = (props) => {
   const history = useHistory();
   const [show, setShow] = useState(false);
+  const [menuOptionLogged, setMenuOptionLogged] = useState(false);
   const token = localStorage.getItem("token");
 
   const handleProfileMenu = () => {
@@ -20,11 +21,23 @@ const Navigation = () => {
   };
 
   const handleLogout = () => {
+    setMenuOptionLogged(false);
+    setShow(false);
     localStorage.clear();
     history.push("/");
   };
 
-  const handleMenuLogged = () => {};
+  const handleMenuLogged = () => {
+    if (menuOptionLogged === false) {
+      setMenuOptionLogged(true);
+    } else {
+      setMenuOptionLogged(false);
+    }
+  };
+
+  const handleLinkRegist = () => {
+    history.push("/register-workers");
+  };
   return (
     <>
       <Navbar expand="lg" className="navigation__mobile position-relative">
@@ -43,11 +56,31 @@ const Navigation = () => {
               <Button className="button__signIn" onClick={handleMenuLogged}>
                 Masuk
               </Button>
-              <Button className="button__signUp">Daftar</Button>
+              <Button className="button__signUp" onClick={handleLinkRegist}>
+                Daftar
+              </Button>
             </div>
           )}
         </Container>
       </Navbar>
+      {!menuOptionLogged ? null : (
+        <div
+          className="w-25 position-absolute p-4"
+          style={{
+            right: "50px",
+            borderRadius: "24px",
+            backgroundColor: "#5e50a1"
+          }}
+        >
+          <Link to="/login-workers" className="d-block mb-3 text-decoration-none text-white">
+            Masuk Sebagai <b>Pekerja</b>
+          </Link>
+          <hr />
+          <Link to="/login-recruiters" className="d-block mb-3 text-decoration-none text-white">
+            Masuk Sebagai <b>Perekrut</b>
+          </Link>
+        </div>
+      )}
       {!show ? null : (
         <div className="bg-light position-absolute w-25 p-2" style={{ right: "0px" }}>
           <div>

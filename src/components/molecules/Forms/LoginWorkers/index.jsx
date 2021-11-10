@@ -35,9 +35,10 @@ class FormLogin extends Component {
       .login(this.state.form)
       .then((res) => {
         localStorage.setItem("token", res.value.data.data.token);
-        // localStorage.setItem("id", res.value.data.data.id);
+        localStorage.setItem("id", res.value.data.data.id);
         this.props.getUserProfile(res.value.data.data.id).then((res) => {
-          console.log("Userrr", res.action.payload.data.data[0].role);
+          localStorage.setItem("role", res.value.data.data[0].role);
+
           if (res.action.payload.data.data[0].role === "Pekerja") {
             this.props.history.push("/profile");
           } else {

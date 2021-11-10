@@ -159,6 +159,31 @@ export default function user(state = initialState, action) {
       };
     }
 
+    case "SORTFULLTIMEJOB_PENDING": {
+      return {
+        ...state,
+        isLoading: false,
+        isError: false,
+        message: ""
+      };
+    }
+    case "SORTFULLTIMEJOB_FULFILLED": {
+      return {
+        ...state,
+        isLoading: false,
+        isError: false,
+        message: action.payload.data.msg
+      };
+    }
+    case "SORTFULLTIMEJOB_REJECTED": {
+      return {
+        ...state,
+        isLoading: true,
+        isError: true,
+        message: action.payload.data.msg
+      };
+    }
+
     // GET PROFILE
     case "GET_PROFILE_PENDING": {
       return {
@@ -192,10 +217,10 @@ export default function user(state = initialState, action) {
     case "GET_USER_BY_ID_PENDING": {
       return {
         ...state,
-        isLoading: false,
+        isLoading: true,
         isError: false,
-        message: "",
         users: []
+        // message: action.payload.data.msg
       };
     }
     case "GET_USER_BY_ID_FULFILLED": {
@@ -213,7 +238,7 @@ export default function user(state = initialState, action) {
         isLoading: true,
         isError: true,
         users: [],
-        message: action.payload.data.msg
+        message: action.payload.response.data.msg
       };
     }
 
@@ -221,7 +246,7 @@ export default function user(state = initialState, action) {
     case "UPDATE_USER_IMAGE_PENDING": {
       return {
         ...state,
-        isLoading: false,
+        isLoading: true,
         isError: false,
         message: ""
       };
@@ -237,9 +262,9 @@ export default function user(state = initialState, action) {
     case "UPDATE_USER_IMAGE_REJECTED": {
       return {
         ...state,
-        isLoading: true,
+        isLoading: false,
         isError: true,
-        message: action.payload.data.msg
+        message: action.payload.response.data.msg
       };
     }
 
@@ -247,7 +272,7 @@ export default function user(state = initialState, action) {
     case "UPDATE_USER_PENDING": {
       return {
         ...state,
-        isLoading: false,
+        isLoading: true,
         isError: false,
         message: ""
       };
@@ -263,12 +288,11 @@ export default function user(state = initialState, action) {
     case "UPDATE_USER_REJECTED": {
       return {
         ...state,
-        isLoading: true,
+        isLoading: false,
         isError: true,
-        message: action.payload.data.msg
+        message: action.payload.response.data.msg
       };
     }
-
     default: {
       return state;
     }

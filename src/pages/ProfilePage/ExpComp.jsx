@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Suitcase } from "../../assets/images/ProfilePageImage";
 import axios from "../../utils/axios";
-import moment from "moment";
+// import moment from "moment";
 
 function ExpComp() {
   const [userJobExp, setUserJobExp] = useState([]);

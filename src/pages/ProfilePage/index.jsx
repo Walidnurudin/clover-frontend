@@ -13,50 +13,44 @@ import UbahPassword from "./UbahPassword";
 import ProfileUser from "../../components/atoms/ProfileUser";
 import Navbar from "../../components/atoms/Navbar";
 import Footer from "../../components/atoms/Footer";
+import Hire from "../Hire";
 
-function ProfilePage() {
+function ProfilePage(props) {
+  const user_id =
+    localStorage.getItem("role") === "Pekerja"
+      ? localStorage.getItem("id")
+      : props.location.state.user_id;
   const [skills, setSkills] = useState(
     "Pyhton,Laravel,Golang,JavaScript,PHP,HTML,C++,Kotlin,Swift"
   );
   const [showExp, setShowExp] = useState(false);
   const [isUpdate, setIsUpdate] = useState(false);
   const [show, setShow] = useState(false);
+  const [role, setRole] = useState("");
+  const [dataPortoUser, setDataPortoUser] = useState([]);
+  const [dataUser, setDataUser] = useState({});
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
-  const [dataUser, setDataUser] = useState({});
-
   const getDataUser = () =>
-    axios.get(`user/${localStorage.getItem("id")}`).then((res) => {
+    axios.get(`user/${user_id}`).then((res) => {
       setDataUser(res.data.data[0]);
+      setRole(res.data.data[0].role);
     });
 
-  const [dataPortoUser, setDataPortoUser] = useState([]);
-
   const getPortoFolioUser = () => {
-    axios.get(`portfolio/${localStorage.getItem("id")}`).then((res) => {
+    axios.get(`portfolio/${user_id}`).then((res) => {
       // console.log(res);
       setDataPortoUser(res.data.data);
     });
   };
 
   useEffect(() => {
-    // console.log(dataPortoUser);
-  }, [dataPortoUser]);
-
-  useEffect(() => {
     getPortoFolioUser();
-  }, []);
-
-  useEffect(() => {
     document.title = "Clover Hire | Profile";
     getDataUser();
   }, []);
-
-  useEffect(() => {
-    // console.log(dataUser);
-  }, [dataUser]);
 
   return (
     <>
@@ -76,6 +70,8 @@ function ProfilePage() {
                 setShow={setShow}
                 dataUser={dataUser}
                 getDataUser={getDataUser}
+                role={role}
+                userId={user_id}
               />
 
               {isUpdate ? (

@@ -115,7 +115,6 @@ function Portofolio(props) {
   };
 
   const { link_repository, nama_aplikasi, id } = dataNewPorto;
-
   return (
     <>
       <ToastContainer />

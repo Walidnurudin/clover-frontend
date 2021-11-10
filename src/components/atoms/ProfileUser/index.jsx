@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { withRouter } from "react-router-dom";
+import { withRouter, useHistory } from "react-router-dom";
 import {
   userImage,
   MapPin,
@@ -11,10 +11,12 @@ import {
 } from "../../../assets/images/ProfilePageImage";
 
 import { ToastContainer, toast } from "react-toastify";
-
 import axios from "../../../utils/axios";
 
 function ProfileUser(props) {
+  const role = localStorage.getItem("role");
+  const userId = props.userId;
+  const history = useHistory();
   const pathName = props.match.path;
   const {
     description,
@@ -57,6 +59,10 @@ function ProfileUser(props) {
       .catch((err) => {
         toast(err.msg);
       });
+  };
+
+  const LinkToHire = () => {
+    history.push("/hire", { userId });
   };
 
   return (
@@ -140,12 +146,21 @@ function ProfileUser(props) {
           ) : (
             <>
               {pathName === "/profile" ? (
-                <button
-                  className="ack-btn-prim py-2 ack-fw-700 ack-fsize-16 my-2"
-                  onClick={() => props.setIsUpdate(true)}
-                >
-                  Update Profile
-                </button>
+                role === "Pekerja" ? (
+                  <button
+                    className="ack-btn-prim py-2 ack-fw-700 ack-fsize-16 my-2"
+                    onClick={() => props.setIsUpdate(true)}
+                  >
+                    Update Profile
+                  </button>
+                ) : (
+                  <button
+                    className="ack-btn-prim py-2 ack-fw-700 ack-fsize-16 my-2"
+                    onClick={LinkToHire}
+                  >
+                    Hire
+                  </button>
+                )
               ) : null}
               <div className="user-profile__skils my-5">
                 <h3>Skils</h3>

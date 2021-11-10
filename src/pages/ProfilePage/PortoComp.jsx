@@ -17,7 +17,7 @@ import {
 } from "../../assets/images/ProfilePageImage";
 
 function PortoComp(props) {
-  console.log(props.dataPortoUser);
+  // console.log(props.dataPortoUser);
   const { dataPortoUser } = props;
   return (
     <div className="porto-container row">

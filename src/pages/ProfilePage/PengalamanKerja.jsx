@@ -15,7 +15,7 @@ function PengalamanKerja() {
         getPengalaman();
       })
       .catch((err) => {
-        console.log(err);
+        // console.log(err);
         // toast.error(err.msg);
       });
   };
@@ -73,7 +73,7 @@ function PengalamanKerja() {
 
   const updatePengalaman = (event) => {
     event.preventDefault();
-    console.log(dataPengalamanBaru);
+    // console.log(dataPengalamanBaru);
     // delete updateData.user_id;
     delete dataPengalamanBaru.createdAt;
     delete dataPengalamanBaru.updatedAt;
@@ -82,7 +82,7 @@ function PengalamanKerja() {
       .patch(`user/experience/${dataPengalamanBaru.id}`, dataPengalamanBaru)
       .then((res) => {
         toast.success(res.data.msg);
-        console.log(dataPengalamanBaru);
+        // console.log(dataPengalamanBaru);
         axios
           .get(`user/experience/${localStorage.getItem("id")}`)
           .then((res) => {
@@ -91,11 +91,11 @@ function PengalamanKerja() {
             // console.log(res);
           })
           .catch((err) => {
-            console.log(err);
+            // console.log(err);
           });
       })
       .catch((err) => {
-        console.log(err);
+        // console.log(err);
       });
   };
 
@@ -107,7 +107,7 @@ function PengalamanKerja() {
 
   const deleteExp = (data) => {
     axios.delete(`user/experience/${data}`).then((res) => {
-      console.log(res);
+      // console.log(res);
       setMsg(res.data.msg);
       toast.success(res.data.msg);
       axios

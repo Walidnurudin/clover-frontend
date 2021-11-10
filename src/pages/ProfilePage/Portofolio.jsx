@@ -10,14 +10,18 @@ function Portofolio(props) {
     event.preventDefault();
 
     setDataNewPorto({ ...dataNewPorto, user_id: localStorage.getItem("id") });
-    postPorto();
+    setDataNewPorto({ ...dataNewPorto, user_id: localStorage.getItem("id") });
+
+    setTimeout(() => {
+      postPorto();
+    }, 100);
   };
 
   const [dataPortoUser, setDataPortoUser] = useState([]);
 
   const getPortoFolioUser = () => {
     axios.get(`portfolio/${localStorage.getItem("id")}`).then((res) => {
-      console.log(res);
+      // console.log(res);
       setDataPortoUser(res.data.data);
     });
   };
@@ -25,8 +29,6 @@ function Portofolio(props) {
   useEffect(() => {
     getPortoFolioUser();
   }, []);
-
-  const [msg, setMsg] = useState("");
 
   const postPorto = () => {
     const formData = new FormData();
@@ -36,13 +38,14 @@ function Portofolio(props) {
     }
 
     for (const pair of formData.entries()) {
-      console.log(pair[0] + ", " + pair[1]);
+      // console.log(pair[0] + ", " + pair[1]);
     }
 
     axios
       .post("portfolio", formData)
       .then((res) => {
         toast.success(res.data.msg);
+        getPortoFolioUser();
       })
       .catch((err) => {
         toast.error(err.msg);
@@ -53,17 +56,20 @@ function Portofolio(props) {
   const [image, setImage] = useState("");
 
   const handleInputPorto = (event) => {
-    setDataNewPorto({ ...dataNewPorto, [event.target.name]: event.target.value });
+    setDataNewPorto({
+      ...dataNewPorto,
+      [event.target.name]: event.target.value,
+      user_id: localStorage.getItem("id")
+    });
   };
 
   useEffect(() => {
-    console.log(dataNewPorto);
+    // console.log(dataNewPorto);
   }, [dataNewPorto]);
 
   useEffect(() => {
-    console.log(image);
+    // console.log(image);
     setDataNewPorto({ ...dataNewPorto, image: image });
-    console.log(dataNewPorto);
   }, [image]);
 
   const deletePorto = (data) => {
@@ -71,9 +77,10 @@ function Portofolio(props) {
       .delete(`portfolio/${data}`)
       .then((res) => {
         toast.success(res.data.msg);
+        getPortoFolioUser();
       })
       .catch((err) => {
-        toast.error(err.data.msg);
+        toast.error(err.msg);
       });
   };
 
@@ -84,13 +91,27 @@ function Portofolio(props) {
     setDataNewPorto(item);
   };
 
-  useEffect(() => {
-    console.log(dataNewPorto);
-  }, [dataNewPorto]);
+  useEffect(() => {}, [dataNewPorto]);
 
   const updatePorto = (event) => {
     event.preventDefault();
-    axios.patch(`portfolio/${id}`, dataNewPorto);
+
+    const formData = new FormData();
+
+    for (const data in dataNewPorto) {
+      formData.append(data, dataNewPorto[data]);
+    }
+
+    for (const pair of formData.entries()) {
+      // console.log(pair[0] + ", " + pair[1]);
+    }
+
+    axios.patch(`portfolio/${id}`, formData).then((res) => {
+      toast.success("Success Update Portofolio");
+      setIsUpdate(false);
+      setDataNewPorto({});
+      getPortoFolioUser();
+    });
   };
 
   const { link_repository, nama_aplikasi, id } = dataNewPorto;

@@ -62,7 +62,7 @@ function DataDiri(props) {
   };
 
   useEffect(() => {
-    console.log(dataDiriBaru);
+    // console.log(dataDiriBaru);
   }, [dataDiriBaru]);
 
   return (

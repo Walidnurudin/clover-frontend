@@ -36,13 +36,13 @@ function ProfilePage() {
 
   const getPortoFolioUser = () => {
     axios.get(`portfolio/${localStorage.getItem("id")}`).then((res) => {
-      console.log(res);
+      // console.log(res);
       setDataPortoUser(res.data.data);
     });
   };
 
   useEffect(() => {
-    console.log(dataPortoUser);
+    // console.log(dataPortoUser);
   }, [dataPortoUser]);
 
   useEffect(() => {
@@ -55,7 +55,7 @@ function ProfilePage() {
   }, []);
 
   useEffect(() => {
-    console.log(dataUser);
+    // console.log(dataUser);
   }, [dataUser]);
 
   return (
@@ -82,7 +82,7 @@ function ProfilePage() {
                 <>
                   <div className="col-lg-8 col-12 data-diri position-relative">
                     <DataDiri dataUser={dataUser} getDataUser={() => getDataUser()} />
-                    <Skill Skills={dataUser.skill.split(",")} />
+                    {/* <Skill Skills={dataUser.skill.split(",")} /> */}
                     <PengalamanKerja />
                     <Portofolio />
                   </div>

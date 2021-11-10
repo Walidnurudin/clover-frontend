@@ -44,7 +44,7 @@ function ProfileUser(props) {
   }
 
   for (const pair of formData.entries()) {
-    console.log(pair[0] + ", " + pair[1]);
+    // console.log(pair[0] + ", " + pair[1]);
   }
 
   const updateImage = () => {
@@ -55,8 +55,7 @@ function ProfileUser(props) {
         props.getDataUser();
       })
       .catch((err) => {
-        console.log(err);
-        toast.error(err.msg);
+        toast(err.msg);
       });
   };
 

@@ -52,18 +52,21 @@ function Skill(props) {
 
   const patchDataSkill = () => {
     const newUserSkill = userSkills.join();
-    console.log(newUserSkill);
+    // console.log(newUserSkill);
     setIsUpdate(false);
   };
 
   useEffect(() => {
-    console.log(userSkills);
-    console.log(userSkills.join());
+    // console.log(userSkills);
+    // console.log(userSkills.join());
   }, [userSkills]);
 
   const deleteSkill = (index) => {
     // delete userSkills[index];
+    // console.log(userSkills.length);
+
     userSkills.splice(index, 1);
+
     axios
       .patch("user", { skill: userSkills.join() })
       .then((res) => {
@@ -107,26 +110,28 @@ function Skill(props) {
           </div>
         </form>
         <div className="user-profile__skils-container d-flex flex-wrap px-4">
-          {userSkills.map((item, index) => (
-            <span
-              key={index}
-              className="skills-list py-1 px-3 ack-fcolor-white ack-fsize-12 ack-fw-600 my-2 me-2"
-            >
-              {item}
-              <img
-                src={Edit}
-                className="ms-3 hover-pointer"
-                alt=""
-                onClick={(event) => updateSKill(event, item, index)}
-              />
-              <img
-                src={Delete}
-                onClick={() => deleteSkill(index)}
-                className="ms-2 hover-pointer"
-                alt=""
-              />
-            </span>
-          ))}
+          {userSkills
+            ? userSkills.map((item, index) => (
+                <span
+                  key={index}
+                  className="skills-list py-1 px-3 ack-fcolor-white ack-fsize-12 ack-fw-600 my-2 me-2"
+                >
+                  {item}
+                  <img
+                    src={Edit}
+                    className="ms-3 hover-pointer"
+                    alt=""
+                    onClick={(event) => updateSKill(event, item, index)}
+                  />
+                  <img
+                    src={Delete}
+                    onClick={() => deleteSkill(index)}
+                    className="ms-2 hover-pointer"
+                    alt=""
+                  />
+                </span>
+              ))
+            : ""}
         </div>
       </div>
     </>

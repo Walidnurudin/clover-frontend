@@ -7,7 +7,6 @@ import { LogoPurple } from "../../../assets/images";
 import { Link, useHistory } from "react-router-dom";
 
 const Navigation = (props) => {
-  const pathName = props.location.pathname;
   const history = useHistory();
   const [show, setShow] = useState(false);
   const [menuOptionLogged, setMenuOptionLogged] = useState(false);

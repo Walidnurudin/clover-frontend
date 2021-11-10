@@ -7,16 +7,16 @@ import { getUserById } from "../../stores/actions/user";
 import Navbar from "../../components/atoms/Navbar";
 import Footer from "../../components/atoms/Footer";
 
-function ProfilePerusahaan(props) {
+function ProfilePerusahaan() {
   const history = useHistory();
 
   const userState = useSelector((state) => state.user);
   const dispatch = useDispatch();
 
   useEffect(() => {
-    // dispatch(getUserById("34e36a65-5488-406d-a02e-591532b29f82")).then((res) => {
-    //   console.log(res);
-    // });
+    dispatch(getUserById(userState.userProfile.id)).then((res) => {
+      console.log(res);
+    });
   }, []);
 
   const handleClick = () => {
@@ -25,7 +25,7 @@ function ProfilePerusahaan(props) {
 
   return (
     <>
-      <Navbar {...props} />
+      <Navbar />
       <div className="profile__perusahaan">
         <div className="container">
           <div className="profile__perusahaan--wrap">
@@ -35,24 +35,20 @@ function ProfilePerusahaan(props) {
             <div className="profile__perusahaan--main text-center">
               <img
                 src={
-                  userState.userProfile.image !== null
-                    ? `${
-                        process.env.REACT_APP_NAME === "dev"
-                          ? process.env.REACT_APP_DEV
-                          : process.env.REACT_APP_PROD
-                      }/uploads/user/${userState.userProfile.image}`
+                  userState.users.image !== null
+                    ? `http://localhost:3001/uploads/user/${userState.users.image}`
                     : Opinion3
                 }
                 alt="profile"
                 width="150px"
               />
-              <h5 className="open-sans-600 mt-3">{userState.userProfile.nama}</h5>
-              <p className="mb-3">{userState.userProfile.bidangPerusahaan || "-"}</p>
+              <h5 className="open-sans-600 mt-3">{userState.users.nama}</h5>
+              <p className="mb-3">{userState.users.bidangPerusahaan || "-"}</p>
               <div>
                 <img src={map} alt="map" width="16px" />
-                <span className="text-secondary ms-2">{userState.userProfile.domisili || "-"}</span>
+                <span className="text-secondary ms-2">{userState.users.domisili || "-"}</span>
               </div>
-              <p className="text-secondary mb-4 mt-4">{userState.userProfile.description || "-"}</p>
+              <p className="text-secondary mb-4 mt-4">{userState.users.description || "-"}</p>
               <button className="btn btn-primary open-sans-700" onClick={handleClick}>
                 Edit profile
               </button>
@@ -60,24 +56,22 @@ function ProfilePerusahaan(props) {
                 <div className="d-flex flex-column">
                   <span className="d-flex gap-3 mb-3">
                     <img src={mail} alt="mail" width="24px" />
-                    <span className="text-secondary">{userState.userProfile.email || "-"}</span>
+                    <span className="text-secondary">{userState.users.email || "-"}</span>
                   </span>
 
                   <span className="d-flex gap-3 mb-3">
                     <img src={ig} alt="instagram" width="24px" />
-                    <span className="text-secondary">{userState.userProfile.instagram || "-"}</span>
+                    <span className="text-secondary">{userState.users.instagram || "-"}</span>
                   </span>
 
                   <span className="d-flex gap-3 mb-3">
                     <img src={phone} alt="phone" width="24px" />
-                    <span className="text-secondary">
-                      {userState.userProfile.noHandphone || "-"}
-                    </span>
+                    <span className="text-secondary">{userState.users.noHandphone || "-"}</span>
                   </span>
 
                   <span className="d-flex gap-3 mb-3">
                     <img src={linkedin} alt="linkedin" width="24px" />
-                    <span className="text-secondary">{userState.userProfile.linkedin || "-"}</span>
+                    <span className="text-secondary">{userState.users.linkedin || "-"}</span>
                   </span>
                 </div>
               </div>

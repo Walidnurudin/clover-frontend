@@ -21,6 +21,7 @@ function Portofolio(props) {
 
   const getPortoFolioUser = () => {
     axios.get(`portfolio/${localStorage.getItem("id")}`).then((res) => {
+      // console.log(res);
       setDataPortoUser(res.data.data);
     });
   };
@@ -223,11 +224,7 @@ function Portofolio(props) {
                 }}
               >
                 <img
-                  src={`${
-                    process.env.REACT_APP_NAME === "dev"
-                      ? process.env.REACT_APP_DEV
-                      : process.env.REACT_APP_PROD
-                  }/images/${item.image}`}
+                  src={`http://localhost:3001/images/${item.image}`}
                   alt=""
                   className="portoImage"
                 />

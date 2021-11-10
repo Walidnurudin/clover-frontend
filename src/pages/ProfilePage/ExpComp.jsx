@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { Suitcase } from "../../assets/images/ProfilePageImage";
 import axios from "../../utils/axios";
-// import moment from "moment";
+import moment from "moment";
 
 function ExpComp() {
   const [userJobExp, setUserJobExp] = useState([]);
   useEffect(() => {
     axios
-      .get(`user/experience/${localStorage.getItem("id")}`)
+      .get(`experience/${localStorage.getItem("id")}`)
       .then((res) => {
         // console.log(res.data.data);
         setUserJobExp(res.data.data);

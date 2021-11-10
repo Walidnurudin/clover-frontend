@@ -25,7 +25,7 @@ const initialState = {
 
 function EditProfilePerusahaan() {
   const [form, setForm] = useState(initialState);
-  const [image, setImage] = useState("");
+  const [image, setImage] = useState(null);
 
   const inputFile = useRef(null);
   const userState = useSelector((state) => state.user);
@@ -62,47 +62,46 @@ function EditProfilePerusahaan() {
       progress: undefined
     });
 
-  useEffect(() => {
+  const getUserProfile = () => {
     dispatch(getUserById(userState.userProfile.id)).then((res) => {
       console.log(res);
     });
+  };
+
+  useEffect(() => {
+    getUserProfile();
   }, []);
 
   const handleFile = (e) => {
-    console.log(e.target.files[0]);
     setImage({
       image: e.target.files[0]
     });
+  };
 
-    console.log("IMAGE", image);
-
-    const formData = new FormData();
-    for (const data in image) {
-      formData.append(data, image[data]);
-    }
-
-    // UNTUK MENGECEK DATA DI DALAM FORMDATA
-    for (const data of formData.entries()) {
-      // [
-      //   [property, value],
-      //   [],
-      // ]
-      console.log(data[0] + ", " + data[1]);
-    }
-
-    console.log(formData);
-
-    dispatch(updateUserImage(formData)).then((res) => {
-      if (userState.isError) {
-        notifError(userState.msg);
-      } else {
-        dispatch(getUserById(userState.userProfile.id)).then((res) => {
-          console.log(res);
-
-          notifSuccess();
-        });
+  const updateImage = () => {
+    if (image === null || !image.image) {
+      notifError("Masukan gambar");
+    } else {
+      const formData = new FormData();
+      for (const data in image) {
+        formData.append(data, image[data]);
       }
-    });
+
+      // UNTUK MENGECEK DATA DI DALAM FORMDATA
+      for (const data of formData.entries()) {
+        // [
+        //   [property, value],
+        //   [],
+        // ]
+        console.log(data[0] + ", " + data[1]);
+      }
+
+      dispatch(updateUserImage(formData)).then((res) => {
+        console.log("UPLOAD IMAGE", res);
+        getUserProfile();
+      });
+      notifSuccess("Berhasil merubah gambar");
+    }
   };
 
   const changeText = (e) => {
@@ -118,7 +117,7 @@ function EditProfilePerusahaan() {
       dispatch(getUserById(userState.userProfile.id)).then((res) => {
         console.log(res);
 
-        notifSuccess();
+        notifSuccess("Berhasil Merubah Data");
         clearState();
       });
     });
@@ -138,7 +137,7 @@ function EditProfilePerusahaan() {
         pauseOnHover
       />
 
-      <Navbar {...props} />
+      <Navbar />
 
       <div className="edit__profile__perusahaan">
         <div className="edit__profile__perusahaan--purple"></div>
@@ -152,18 +151,14 @@ function EditProfilePerusahaan() {
                     <img
                       src={
                         userState.users.image !== null
-                          ? `${
-                              process.env.REACT_APP_NAME === "dev"
-                                ? process.env.REACT_APP_DEV
-                                : process.env.REACT_APP_PROD
-                            }/uploads/user/${userState.users.image}`
+                          ? `http://localhost:3001/uploads/user/${userState.users.image}`
                           : Opinion3
                       }
                       alt="profile"
                       width="150px"
                     />
 
-                    <div className="mt-3" onClick={onButtonClick}>
+                    <div className="mt-3" style={{ cursor: "pointer" }} onClick={onButtonClick}>
                       <img src={edit} alt="edit" width="16px" />
                       <span className="open-sans-600 text-secondary ms-2">Edit</span>
                     </div>
@@ -174,8 +169,15 @@ function EditProfilePerusahaan() {
                       name="image"
                       onChange={handleFile}
                       ref={inputFile}
-                      style={{ display: "none" }}
+                      // style={{ display: "none" }}
                     />
+
+                    <button
+                      className="btn open-sans-700 mt-3 edit__profile__perusahaan--simpan"
+                      onClick={updateImage}
+                    >
+                      Update Image
+                    </button>
                   </div>
 
                   <h5 className="open-sans-600 mt-3">{userState.users.nama}</h5>
@@ -199,7 +201,10 @@ function EditProfilePerusahaan() {
                   >
                     Simpan
                   </button>
-                  <button className="btn open-sans-700 mt-2 edit__profile__perusahaan--batal">
+                  <button
+                    className="btn open-sans-700 mt-2 edit__profile__perusahaan--batal"
+                    onClick={clearState}
+                  >
                     Batal
                   </button>
                 </div>

@@ -79,7 +79,6 @@ function EditProfilePerusahaan() {
   };
 
   const updateImage = () => {
-    console.log("ASUUU", image);
     if (image === null || !image.image) {
       notifError("Masukan gambar");
     } else {

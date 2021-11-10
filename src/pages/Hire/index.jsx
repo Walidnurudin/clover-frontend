@@ -1,18 +1,21 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./index.css";
 import ProfileUser from "../../components/atoms/ProfileUser";
 import Navbar from "../../components/atoms/Navbar";
 import Footer from "../../components/atoms/Footer";
 import { connect } from "react-redux";
+import axios from "../../utils/axios";
 import { postHire } from "../../stores/actions/user";
 import { ToastContainer, toast } from "react-toastify";
 import { useHistory } from "react-router-dom";
 
 function Hire(props) {
+  const userId = props.location.state.userId;
   const history = useHistory();
   const [skills] = useState("Pyhton,Laravel,Golang,JavaScript,PHP,HTML,C++,Kotlin,Swift");
+  const [dataUser, setDataUser] = useState({});
   const [hire, setHire] = useState({
-    user_id: "3232432",
+    user_id: userId,
     tujuan_pesan: "",
     pesan: ""
   });
@@ -50,6 +53,14 @@ function Hire(props) {
     setHire({ ...hire, [event.target.name]: event.target.value });
   };
 
+  const getDataUser = () =>
+    axios.get(`user/${userId}`).then((res) => {
+      setDataUser(res.data.data[0]);
+    });
+  useEffect(() => {
+    getDataUser();
+  }, []);
+
   return (
     <>
       <Navbar />
@@ -58,7 +69,7 @@ function Hire(props) {
           <ToastContainer />
           <div className="row">
             <div className="col-md-4 mt-5 mb-5">
-              <ProfileUser skills={skills} />
+              <ProfileUser skills={skills} dataUser={dataUser} getDataUser={getDataUser} />
             </div>
             <section className="col-md-8 mt-5">
               {/* Form Hire */}

@@ -21,6 +21,8 @@ const Navigation = (props) => {
   };
 
   const handleLogout = () => {
+    setMenuOptionLogged(false);
+    setShow(false);
     localStorage.clear();
     history.push("/");
   };

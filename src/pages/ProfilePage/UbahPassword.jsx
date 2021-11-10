@@ -1,10 +1,34 @@
 import React, { useState, useEffect } from "react";
 import { Modal, Button } from "react-bootstrap";
 import { Eye } from "../../assets/images/ProfilePageImage";
+import interceptorAxios from "../../utils/axios";
+import axios from "../../utils/axios";
 
 function UbahPassword(props) {
   const [showPass, setShowPass] = useState(false);
   const [showConfirmPass, setShowConfirmPass] = useState(false);
+
+  const [changePassData, setChangePassData] = useState({
+    newPassword: "",
+    confirmPassword: ""
+  });
+
+  const submitChangePass = () => {
+    axios.patch(
+      `auth/forgot-password/${localStorage.getItem("id")}/${localStorage.getItem("token")}`,
+      changePassData
+    );
+  };
+
+  const handleChangePass = (event) => {
+    setChangePassData({
+      ...changePassData,
+      [event.target.name]: event.target.value
+    });
+  };
+  useEffect(() => {
+    console.log(changePassData);
+  }, [changePassData]);
 
   return (
     <>
@@ -20,8 +44,10 @@ function UbahPassword(props) {
               </label>
               <div className="changePassInput d-flex justify-content-between align-items-center  col-12 mb-4 p-2">
                 <input
+                  onChange={(event) => handleChangePass(event)}
+                  name="newPassword"
                   type={showPass ? "text" : "password"}
-                  placeholder="Inpu Confirm Password"
+                  placeholder="Input Confirm Password"
                   style={{ width: "90%" }}
                 />
                 <span className="d-flex align-items-center hover-pointer">
@@ -39,8 +65,10 @@ function UbahPassword(props) {
               </label>
               <div className="changePassInput d-flex justify-content-between align-items-center col-12 mb-4 p-2">
                 <input
+                  onChange={(event) => handleChangePass(event)}
                   type={showConfirmPass ? "text" : "password"}
-                  placeholder="Inpu Confirm Password"
+                  placeholder="Input Confirm Password"
+                  name="confirmPassword"
                   style={{ width: "90%" }}
                 />
                 <span className="d-flex align-items-center hover-pointer ">
@@ -59,12 +87,20 @@ function UbahPassword(props) {
           </form>
         </Modal.Body>
         <Modal.Footer className="justify-content-evenly">
-          <Button variant="secondary" style={{ width: "40%" }} onClick={props.handleClose}>
-            Close
-          </Button>
-          <Button variant="primary" style={{ width: "40%" }} onClick={props.handleClose}>
-            Save Changes
-          </Button>
+          <div style={{ width: "40%" }}>
+            <Button className="ack-btn-2" onClick={props.handleClose}>
+              Close
+            </Button>
+          </div>
+          <div style={{ width: "40%" }}>
+            <Button
+              className="ack-btn-prim"
+              style={{ width: "40%" }}
+              onClick={() => submitChangePass()}
+            >
+              Save Changes
+            </Button>
+          </div>
         </Modal.Footer>
       </Modal>
     </>

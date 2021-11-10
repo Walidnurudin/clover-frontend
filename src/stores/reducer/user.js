@@ -181,6 +181,50 @@ export default function user(state = initialState, action) {
         message: action.payload.data.msg
       };
     }
+    case "GET_USER_BY_ID_FULFILLED": {
+      return {
+        ...state,
+        isLoading: false,
+        isError: false,
+        users: action.payload.data.data[0],
+        message: action.payload.data.msg
+      };
+    }
+    case "GET_USER_BY_ID_REJECTED": {
+      return {
+        ...state,
+        isLoading: true,
+        isError: true,
+        users: [],
+        message: action.payload.data.msg
+      };
+    }
+
+    // UPDATE USER
+    case "UPDATE_USER_PENDING": {
+      return {
+        ...state,
+        isLoading: false,
+        isError: false,
+        message: ""
+      };
+    }
+    case "UPDATE_USER_FULFILLED": {
+      return {
+        ...state,
+        isLoading: false,
+        isError: false,
+        message: action.payload.data.msg
+      };
+    }
+    case "UPDATE_USER_REJECTED": {
+      return {
+        ...state,
+        isLoading: true,
+        isError: true,
+        message: action.payload.data.msg
+      };
+    }
     default: {
       return {
         ...state

@@ -33,6 +33,7 @@ class FormLogin extends Component {
       .login(this.state.form)
       .then((res) => {
         localStorage.setItem("token", res.value.data.data.token);
+        localStorage.setItem("role", "Perekrut");
         localStorage.setItem("id", res.value.data.data.id);
         this.props.history.push("/");
       })

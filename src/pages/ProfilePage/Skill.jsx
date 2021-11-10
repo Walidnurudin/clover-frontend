@@ -5,11 +5,24 @@ import { Edit, Delete } from "../../assets/images/ProfilePageImage";
 import axios from "../../utils/axios";
 
 function Skill(props) {
+  const updateDB = (data) => {
+    axios.patch("user", { skill: data }).then((res) => {
+      getUserSkill();
+    });
+  };
+
+  const getUserSkill = () => {
+    axios.get(`user/${localStorage.getItem("id")}`).then((res) => {
+      setUserSkills(res.data.data[0].skill.split(","));
+    });
+  };
+
   const submitDataDiri = (event) => {
     event.preventDefault();
     setUserSkills([...userSkills, `${inputSkill}`]);
-    const newUserSkill = userSkills.join();
-    console.log(newUserSkill);
+    axios.patch("user", { skill: [...userSkills, `${inputSkill}`].join() }).then((res) => {
+      getUserSkill();
+    });
     toast.success("Success add skill");
 
     setInputSkill("");
@@ -31,9 +44,10 @@ function Skill(props) {
   const applyUpdateSkill = (event) => {
     event.preventDefault();
     userSkills[indexSkill] = inputSkill;
+    axios.patch("user", { skill: userSkills.join() });
     setInputSkill("");
-    patchDataSkill();
     toast.success("Success update skill");
+    setIsUpdate(false);
   };
 
   const patchDataSkill = () => {
@@ -50,7 +64,15 @@ function Skill(props) {
   const deleteSkill = (index) => {
     // delete userSkills[index];
     userSkills.splice(index, 1);
-    console.log(userSkills);
+    axios
+      .patch("user", { skill: userSkills.join() })
+      .then((res) => {
+        getUserSkill();
+      })
+      .catch((err) => {
+        setUserSkills([]);
+      });
+
     toast.success("Success delete skill");
   };
 

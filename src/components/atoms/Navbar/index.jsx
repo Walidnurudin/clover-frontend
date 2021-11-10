@@ -84,12 +84,22 @@ const Navigation = (props) => {
       {!show ? null : (
         <div className="bg-light position-absolute w-25 p-2" style={{ right: "0px" }}>
           <div>
-            <Link
-              to="/profile"
-              className="text-decoration-none d-block fs-6 text-center text-dark  mb-3 fw-bold"
-            >
-              Profile
-            </Link>
+            {localStorage.getItem("role") === "Pekerja" ? (
+              <Link
+                to="/profile"
+                className="text-decoration-none d-block fs-6 text-center text-dark  mb-3 fw-bold"
+              >
+                Profile
+              </Link>
+            ) : (
+              <Link
+                to="/profile-recruiters"
+                className="text-decoration-none d-block fs-6 text-center text-dark  mb-3 fw-bold"
+              >
+                Profile
+              </Link>
+            )}
+
             <Link
               onClick={handleLogout}
               className="text-decoration-none d-block fs-6 text-center text-dark"

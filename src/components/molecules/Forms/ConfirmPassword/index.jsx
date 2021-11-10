@@ -33,7 +33,7 @@ const FormConfirmPassword = (props) => {
       const response = await props.resetPassword(user_id, token, setFormResetPassword);
       toast.success(`${response.value.data.msg}`);
       setTimeout(() => {
-        history.push("/login");
+        history.push("/login-workers");
       }, 2000);
       event.target.reset();
       setFormResetPassword({

@@ -40,6 +40,8 @@ function Home(props) {
   const [isLoading, setLoading] = useState(false);
   const [role] = useState("Pekerja");
 
+  console.log("USER", props);
+
   const listGetAllUsers = () => {
     props.getAllUsers(role, page, limit).then((response) => {
       setLoading(false);
@@ -146,12 +148,22 @@ function Home(props) {
   const linkToProfile = (user_id) => {
     history.push("/profile", { user_id });
   };
+
   useEffect(() => {
     // if (role !== "Pekerja") {
     //   history.push("/");
     // }
     listGetAllUsers();
   }, [role, page, limit, sort, search]);
+
+  useEffect(() => {
+    // if (role !== "Pekerja") {
+    //   history.push("/");
+    // }
+
+    console.log("GETTT");
+    listGetAllUsers();
+  }, []);
   // console.log(users.skill);
 
   return (

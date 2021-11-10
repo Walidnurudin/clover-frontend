@@ -31,7 +31,7 @@ function PortoComp(props) {
               process.env.REACT_APP_NAME === "dev"
                 ? process.env.REACT_APP_DEV
                 : process.env.REACT_APP_PROD
-            }${item.image}`}
+            }images/${item.image}`}
             alt=""
           />
           <p className="ack-fsize-14 ack-fw-400 my-2">{item.nama_aplikasi}</p>

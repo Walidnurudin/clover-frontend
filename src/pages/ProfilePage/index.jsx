@@ -78,7 +78,7 @@ function ProfilePage(props) {
                 <>
                   <div className="col-lg-8 col-12 data-diri position-relative">
                     <DataDiri dataUser={dataUser} getDataUser={() => getDataUser()} />
-                    <Skill Skills={dataUser.skill.length > 1 ? dataUser.skill.split(",") : null} />
+                    <Skill Skills={dataUser.skill !== null ? dataUser.skill.split(",") : null} />
                     <PengalamanKerja />
                     <Portofolio />
                   </div>

@@ -19,10 +19,16 @@ function Skill(props) {
 
   const submitDataDiri = (event) => {
     event.preventDefault();
+
     setUserSkills([...userSkills, `${inputSkill}`]);
     axios.patch("user", { skill: [...userSkills, `${inputSkill}`].join() }).then((res) => {
       getUserSkill();
     });
+
+    // setUserSkills([userSkills, `${inputSkill}`]);
+    // axios.patch("user", { skill: [userSkills, `${inputSkill}`].join() }).then((res) => {
+    //   getUserSkill();
+    // });
     toast.success("Success add skill");
 
     setInputSkill("");

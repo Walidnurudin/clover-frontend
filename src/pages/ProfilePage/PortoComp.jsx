@@ -26,7 +26,14 @@ function PortoComp(props) {
           key={index}
           className="porto-list d-flex flex-column mb-5 text-center px-2 col-12 col-lg-4"
         >
-          <img src={`http://localhost:3001/images/${item.image}`} alt="" />
+          <img
+            src={`${
+              process.env.REACT_APP_NAME === "dev"
+                ? process.env.REACT_APP_DEV
+                : process.env.REACT_APP_PROD
+            }images/${item.image}`}
+            alt=""
+          />
           <p className="ack-fsize-14 ack-fw-400 my-2">{item.nama_aplikasi}</p>
         </div>
       ))}

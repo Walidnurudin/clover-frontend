@@ -118,6 +118,7 @@ function Home(props) {
 
   const changePagination = (event) => {
     const selectedPage = event.selected + 1;
+    history.push(`/home?page=${selectedPage}&limit=${limit}`);
     setPage(selectedPage, () => getAllUsers(role, page, limit));
   };
 
@@ -155,7 +156,7 @@ function Home(props) {
     listGetAllUsers();
   }, [role, page, limit, sort, search]);
 
-  console.log(user);
+  console.log(totalPage);
   return (
     <>
       {!show ? (

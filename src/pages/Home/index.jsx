@@ -31,18 +31,17 @@ function Home(props) {
   const [show, setShow] = useState(false);
   const [filterShow, setFilterShow] = useState(false);
   const [search, setSearch] = useState("");
-  const [sort] = useState("ASC");
+  let [sort] = useState("DESC");
   const [jobFreelance] = useState("Freelance");
   const [jobFulltime] = useState("Fulltime");
   const [page, setPage] = useState(1);
-  const [limit] = useState(3);
+  let [limit] = useState(3);
   const [totalPage, setTotalPage] = useState("");
   const [isLoading, setLoading] = useState(false);
   const [role] = useState("Pekerja");
 
   const listGetAllUsers = () => {
     props.getAllUsers(role, page, limit).then((response) => {
-      console.log("value response =>", response);
       setLoading(false);
       setUser(response.value.data.data);
       setTotalPage(response.value.data.pagination.totalPage);
@@ -85,6 +84,7 @@ function Home(props) {
       const response = await props.sortNameUsers(role, sort, page, limit);
       setLoading(false);
       setUser(response.value.data.data);
+      setTotalPage(response.value.data.pagination.totalPage);
       history.push(`/home?sort=${sort}`);
       setFilterShow(false);
     } catch (error) {
@@ -94,9 +94,12 @@ function Home(props) {
   const findSortBySkill = async () => {
     try {
       setLoading(true);
+
       const response = await props.sortSkillUsers(role, sort, page, limit);
+      console.log(response);
       setLoading(false);
       setUser(response.value.data.data);
+      setTotalPage(response.value.data.pagination.totalPage);
       history.push(`/home?sort=${sort}`);
       setFilterShow(false);
     } catch (error) {
@@ -109,6 +112,7 @@ function Home(props) {
       const response = await props.sortLocationUsers(role, sort, page, limit);
       setLoading(false);
       setUser(response.value.data.data);
+      setTotalPage(response.value.data.pagination.totalPage);
       history.push(`/home?sort=${sort}`);
       setFilterShow(false);
     } catch (error) {
@@ -119,7 +123,7 @@ function Home(props) {
   const changePagination = (event) => {
     const selectedPage = event.selected + 1;
     history.push(`/home?page=${selectedPage}&limit=${limit}`);
-    setPage(selectedPage, () => getAllUsers(role, page, limit));
+    setPage(selectedPage, () => getAllUsers(role, selectedPage, limit));
   };
 
   const findFreelance = async () => {
@@ -128,6 +132,7 @@ function Home(props) {
       const response = await props.sortFullTimeJobUsers(role, jobFreelance, page, limit);
       setLoading(false);
       setUser(response.value.data.data);
+      setTotalPage(response.value.data.pagination.totalPage);
       setFilterShow(false);
     } catch (error) {
       new Error(error);
@@ -139,6 +144,7 @@ function Home(props) {
       const response = await props.sortFullTimeJobUsers(role, jobFulltime, page, limit);
       setLoading(false);
       setUser(response.value.data.data);
+      setTotalPage(response.value.data.pagination.totalPage);
       setFilterShow(false);
     } catch (error) {
       new Error(error);
@@ -150,13 +156,9 @@ function Home(props) {
   };
 
   useEffect(() => {
-    // if (role !== "Pekerja") {
-    //   history.push("/");
-    // }
     listGetAllUsers();
   }, [role, page, limit, sort, search]);
 
-  console.log(totalPage);
   return (
     <>
       {!show ? (
@@ -258,57 +260,68 @@ function Home(props) {
             </section>
             <section className="homepage__spacing homepage__main-list-users">
               <h2 className="d-block d-md-none homepage__topmenu-title">Web Developer</h2>
-              {user.map((users, idx) => {
-                // const skillAsli = users.skill.map((value) => value);
-                // let temp;
-                // if (users.skill.length > 3) {
-                //   const parseMoreSkills = users.skill.pop();
-                //   temp = parseMoreSkills;
-                // }
-                // const moreSkills = temp === undefined ? null : temp.split();
-                return (
-                  <div className="homepage__list-users-card" key={idx}>
-                    <img
-                      src={Profile}
-                      alt=""
-                      className="homepage__list-users-card-image img-fluid"
-                    />
-                    <div className="homepage__list-users-card-body">
-                      <div className="homepage__list-users-card-body-left">
-                        <h5>{users.nama}</h5>
-                        <span>
-                          {users.jobDesk ? users.jobDesk : "-"}
-                          {" - "}
-                          {users.jobStatus ? users.jobStatus : null}
-                        </span>
-                        <span>{users.domisili ? users.domisili : "-"}</span>
-                        <div className="homepage__list-users-card-body-skills">
-                          {users.skill?.map((skills, idx) => {
-                            return (
-                              <div key={idx}>
-                                <div className="homepage__list-users-card-body-skills-category">
-                                  {skills}
-                                </div>
-                              </div>
-                            );
-                          })}
-                          <span className="homepage__list-users-card-body-skills-more d-flex d-md-none">
-                            8+
+              {user.length > 0 && props.user.users !== null ? (
+                user.map((users, idx) => {
+                  // const skillAsli = users.skill.map((value) => value);
+                  // let temp;
+                  // if (users.skill.length > 3) {
+                  //   const parseMoreSkills = users.skill.pop();
+                  //   temp = parseMoreSkills;
+                  // }
+                  // const moreSkills = temp === undefined ? null : temp.split();
+                  return (
+                    <div className="homepage__list-users-card" key={idx}>
+                      <img
+                        src={`${
+                          user.image
+                            ? `${
+                                process.env.REACT_APP_NAME === "dev"
+                                  ? process.env.REACT_APP_DEV
+                                  : process.env.REACT_APP_PROD
+                              }uploads/user/${user.image}`
+                            : "https://www.a1hosting.net/wp-content/themes/arkahost/assets/images/default.jpg"
+                        }`}
+                        alt=""
+                        className="homepage__list-users-card-image img-fluid"
+                      />
+                      <div className="homepage__list-users-card-body">
+                        <div className="homepage__list-users-card-body-left">
+                          <h5>{users.nama}</h5>
+                          <span>
+                            {users.jobDesk ? users.jobDesk : "-"}
+                            {users.jobStatus ? users.jobStatus : null}
                           </span>
+                          <span>{users.domisili ? users.domisili : "-"}</span>
+                          <div className="homepage__list-users-card-body-skills">
+                            {users.skill?.map((skills, idx) => {
+                              return (
+                                <div key={idx}>
+                                  <div className="homepage__list-users-card-body-skills-category">
+                                    {skills}
+                                  </div>
+                                </div>
+                              );
+                            })}
+                            <span className="homepage__list-users-card-body-skills-more d-flex d-md-none">
+                              8+
+                            </span>
+                          </div>
+                        </div>
+                        <div className="homepage__list-users-card-body-right">
+                          <button
+                            className="homepage__list-users-card-body-button"
+                            onClick={() => linkToProfile(users.id)}
+                          >
+                            Lihat Profile
+                          </button>
                         </div>
                       </div>
-                      <div className="homepage__list-users-card-body-right">
-                        <button
-                          className="homepage__list-users-card-body-button"
-                          onClick={() => linkToProfile(users.id)}
-                        >
-                          Lihat Profile
-                        </button>
-                      </div>
                     </div>
-                  </div>
-                );
-              })}
+                  );
+                })
+              ) : (
+                <p className="text-center fw-bold">Belum ada pekerja</p>
+              )}
             </section>
             <section className="homepage__spacing homepage__pagination">
               <Pagination

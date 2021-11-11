@@ -56,9 +56,11 @@ const Navigation = (props) => {
               <img src={LogoPurple} alt="Clover Hire" className="logo__purple" />
             </Link>
             {token ? (
-              <Link to="/home" className="menu__home text-decoration-none text-dark fw-bold">
-                Home
-              </Link>
+              role === "Perekrut" ? (
+                <Link to="/home" className="menu__home text-decoration-none text-dark fw-bold">
+                  Home
+                </Link>
+              ) : null
             ) : null}
           </div>
 

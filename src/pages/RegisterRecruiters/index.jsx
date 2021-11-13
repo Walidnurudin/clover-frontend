@@ -7,7 +7,7 @@ import FormRegisterRecruiters from "../../components/molecules/Forms/RegisterRec
 const RegisterRecruiters = () => {
   return (
     <>
-      <Container fluid className="window">
+      <Container fluid className="window__regis--recruiters">
         <Row>
           <Col md={6} className="column1">
             <AuthLeft />

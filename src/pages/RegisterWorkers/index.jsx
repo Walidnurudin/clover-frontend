@@ -7,7 +7,7 @@ import FormRegisterWorkers from "../../components/molecules/Forms/RegisterWorker
 const RegisterWorkers = () => {
   return (
     <>
-      <Container fluid className="window">
+      <Container fluid className="window__regis--workers">
         <Row>
           <Col md={6} className="column1">
             <AuthLeft />

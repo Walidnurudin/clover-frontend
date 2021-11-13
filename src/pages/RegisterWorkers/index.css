@@ -1,8 +1,8 @@
-.window {
+.window__regis--workers {
   padding-left: 0 !important;
   padding-right: 0 !important;
   background-color: #f6f7f8;
-  /* height: 170vh; */
+  height: 150vh !important;
 }
 
 .column1 {
@@ -17,6 +17,9 @@
 }
 
 @media (max-width: 480px) {
+  .window__regis--workers {
+    height: 90vh !important;
+  }
   .column1 {
     display: none !important;
   }

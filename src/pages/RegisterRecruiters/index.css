@@ -1,6 +1,8 @@
-.window {
-  width: 100%;
-  height: 195vh;
+.window__regis--recruiters {
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+  background-color: #f6f7f8;
+  height: 174vh !important;
 }
 
 .column1 {
@@ -13,6 +15,9 @@
 }
 
 @media (max-width: 480px) {
+  .window__regis--recruiters {
+    height: 90vh !important;
+  }
   .column1 {
     display: none !important;
   }

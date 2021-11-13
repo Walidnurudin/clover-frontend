@@ -7,17 +7,20 @@ import "react-toastify/dist/ReactToastify.css";
 function DataDiri(props) {
   const submitDataDiri = (event) => {
     event.preventDefault();
-    axios
-      .patch("user", dataDiriBaru)
-      .then((res) => {
-        toast.success(res.data.msg);
-        props.getDataUser();
-      })
-      .catch(
-        (err) => toast.error(err.msg)
+    console.log(dataDiriBaru.description.length);
+    dataDiriBaru.description.length > 255
+      ? toast.error("Deskripsi tidak boleh lebih dari 255 huruf")
+      : axios
+          .patch("user", dataDiriBaru)
+          .then((res) => {
+            toast.success(res.data.msg);
+            props.getDataUser();
+          })
+          .catch(
+            (err) => toast.error(err.msg)
 
-        // window.alert(err)
-      );
+            // window.alert(err)
+          );
   };
 
   const [dataDiriBaru, setDataDiriBaru] = useState({});

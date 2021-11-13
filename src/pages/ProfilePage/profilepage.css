@@ -49,6 +49,7 @@
   height: 150px;
   object-fit: cover;
   border-radius: 100%;
+  /* border: 1px black solid; */
   margin: auto;
 }
 

@@ -31,7 +31,9 @@ function EditProfilePerusahaan() {
   };
 
   const [form, setForm] = useState(initialState);
-  const [image, setImage] = useState(null);
+  const [image, setImage] = useState({ image: "" });
+
+  // const [imageTemp, setImageTemp] = useState(null);
 
   const handleKembali = () => {
     history.push("/profile-recruiters");
@@ -78,15 +80,14 @@ function EditProfilePerusahaan() {
     getUserProfile();
   }, []);
 
-  const handleFile = (e) => {
-    setImage({
-      image: e.target.files[0]
-    });
-  };
+  useEffect(() => {
+    updateImage();
+    console.log("UPDATE IMAGE");
+  }, [image]);
 
   const updateImage = () => {
     if (image === null || !image.image) {
-      notifError("Masukan gambar");
+      // notifError("Masukan gambar");
     } else {
       const formData = new FormData();
       for (const data in image) {
@@ -102,11 +103,16 @@ function EditProfilePerusahaan() {
         console.log(data[0] + ", " + data[1]);
       }
 
-      dispatch(updateUserImage(formData)).then((res) => {
-        console.log("UPLOAD IMAGE", res);
-        getUserProfile();
-      });
-      notifSuccess("Berhasil merubah gambar");
+      dispatch(updateUserImage(formData))
+        .then((res) => {
+          getUserProfile();
+          notifSuccess("Berhasil merubah gambar");
+        })
+        .catch((err) => {
+          if (userState.isError) {
+            notifError(userState.message);
+          }
+        });
     }
   };
 
@@ -177,17 +183,21 @@ function EditProfilePerusahaan() {
                       type="file"
                       id="file"
                       name="image"
-                      onChange={handleFile}
+                      onChange={(e) =>
+                        setImage({
+                          image: e.target.files[0]
+                        })
+                      }
                       ref={inputFile}
-                      // style={{ display: "none" }}
+                      style={{ display: "none" }}
                     />
 
-                    <button
+                    {/* <button
                       className="btn open-sans-700 mt-3 edit__profile__perusahaan--simpan"
                       onClick={updateImage}
                     >
                       Update Image
-                    </button>
+                    </button> */}
                   </div>
 
                   <h5 className="open-sans-600 mt-3">{userState.users.nama}</h5>

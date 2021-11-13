@@ -23,6 +23,12 @@ interceptorAxios.interceptors.response.use(
     return response;
   },
   function (error) {
+    if (error.response.status === 403) {
+      alert("ada kesalahan token");
+      localStorage.clear();
+      window.location.href = "/login-workers";
+    }
+
     return Promise.reject(error);
   }
 );

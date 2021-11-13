@@ -9,27 +9,33 @@ import {
   getUserProfile
 } from "../../stores/actions/user";
 import { ToastContainer, toast } from "react-toastify";
+import { useHistory } from "react-router-dom";
 import Navbar from "../../components/atoms/Navbar";
 import Footer from "../../components/atoms/Footer";
 
-const initialState = {
-  nama: "",
-  bidangPerusahaan: "",
-  domisili: "",
-  description: "",
-  email: "",
-  instagram: "",
-  noHandphone: "",
-  linkedin: ""
-};
-
 function EditProfilePerusahaan() {
+  const inputFile = useRef(null);
+  const history = useHistory();
+  const userState = useSelector((state) => state.user);
+  const dispatch = useDispatch();
+
+  const initialState = {
+    nama: userState.users.nama,
+    bidangPerusahaan: userState.users.bidangPerusahaan,
+    domisili: userState.users.domisili,
+    description: userState.users.description,
+    email: userState.users.email,
+    instagram: userState.users.instagram,
+    noHandphone: userState.users.noHandphone,
+    linkedin: userState.users.linkedin
+  };
+
   const [form, setForm] = useState(initialState);
   const [image, setImage] = useState(null);
 
-  const inputFile = useRef(null);
-  const userState = useSelector((state) => state.user);
-  const dispatch = useDispatch();
+  const handleKembali = () => {
+    history.push("/profile-recruiters");
+  };
 
   const clearState = () => {
     setForm({ ...initialState });
@@ -118,7 +124,7 @@ function EditProfilePerusahaan() {
         console.log(res);
 
         notifSuccess("Berhasil Merubah Data");
-        clearState();
+        // clearState();
       });
     });
   };
@@ -159,7 +165,7 @@ function EditProfilePerusahaan() {
                           : Opinion3
                       }
                       alt="profile"
-                      width="150px"
+                      className="edit__profile__perusahaan--profile--img"
                     />
 
                     <div className="mt-3" style={{ cursor: "pointer" }} onClick={onButtonClick}>
@@ -207,9 +213,9 @@ function EditProfilePerusahaan() {
                   </button>
                   <button
                     className="btn open-sans-700 mt-2 edit__profile__perusahaan--batal"
-                    onClick={clearState}
+                    onClick={handleKembali}
                   >
-                    Batal
+                    Kembali
                   </button>
                 </div>
               </div>

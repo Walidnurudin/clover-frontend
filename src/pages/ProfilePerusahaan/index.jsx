@@ -44,7 +44,7 @@ function ProfilePerusahaan() {
                     : Opinion3
                 }
                 alt="profile"
-                width="150px"
+                className="profile__perusahaan--main--img"
               />
               <h5 className="open-sans-600 mt-3">{userState.users.nama}</h5>
               <p className="mb-3">{userState.users.bidangPerusahaan || "-"}</p>

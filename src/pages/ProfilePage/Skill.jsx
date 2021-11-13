@@ -20,18 +20,21 @@ function Skill(props) {
   const submitDataDiri = (event) => {
     event.preventDefault();
 
-    setUserSkills([...userSkills, `${inputSkill}`]);
-    axios.patch("user", { skill: [...userSkills, `${inputSkill}`].join() }).then((res) => {
-      getUserSkill();
-    });
+    if (!inputSkill) {
+      toast.error("Masukkan Skill");
+    } else {
+      setUserSkills([...userSkills, `${inputSkill}`]);
+      axios.patch("user", { skill: [...userSkills, `${inputSkill}`].join(", ") }).then((res) => {
+        toast.success("Success add skill");
+        getUserSkill();
+        setInputSkill("");
+      });
+    }
 
     // setUserSkills([userSkills, `${inputSkill}`]);
     // axios.patch("user", { skill: [userSkills, `${inputSkill}`].join() }).then((res) => {
     //   getUserSkill();
     // });
-    toast.success("Success add skill");
-
-    setInputSkill("");
   };
 
   const [userSkills, setUserSkills] = useState(props.Skills);
@@ -50,14 +53,14 @@ function Skill(props) {
   const applyUpdateSkill = (event) => {
     event.preventDefault();
     userSkills[indexSkill] = inputSkill;
-    axios.patch("user", { skill: userSkills.join() });
+    axios.patch("user", { skill: userSkills.join(", ") });
     setInputSkill("");
     toast.success("Success update skill");
     setIsUpdate(false);
   };
 
   const patchDataSkill = () => {
-    const newUserSkill = userSkills.join();
+    const newUserSkill = userSkills.join(", ");
     // console.log(newUserSkill);
     setIsUpdate(false);
   };
@@ -74,12 +77,12 @@ function Skill(props) {
     userSkills.splice(index, 1);
 
     axios
-      .patch("user", { skill: userSkills.join() })
+      .patch("user", { skill: userSkills.join(", ") })
       .then((res) => {
         getUserSkill();
       })
       .catch((err) => {
-        setUserSkills([]);
+        // setUserSkills([]);
       });
 
     toast.success("Success delete skill");
@@ -91,7 +94,6 @@ function Skill(props) {
 
   return (
     <>
-      <ToastContainer />
       <div className="user-profile__porto-exp mb-4 pb-4 ack-bg-white">
         <p className="p-4 updateForm__header margin-reset ack-fw-600 ack-fsize-22">Skill</p>
         <form
@@ -106,6 +108,8 @@ function Skill(props) {
               className="col-12 mt-4 p-3"
               value={inputSkill}
               onChange={(event) => setInputSkill(event.target.value)}
+              placeholder="Masukkan Skill"
+              // required
             />
           </div>
 

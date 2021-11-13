@@ -15,9 +15,15 @@ function UbahPassword(props) {
   });
 
   const submitChangePass = () => {
-    axios.patch("user/update-password", changePassData).then((res) => {
-      toast.success("Success change password");
-    });
+    axios
+      .patch("user/update-password", changePassData)
+      .then((res) => {
+        toast.success("Success change password");
+        props.handleClose();
+      })
+      .catch((err) => {
+        toast.error(err.msg);
+      });
   };
 
   const handleChangePass = (event) => {
@@ -37,7 +43,6 @@ function UbahPassword(props) {
           <Modal.Title>Ubah Password</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <ToastContainer />
           <form className="roow">
             <div className="col6">
               <label htmlFor="" className="col-12">

@@ -50,19 +50,38 @@ function ProfileUser(props) {
   }
 
   const updateImage = () => {
-    axios
-      .patch("user/update-image", formData)
-      .then((res) => {
-        toast.success(res.data.msg);
-        props.getDataUser();
-      })
-      .catch((err) => {
-        toast(err.msg);
-      });
+    console.log(form);
+    if (
+      form.image.type == "image/jpeg" ||
+      form.image.type == "image/png" ||
+      form.image.type == "image/jpg"
+    ) {
+      if (form.image.size > 1024 * 1024) {
+        toast.error("Ukuran File Terlalu Besar ( Max 1 MB )");
+      } else {
+        axios
+          .patch("user/update-image", formData)
+          .then((res) => {
+            toast.success(res.data.msg);
+            props.getDataUser();
+          })
+          .catch((err) => {
+            console.log(err);
+            toast(err.msg);
+          });
+      }
+    } else {
+      toast.error("Hanya File Bertipe Gambar Yang Diperbolehkan");
+    }
   };
 
   const LinkToHire = () => {
     history.push("/hire", { userId });
+  };
+
+  const kembali = () => {
+    props.setIsUpdate(false);
+    props.getDataUser();
   };
 
   return (
@@ -101,7 +120,10 @@ function ProfileUser(props) {
                   id=""
                 />
               </form>
-              <span className="ack-fsize-22 ack-fcolor2 ack-fw-600" onClick={() => updateImage()}>
+              <span
+                className="ack-fsize-22 ack-fcolor2 ack-fw-600 hover-pointer"
+                onClick={() => updateImage()}
+              >
                 Edit
               </span>
             </div>
@@ -149,7 +171,8 @@ function ProfileUser(props) {
               </button>
               <button
                 className="ack-btn-2 py-2 ack-fw-700 ack-fsize-16 my-2"
-                onClick={() => props.setIsUpdate(false)}
+                // onClick={() => props.setIsUpdate(false)}
+                onClick={() => kembali()}
               >
                 Kembali
               </button>
@@ -195,20 +218,35 @@ function ProfileUser(props) {
                   <span className="ack-fcolor2 ">{email ? email : ""}</span>
                 </div>
 
-                <div className="user-profile__social-ig my-4 ack-fsize-14 d-flex align-items-center">
-                  <img src={Instagram} alt="" className="me-3" />
-                  <span className="ack-fcolor2">@{instagram ? instagram : " -"}</span>
-                </div>
+                {instagram ? (
+                  <div className="user-profile__social-ig my-4 ack-fsize-14 d-flex align-items-center">
+                    <img src={Instagram} alt="" className="me-3" />
+                    <span className="ack-fcolor2">@{instagram ? instagram : " -"}</span>
+                  </div>
+                ) : (
+                  ""
+                )}
 
-                <div className="user-profile__social-github my-4 ack-fsize-14 d-flex align-items-center">
-                  <img src={Github} alt="" className="me-3" />
-                  <span className="ack-fcolor2">@{github ? github : " -"}</span>
-                </div>
+                {github ? (
+                  <div className="user-profile__social-github my-4 ack-fsize-14 d-flex align-items-center">
+                    <img src={Github} alt="" className="me-3" />
+                    <span className="ack-fcolor2">@{github ? github : " -"}</span>
+                  </div>
+                ) : (
+                  ""
+                )}
 
-                <div className="user-profile__social-gitlab my-4 ack-fsize-14 d-flex align-items-center">
-                  <img src={Gitlab} alt="" className="me-3" />
-                  <span className="ack-fcolor2">@{gitlab ? gitlab : " -"}</span>
-                </div>
+                {gitlab ? (
+                  <div
+                    className="user-profile__social-gitlab my-4 ack-fsize-14 d-flex align-items-center"
+                    // style={gitlab ? { display: "block" } : { display: "none" }}
+                  >
+                    <img src={Gitlab} alt="" className="me-3" />
+                    <span className="ack-fcolor2">@{gitlab ? gitlab : " -"}</span>
+                  </div>
+                ) : (
+                  ""
+                )}
               </div>
             </>
           )}

@@ -14,7 +14,7 @@ function DataDiri(props) {
         props.getDataUser();
       })
       .catch(
-        (err) => toast.error(err.data.msg)
+        (err) => toast.error(err.msg)
 
         // window.alert(err)
       );
@@ -67,7 +67,6 @@ function DataDiri(props) {
 
   return (
     <>
-      <ToastContainer></ToastContainer>
       <div className="user-profile__porto-exp mb-4 ack-bg-white">
         <p className="p-4 updateForm__header margin-reset ack-fw-600 ack-fsize-22">Data Diri</p>
         <form className="px-4 formDataDiri" onSubmit={(event) => submitDataDiri(event)}>

@@ -90,7 +90,9 @@ function ProfileUser(props) {
     // updateImage();
   };
   useEffect(() => {
-    updateImage();
+    if (form) {
+      updateImage();
+    }
   }, [form]);
 
   return (
@@ -111,7 +113,7 @@ function ProfileUser(props) {
                         ? process.env.REACT_APP_DEV
                         : process.env.REACT_APP_PROD
                     }uploads/user/${image}`
-                  : userImage
+                  : "https://www.a1hosting.net/wp-content/themes/arkahost/assets/images/default.jpg"
               }
               alt=""
             />
@@ -126,7 +128,7 @@ function ProfileUser(props) {
                   type="file"
                   onChange={(event) => setForm({ image: event.target.files[0] })}
                   name="image"
-                  id=""
+                  id="image"
                   ref={inputFile}
                   style={{ display: "none" }}
                 />

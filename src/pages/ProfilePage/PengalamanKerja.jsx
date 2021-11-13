@@ -12,6 +12,7 @@ function PengalamanKerja() {
       .post("experience", dataPengalamanBaru)
       .then((res) => {
         if (
+          !dataPengalamanBaru ||
           !dataPengalamanBaru.nama_perusahaan ||
           !dataPengalamanBaru.posisi ||
           !dataPengalamanBaru.tanggal_masuk ||
@@ -143,6 +144,7 @@ function PengalamanKerja() {
 
   const deletePengalaman = () => {
     axios.delete(`experience/${deleteId}`).then((res) => {
+      toast.success(res.data.msg);
       getPengalaman();
       setShow(false);
     });

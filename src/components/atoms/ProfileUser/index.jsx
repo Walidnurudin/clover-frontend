@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { withRouter, useHistory } from "react-router-dom";
 import {
   userImage,
@@ -84,6 +84,15 @@ function ProfileUser(props) {
     props.getDataUser();
   };
 
+  const inputFile = useRef(null);
+  const onClickInput = () => {
+    inputFile.current.click();
+    // updateImage();
+  };
+  useEffect(() => {
+    updateImage();
+  }, [form]);
+
   return (
     <>
       <ToastContainer />
@@ -118,11 +127,14 @@ function ProfileUser(props) {
                   onChange={(event) => setForm({ image: event.target.files[0] })}
                   name="image"
                   id=""
+                  ref={inputFile}
+                  style={{ display: "none" }}
                 />
               </form>
               <span
                 className="ack-fsize-22 ack-fcolor2 ack-fw-600 hover-pointer"
-                onClick={() => updateImage()}
+                // onClick={() => updateImage()}
+                onClick={() => onClickInput()}
               >
                 Edit
               </span>

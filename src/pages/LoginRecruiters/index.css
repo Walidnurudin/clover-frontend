@@ -15,6 +15,9 @@
 }
 
 @media (max-width: 480px) {
+  .window {
+    height: 100vh;
+  }
   .column1 {
     display: none !important;
   }

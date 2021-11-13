@@ -10,6 +10,7 @@
 
 .formSignUp__formInput {
   padding-top: 2em;
+  padding-bottom: 2.4em;
   color: #9ea0a5;
 }
 
@@ -41,6 +42,12 @@
 .formSignUp__login a {
   text-decoration: none;
   color: #fbb017;
+}
+
+.formSignUp__registerRecruiters {
+  text-decoration: none !important;
+  color: #fbb017 !important;
+  text-align: center !important;
 }
 
 @media (max-width: 480px) {

@@ -145,6 +145,9 @@ class FormRegisterWorkers extends Component {
               Daftar
             </Button>
           </Form>
+          <Link to="/register-recruiters" className="formSignUp__registerRecruiters">
+            <h5>Daftar sebagai perekrut</h5>
+          </Link>{" "}
           <p className="formSignUp__login">
             Anda sudah punya akun? <Link to="/login-workers">Masuk disini</Link>
           </p>

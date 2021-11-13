@@ -90,9 +90,8 @@ function ProfileUser(props) {
     // updateImage();
   };
   useEffect(() => {
-    if (form) {
-      updateImage();
-    }
+    console.log(form);
+    form.image ? updateImage() : null;
   }, [form]);
 
   return (

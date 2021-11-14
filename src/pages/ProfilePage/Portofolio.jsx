@@ -45,25 +45,38 @@ function Portofolio(props) {
   }, []);
 
   const postPorto = () => {
-    const formData = new FormData();
+    if (
+      dataNewPorto.image.type == "image/jpeg" ||
+      dataNewPorto.image.type == "image/png" ||
+      dataNewPorto.image.type == "image/jpg"
+    ) {
+      if (dataNewPorto.image.size > 1024 * 1024 * 3) {
+        toast.error("Ukuran File Terlalu Besar ( Max 3 MB )");
+      } else {
+        const formData = new FormData();
 
-    for (const data in dataNewPorto) {
-      formData.append(data, dataNewPorto[data]);
+        for (const data in dataNewPorto) {
+          formData.append(data, dataNewPorto[data]);
+        }
+
+        for (const pair of formData.entries()) {
+          // console.log(pair[0] + ", " + pair[1]);
+        }
+
+        axios
+          .post("portfolio", formData)
+          .then((res) => {
+            toast.success(res.data.msg);
+            setDataNewPorto({});
+            getPortoFolioUser();
+          })
+          .catch((err) => {
+            toast.error(err.msg);
+          });
+      }
+    } else {
+      toast.error("Hanya File Bertipe Gambar Yang Diperbolehkan");
     }
-
-    for (const pair of formData.entries()) {
-      // console.log(pair[0] + ", " + pair[1]);
-    }
-
-    axios
-      .post("portfolio", formData)
-      .then((res) => {
-        toast.success(res.data.msg);
-        getPortoFolioUser();
-      })
-      .catch((err) => {
-        toast.error(err.msg);
-      });
   };
 
   const [dataNewPorto, setDataNewPorto] = useState({});
@@ -110,22 +123,48 @@ function Portofolio(props) {
   const updatePorto = (event) => {
     event.preventDefault();
 
-    const formData = new FormData();
+    if (dataNewPorto.image) {
+      if (
+        dataNewPorto.image.type == "image/jpeg" ||
+        dataNewPorto.image.type == "image/png" ||
+        dataNewPorto.image.type == "image/jpg"
+      ) {
+        if (dataNewPorto.image.size > 1024 * 1024) {
+          toast.error("Ukuran File Terlalu Besar ( Max 1 MB )");
+        } else {
+          const formData = new FormData();
 
-    for (const data in dataNewPorto) {
-      formData.append(data, dataNewPorto[data]);
+          for (const data in dataNewPorto) {
+            formData.append(data, dataNewPorto[data]);
+          }
+
+          for (const pair of formData.entries()) {
+            // console.log(pair[0] + ", " + pair[1]);
+          }
+
+          axios.patch(`portfolio/${id}`, formData).then((res) => {
+            toast.success("Success Update Portofolio");
+            setIsUpdate(false);
+            setDataNewPorto({});
+            getPortoFolioUser();
+          });
+        }
+      } else {
+        toast.error("Data Harus Berupa Gambar");
+      }
+    } else {
+      console.log("dataNewPorto");
+      console.log(dataNewPorto);
+      delete dataNewPorto.image;
+      console.log(dataNewPorto);
+
+      axios.patch(`portfolio/${id}`, dataNewPorto).then((res) => {
+        toast.success("Success Update Portofolio");
+        setIsUpdate(false);
+        setDataNewPorto({});
+        getPortoFolioUser();
+      });
     }
-
-    for (const pair of formData.entries()) {
-      // console.log(pair[0] + ", " + pair[1]);
-    }
-
-    axios.patch(`portfolio/${id}`, formData).then((res) => {
-      toast.success("Success Update Portofolio");
-      setIsUpdate(false);
-      setDataNewPorto({});
-      getPortoFolioUser();
-    });
   };
 
   const { link_repository, nama_aplikasi, id } = dataNewPorto;

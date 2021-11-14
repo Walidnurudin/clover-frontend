@@ -82,6 +82,7 @@ function ProfileUser(props) {
   const kembali = () => {
     props.setIsUpdate(false);
     props.getDataUser();
+    props.getPortoFolioUser();
   };
 
   const inputFile = useRef(null);

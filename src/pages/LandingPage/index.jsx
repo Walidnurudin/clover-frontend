@@ -38,8 +38,8 @@ function LandingPage(props) {
             <div className="col-12 col-md-6 align-self-center landing__page--1--desc mb-5">
               <h1 className="open-sans-600">Talenta terbaik negeri untuk perubahan revolusi 4.0</h1>
               <p className="open-sans-400">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. In euismod ipsum et dui
-                rhoncus auctor.
+                Mari bergabung dengan kami untuk merekrut calon karyawan di perusahaan anda dengan
+                standar perusahaan dan bagi calon perkerja lebih mudah dalam mencari pekerjaan
               </p>
               <button className="btn btn-primary open-sans-700" onClick={startNow}>
                 Mulai Dari Sekarang
@@ -57,23 +57,23 @@ function LandingPage(props) {
               <img src={LandingPage2} alt="image" />
             </div>
             <div className="col-12 col-md-6 order-1 order-md-2 align-self-center landing__page--2--desc mb-5">
-              <h1 className="open-sans-600">Kenapa harus mencari tallent di peworld</h1>
+              <h1 className="open-sans-600">Kenapa harus mencari talent di Clover-hire</h1>
               <div className="open-sans-400 d-flex flex-column">
                 <span className="mb-4">
                   <img src={TickPurple} alt="checklist" width="24px" className="me-4" />
-                  <span>Lorem ipsum dolor sit amet.</span>
+                  <span>Sedia setiap saat.</span>
                 </span>
                 <span className="mb-4">
                   <img src={TickPurple} alt="checklist" width="24px" className="me-4" />
-                  <span>Lorem ipsum dolor sit amet.</span>
+                  <span>Jangkau audiens yang lebih luas.</span>
                 </span>
                 <span className="mb-4">
                   <img src={TickPurple} alt="checklist" width="24px" className="me-4" />
-                  <span>Lorem ipsum dolor sit amet.</span>
+                  <span>Kemampuan yang mumpuni di berbagai bidang keahlian.</span>
                 </span>
                 <span>
                   <img src={TickPurple} alt="checklist" width="24px" className="me-4" />
-                  <span>Lorem ipsum dolor sit amet.</span>
+                  <span>Metode rekrutmen yang hemat biaya.</span>
                 </span>
               </div>
             </div>

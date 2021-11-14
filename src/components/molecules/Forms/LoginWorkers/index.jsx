@@ -70,9 +70,7 @@ class FormLogin extends Component {
         <div className="formLogin">
           <Image src={LogoPurple} className="logo__mobile" />
           <h1>Halo, Clovers</h1>
-          <p className="fs-5">
-            Masukan alamat email dan kata sandi anda untuk dapat mengakses clover hire
-          </p>
+          <p>Masukan alamat email dan kata sandi anda untuk dapat mengakses clover hire</p>
           {this.state.isError && <div className="alert alert-danger">{msg}</div>}
           <Form
             className="formLogin__formInput"
@@ -106,7 +104,6 @@ class FormLogin extends Component {
               />
             </Form.Group>
             <div className="d-flex justify-content-between">
-              <div></div>
               <Link to="/login-recruiters" className="formLogin__forgotPass">
                 Login Sebagai Rekruter
               </Link>

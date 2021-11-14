@@ -129,8 +129,8 @@ function Portofolio(props) {
         dataNewPorto.image.type == "image/png" ||
         dataNewPorto.image.type == "image/jpg"
       ) {
-        if (dataNewPorto.image.size > 1024 * 1024) {
-          toast.error("Ukuran File Terlalu Besar ( Max 1 MB )");
+        if (dataNewPorto.image.size > 1024 * 1024 * 3) {
+          toast.error("Ukuran File Terlalu Besar ( Max 3 MB )");
         } else {
           const formData = new FormData();
 

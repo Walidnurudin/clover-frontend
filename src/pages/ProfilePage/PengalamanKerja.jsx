@@ -133,7 +133,6 @@ function PengalamanKerja() {
   const [deleteTahunKeluar, setDeleteTahunKeluar] = useState("");
 
   const deleteExp = (data) => {
-    console.log(data);
     setDeleteId(data.id);
     setDeletePosisi(data.posisi);
     setDeleteLokasi(data.nama_perusahaan);

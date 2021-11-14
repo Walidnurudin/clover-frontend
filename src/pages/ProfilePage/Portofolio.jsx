@@ -153,10 +153,7 @@ function Portofolio(props) {
         toast.error("Data Harus Berupa Gambar");
       }
     } else {
-      console.log("dataNewPorto");
-      console.log(dataNewPorto);
       delete dataNewPorto.image;
-      console.log(dataNewPorto);
 
       axios.patch(`portfolio/${id}`, dataNewPorto).then((res) => {
         toast.success("Success Update Portofolio");

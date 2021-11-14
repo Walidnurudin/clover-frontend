@@ -7,7 +7,6 @@ import "react-toastify/dist/ReactToastify.css";
 function DataDiri(props) {
   const submitDataDiri = (event) => {
     event.preventDefault();
-    console.log(dataDiriBaru.description.length);
     dataDiriBaru.description.length > 255
       ? toast.error("Deskripsi tidak boleh lebih dari 255 huruf")
       : axios

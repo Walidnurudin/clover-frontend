@@ -50,7 +50,6 @@ function ProfileUser(props) {
   }
 
   const updateImage = () => {
-    console.log(form);
     if (
       form.image.type == "image/jpeg" ||
       form.image.type == "image/png" ||
@@ -66,7 +65,6 @@ function ProfileUser(props) {
             props.getDataUser();
           })
           .catch((err) => {
-            console.log(err);
             toast(err.msg);
           });
       }
@@ -91,7 +89,6 @@ function ProfileUser(props) {
     // updateImage();
   };
   useEffect(() => {
-    console.log(form);
     form.image ? updateImage() : null;
   }, [form]);
 

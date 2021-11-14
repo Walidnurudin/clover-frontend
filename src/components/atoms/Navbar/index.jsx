@@ -7,13 +7,14 @@ import { LogoPurple } from "../../../assets/images";
 import { Link, useHistory } from "react-router-dom";
 
 const Navigation = (props) => {
-  const profileUserHome = props.user ? props.user.userProfile.image : null;
-  const profileUserRecruiter = props.users ? props.users.image : null;
-  const profile = profileUserHome
-    ? profileUserHome
-    : profileUserRecruiter
-    ? profileUserRecruiter
-    : null;
+  // const profileUserHome = props.user ? props.user.userProfile.image : null;
+  // const profileUserRecruiter = props.users ? props.users.image : null;
+  // const profile = profileUserHome
+  //   ? profileUserHome
+  //   : profileUserRecruiter
+  //   ? profileUserRecruiter
+  //   : null;
+
   const path = props.location.pathname.replace("/", "");
   const history = useHistory();
   const [show, setShow] = useState(false);
@@ -82,12 +83,12 @@ const Navigation = (props) => {
               <Envelope size={25} style={{ marginRight: "40px", color: "#9B9B9B" }} />
               <img
                 src={
-                  profile
+                  props.image
                     ? `${
                         process.env.REACT_APP_NAME === "dev"
                           ? process.env.REACT_APP_DEV
                           : process.env.REACT_APP_PROD
-                      }uploads/user/${profile}`
+                      }uploads/user/${props.image}`
                     : Profile
                 }
                 alt="Profile"

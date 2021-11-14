@@ -12,6 +12,7 @@ import { ToastContainer, toast } from "react-toastify";
 import { useHistory } from "react-router-dom";
 import Navbar from "../../components/atoms/Navbar";
 import Footer from "../../components/atoms/Footer";
+import axios from "../../utils/axios";
 
 function EditProfilePerusahaan(props) {
   const inputFile = useRef(null);
@@ -32,6 +33,7 @@ function EditProfilePerusahaan(props) {
 
   const [form, setForm] = useState(initialState);
   const [image, setImage] = useState({ image: "" });
+  const [userProfileNavbar, setUserProfileNavbar] = useState({});
 
   // const [imageTemp, setImageTemp] = useState(null);
 
@@ -76,8 +78,20 @@ function EditProfilePerusahaan(props) {
     });
   };
 
+  const getUserProfileNavbar = () => {
+    axios
+      .get(`user/${localStorage.getItem("id")}`)
+      .then((res) => {
+        setUserProfileNavbar(res.data.data[0]);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
   useEffect(() => {
     getUserProfile();
+    getUserProfileNavbar();
   }, []);
 
   useEffect(() => {
@@ -146,7 +160,7 @@ function EditProfilePerusahaan(props) {
         pauseOnHover
       />
 
-      <Navbar {...userState} {...props} />
+      <Navbar image={userProfileNavbar.image} {...props} />
 
       <div className="edit__profile__perusahaan">
         <div className="edit__profile__perusahaan--purple"></div>

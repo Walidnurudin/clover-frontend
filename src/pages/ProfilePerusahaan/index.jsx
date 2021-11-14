@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import "./index.css";
 import { useHistory } from "react-router";
 import { useSelector, useDispatch } from "react-redux";
@@ -6,25 +6,40 @@ import { Opinion3, mail, ig, phone, linkedin, map } from "../../assets/images";
 import { getUserById } from "../../stores/actions/user";
 import Navbar from "../../components/atoms/Navbar";
 import Footer from "../../components/atoms/Footer";
+import axios from "../../utils/axios";
 
 function ProfilePerusahaan(props) {
   const history = useHistory();
   const userState = useSelector((state) => state.user);
   const dispatch = useDispatch();
 
+  const [userProfile, setUserProfile] = useState({});
+
   useEffect(() => {
     dispatch(getUserById(userState.userProfile.id)).then((res) => {
       // console.log(res);
     });
+    getUserProfile();
   }, []);
 
   const handleClick = () => {
     history.push("/edit-profile-recruiters");
   };
 
+  const getUserProfile = () => {
+    axios
+      .get(`user/${localStorage.getItem("id")}`)
+      .then((res) => {
+        setUserProfile(res.data.data[0]);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
   return (
     <>
-      <Navbar {...userState} {...props} />
+      <Navbar image={userProfile.image} {...props} />
       <div className="profile__perusahaan">
         <div className="container">
           <div className="profile__perusahaan--wrap">

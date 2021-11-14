@@ -8,12 +8,15 @@ import axios from "../../utils/axios";
 import { postHire } from "../../stores/actions/user";
 import { ToastContainer, toast } from "react-toastify";
 import { useHistory } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 function Hire(props) {
   const userId = props.location.state.userId;
+  const userState = useSelector((state) => state.user);
   const history = useHistory();
   const [skills] = useState("Pyhton,Laravel,Golang,JavaScript,PHP,HTML,C++,Kotlin,Swift");
   const [dataUser, setDataUser] = useState({});
+  const [userProfile, setUserProfile] = useState({});
   const [hire, setHire] = useState({
     user_id: userId,
     tujuan_pesan: "",
@@ -57,13 +60,26 @@ function Hire(props) {
     axios.get(`user/${userId}`).then((res) => {
       setDataUser(res.data.data[0]);
     });
+
+  const getUserProfile = () => {
+    axios
+      .get(`user/${localStorage.getItem("id")}`)
+      .then((res) => {
+        setUserProfile(res.data.data[0]);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
   useEffect(() => {
     getDataUser();
+    getUserProfile();
   }, []);
 
   return (
     <>
-      <Navbar {...props} />
+      <Navbar image={userProfile.image} {...props} />
       <main className="hire__main">
         <section className="container">
           <ToastContainer />

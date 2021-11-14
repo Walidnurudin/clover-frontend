@@ -81,7 +81,15 @@ const Navigation = (props) => {
               <Bell size={25} style={{ marginRight: "40px", color: "#9B9B9B" }} />
               <Envelope size={25} style={{ marginRight: "40px", color: "#9B9B9B" }} />
               <img
-                src={profile ? `http://localhost:3001/uploads/user/${profile}` : Profile}
+                src={
+                  profile
+                    ? `${
+                        process.env.REACT_APP_NAME === "dev"
+                          ? process.env.REACT_APP_DEV
+                          : process.env.REACT_APP_PROD
+                      }uploads/user/${profile}`
+                    : Profile
+                }
                 alt="Profile"
                 className="user__pic"
                 onClick={handleProfileMenu}

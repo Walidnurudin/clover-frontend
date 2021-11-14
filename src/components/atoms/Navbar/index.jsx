@@ -7,6 +7,14 @@ import { LogoPurple } from "../../../assets/images";
 import { Link, useHistory } from "react-router-dom";
 
 const Navigation = (props) => {
+  const profileUserHome = props.user ? props.user.userProfile.image : null;
+  const profileUserRecruiter = props.users ? props.users.image : null;
+  const profile = profileUserHome
+    ? profileUserHome
+    : profileUserRecruiter
+    ? profileUserRecruiter
+    : null;
+  const path = props.location.pathname.replace("/", "");
   const history = useHistory();
   const [show, setShow] = useState(false);
   const [menuOptionLogged, setMenuOptionLogged] = useState(false);
@@ -56,18 +64,45 @@ const Navigation = (props) => {
               <img src={LogoPurple} alt="Clover Hire" className="logo__purple" />
             </Link>
             {token ? (
-              <Link to="/home" className="menu__home text-decoration-none text-dark fw-bold">
-                Home
-              </Link>
+              role === "Perekrut" ? (
+                <Link to="/home" className="menu__home text-decoration-none text-dark fw-bold">
+                  Home
+                </Link>
+              ) : null
             ) : null}
           </div>
 
-          {token ? (
+          {(token && path === "home") ||
+          path === "profile" ||
+          path === "profile-recruiters" ||
+          path === "hire" ||
+          path === "edit-profile-recruiters" ? (
             <div className="navbar__item--right">
               <Bell size={25} style={{ marginRight: "40px", color: "#9B9B9B" }} />
               <Envelope size={25} style={{ marginRight: "40px", color: "#9B9B9B" }} />
-              <img src={Profile} alt="" className="user__pic" onClick={handleProfileMenu} />
+              <img
+                src={profile ? `http://localhost:3001/uploads/user/${profile}` : Profile}
+                alt="Profile"
+                className="user__pic"
+                onClick={handleProfileMenu}
+              />
             </div>
+          ) : token && path !== "home" ? (
+            <button
+              onClick={handleToProfile}
+              style={{
+                right: "50px",
+                borderRadius: "4px",
+                backgroundColor: "#5e50a1",
+                border: "none",
+                color: "#fff",
+                fontWeight: "700",
+                fontSize: "14px",
+                padding: "12px 24px"
+              }}
+            >
+              Profil
+            </button>
           ) : (
             <div className="navbar__item--right">
               <Button className="button__signIn" onClick={handleMenuLogged}>
@@ -78,21 +113,6 @@ const Navigation = (props) => {
               </Button>
             </div>
           )}
-          {/* <button
-            onClick={handleToProfile}
-            style={{
-              right: "50px",
-              borderRadius: "4px",
-              backgroundColor: "#5e50a1",
-              border: "none",
-              color: "#fff",
-              fontWeight: "700",
-              fontSize: "14px",
-              padding: "12px 24px"
-            }}
-          >
-            Profil
-          </button> */}
         </Container>
       </Navbar>
       {!menuOptionLogged ? null : (

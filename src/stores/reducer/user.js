@@ -80,7 +80,9 @@ export default function user(state = initialState, action) {
         ...state,
         isLoading: true,
         isError: true,
-        message: action.payload.data.msg
+        users: action.payload.response.data.data,
+        message: action.payload.response.data.msg,
+        pageInfo: action.payload.response.data.pagination
       };
     }
     case "SORTSKILL_PENDING": {

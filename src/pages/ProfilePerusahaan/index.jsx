@@ -7,15 +7,14 @@ import { getUserById } from "../../stores/actions/user";
 import Navbar from "../../components/atoms/Navbar";
 import Footer from "../../components/atoms/Footer";
 
-function ProfilePerusahaan() {
+function ProfilePerusahaan(props) {
   const history = useHistory();
-
   const userState = useSelector((state) => state.user);
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(getUserById(userState.userProfile.id)).then((res) => {
-      console.log(res);
+      // console.log(res);
     });
   }, []);
 
@@ -25,7 +24,7 @@ function ProfilePerusahaan() {
 
   return (
     <>
-      <Navbar />
+      <Navbar {...userState} {...props} />
       <div className="profile__perusahaan">
         <div className="container">
           <div className="profile__perusahaan--wrap">
@@ -36,7 +35,11 @@ function ProfilePerusahaan() {
               <img
                 src={
                   userState.users.image !== null
-                    ? `http://localhost:3001/uploads/user/${userState.users.image}`
+                    ? `${
+                        process.env.REACT_APP_NAME === "dev"
+                          ? process.env.REACT_APP_DEV
+                          : process.env.REACT_APP_PROD
+                      }uploads/user/${userState.users.image}`
                     : Opinion3
                 }
                 alt="profile"

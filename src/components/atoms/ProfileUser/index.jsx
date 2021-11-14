@@ -82,7 +82,7 @@ function ProfileUser(props) {
                       process.env.REACT_APP_NAME === "dev"
                         ? process.env.REACT_APP_DEV
                         : process.env.REACT_APP_PROD
-                    }/uploads/user/${image}`
+                    }uploads/user/${image}`
                   : userImage
               }
               alt=""

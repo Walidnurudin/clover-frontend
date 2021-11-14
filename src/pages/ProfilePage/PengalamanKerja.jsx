@@ -225,7 +225,7 @@ function PengalamanKerja() {
 
           <div className="col-6">
             <label htmlFor="name" className="d-blok col-12 mt-4">
-              Taggal Masuk
+              Tanggal Masuk
             </label>
             <input
               // required
@@ -240,7 +240,7 @@ function PengalamanKerja() {
 
           <div className="col-6">
             <label htmlFor="name" className="d-blok col-12 mt-4">
-              Taggal Keluar
+              Tanggal Keluar
             </label>
             <input
               // required

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Cloud, Expand, Photo } from "../../assets/images/ProfilePageImage";
 import axios from "../../utils/axios";
+import { Modal, Button } from "react-bootstrap";
 
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -104,7 +105,22 @@ function Portofolio(props) {
     setDataNewPorto({ ...dataNewPorto, image: image });
   }, [image]);
 
+  const [show, setShow] = useState(false);
+
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
+
+  const [portoName, setPortoName] = useState("");
+  const [delPortoId, setDelPortoId] = useState("");
+
+  const confirmDelete = (data) => {
+    setShow(true);
+    setDelPortoId(data.id);
+    setPortoName(data.nama_aplikasi);
+  };
+
   const deletePorto = (data) => {
+    setShow(false);
     axios
       .delete(`portfolio/${data}`)
       .then((res) => {
@@ -172,6 +188,31 @@ function Portofolio(props) {
   const { link_repository, nama_aplikasi, id } = dataNewPorto;
   return (
     <>
+      <Modal show={show} onHide={handleClose}>
+        <Modal.Header className="justify-content-center">
+          <Modal.Title>Konfirmasi Delete Portofolio</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <div className="text-center">Hapus Portofolio {portoName}?</div>
+        </Modal.Body>
+        <Modal.Footer className="justify-content-evenly">
+          <div style={{ width: "40%" }}>
+            <Button className="ack-btn-2" onClick={handleClose}>
+              Close
+            </Button>
+          </div>
+          <div style={{ width: "40%" }}>
+            <Button
+              className="ack-btn-prim"
+              style={{ width: "40%" }}
+              onClick={() => deletePorto(delPortoId)}
+            >
+              Delete
+            </Button>
+          </div>
+        </Modal.Footer>
+      </Modal>
+
       <div className="user-profile__porto-exp mb-4 ack-bg-white">
         <p className="p-4 updateForm__header margin-reset ack-fw-600 ack-fsize-22">Portofolio</p>
         <form
@@ -271,7 +312,7 @@ function Portofolio(props) {
                   UPDATE
                 </button>
                 <button
-                  onClick={() => deletePorto(item.id)}
+                  onClick={() => confirmDelete(item)}
                   className="ack-btn-2 text-center p-2 my-1"
                 >
                   DELETE

@@ -64,6 +64,7 @@ function ProfileUser(props) {
           .then((res) => {
             toast.success(res.data.msg);
             props.getDataUser();
+            props.getUserProfile();
           })
           .catch((err) => {
             console.log(err);

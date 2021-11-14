@@ -19,6 +19,7 @@ import Cloud from "./cloud.png";
 import Expand from "./expand.png";
 import Photo from "./photo.png";
 import Eye from "./icon/eye.png";
+import defaultImage from "./default.jpg";
 
 export {
   Eye,
@@ -41,5 +42,6 @@ export {
   Porto6,
   Github,
   Gitlab,
-  Suitcase
+  Suitcase,
+  defaultImage
 };

@@ -120,6 +120,7 @@ function EditProfilePerusahaan(props) {
       dispatch(updateUserImage(formData))
         .then((res) => {
           getUserProfile();
+          getUserProfileNavbar();
           notifSuccess("Berhasil merubah gambar");
         })
         .catch((err) => {

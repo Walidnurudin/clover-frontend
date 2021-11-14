@@ -89,6 +89,7 @@ function ProfilePage(props) {
                 setShow={setShow}
                 dataUser={dataUser}
                 getDataUser={getDataUser}
+                getUserProfile={getUserProfile}
                 getPortoFolioUser={getPortoFolioUser}
                 role={role}
                 userId={user_id}

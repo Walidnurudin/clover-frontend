@@ -92,8 +92,7 @@ function Hire(props) {
               <div className="hire__description">
                 <h3 className="hire__title-worker">Hubungi {dataUser.nama}</h3>
                 <p className="hire__title-worker-paragraph">
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit. In euismod ipsum et dui
-                  rhoncus auctor.
+                  Calon pekerja akan menerima email rekrutmen yang anda tuliskan.
                 </p>
               </div>
               <div className="hire__form-recruiter">

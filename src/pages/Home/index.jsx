@@ -21,7 +21,7 @@ import {
   sortLocationUsers,
   sortFullTimeJobUsers
 } from "../../stores/actions/user";
-import { connect } from "react-redux";
+import { connect, useSelector } from "react-redux";
 import { toast, ToastContainer } from "react-toastify";
 import { useHistory } from "react-router-dom";
 
@@ -176,7 +176,7 @@ function Home(props) {
       {!show ? (
         <>
           <div className="d-none d-md-block">
-            <Navbar {...user} {...props} />
+            <Navbar {...props} />
           </div>
           <section className="homepage__container homepage__spacing homepage__banner">
             <section className="d-block d-md-none homepage__topmenu">
@@ -281,6 +281,8 @@ function Home(props) {
                   //   temp = parseMoreSkills;
                   // }
                   // const moreSkills = temp === undefined ? null : temp.split();
+                  // console.log(moreSkills);
+                  // console.log(skillAsli);
                   return (
                     <div className="homepage__list-users-card" key={idx}>
                       <img
@@ -294,13 +296,14 @@ function Home(props) {
                             : "https://www.a1hosting.net/wp-content/themes/arkahost/assets/images/default.jpg"
                         }`}
                         alt={`Profile ${users.nama}`}
-                        className="homepage__list-users-card-image img-fluid rounded-circle"
+                        className="homepage__list-users-card-image rounded-circle"
                       />
                       <div className="homepage__list-users-card-body">
                         <div className="homepage__list-users-card-body-left">
                           <h5>{users.nama}</h5>
                           <span>
                             {users.jobDesk ? users.jobDesk : "-"}
+                            {users.jobDesk || users.jobStatus === null ? "-" : ""}
                             {users.jobStatus ? users.jobStatus : null}
                           </span>
                           <span>{users.domisili ? users.domisili : "-"}</span>
@@ -337,15 +340,15 @@ function Home(props) {
             </section>
             <section className="homepage__spacing homepage__pagination">
               <Pagination
-                containerClassName="homepage__pagination"
                 previousLabel={"<"}
                 nextLabel={">"}
                 pageCount={totalPage}
                 onPageChange={changePagination}
+                containerClassName="homepage__pagination"
                 activeClassName="homepage__pagination-active"
                 previousClassName="homepage__pagination-previous"
                 nextClassName="homepage__pagination-next"
-                // pageClassName="homepage__pagination-page"
+                pageClassName="homepage__pagination-previous"
               />
             </section>
           </section>
@@ -388,6 +391,13 @@ function Home(props) {
             <div className="homepage__mobile-navigation-list-users-container">
               {user.length > 0 && props.user.users !== null ? (
                 user.map((users) => {
+                  const skillAsli = users.skill.map((value) => value);
+                  let temp;
+                  if (users.skill.length > 3) {
+                    const parseMoreSkills = users.skill.pop();
+                    temp = parseMoreSkills;
+                  }
+                  const moreSkills = temp === undefined ? null : temp.split();
                   return (
                     <div
                       className={`${
@@ -412,7 +422,7 @@ function Home(props) {
                           {users.jobDesk ? users.jobDesk : "-"}
                         </p>
 
-                        <div className="homepage__mobile-navigation-list-users-card-body-list-skills">
+                        <div className="homepage__mobile-navigation-list-users-card-body-list-skills d-flex r">
                           {users.skill.map((skill, idx) => (
                             <div
                               className="homepage__mobile-navigation-list-users-card-body-skills"
@@ -421,6 +431,9 @@ function Home(props) {
                               {skill}
                             </div>
                           ))}
+                          <p className="homepage__mobile-navigation-list-users-skill-more">
+                            {users.skill.length > 3 ? `${skillAsli.length} +` : null}
+                          </p>
                         </div>
                       </div>
                     </div>

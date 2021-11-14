@@ -5,21 +5,24 @@ import { Profile } from "../../../assets/images";
 import "./index.css";
 import { LogoPurple } from "../../../assets/images";
 import { Link, useHistory } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 const Navigation = (props) => {
+  const userState = useSelector((state) => state.user);
   const profileUserHome = props.user ? props.user.userProfile.image : null;
   const profileUserRecruiter = props.users ? props.users.image : null;
   const profile = profileUserHome
-    ? profileUserHome
+    ? profileUserRecruiter
     : profileUserRecruiter
     ? profileUserRecruiter
     : null;
   const path = props.location.pathname.replace("/", "");
   const history = useHistory();
   const [show, setShow] = useState(false);
-  const [menuOptionLogged, setMenuOptionLogged] = useState(false);
   const token = localStorage.getItem("token");
   const role = localStorage.getItem("role");
+
+  console.log(show);
 
   const handleProfileMenu = () => {
     if (show === false) {
@@ -36,15 +39,10 @@ const Navigation = (props) => {
     history.push("/");
   };
 
-  const handleMenuLogged = () => {
-    if (menuOptionLogged === false) {
-      setMenuOptionLogged(true);
-    } else {
-      setMenuOptionLogged(false);
-    }
+  const linkToLogged = () => {
+    history.push("/login-workers");
   };
-
-  const handleLinkRegist = () => {
+  const linkToRegist = () => {
     history.push("/register-workers");
   };
 
@@ -105,36 +103,19 @@ const Navigation = (props) => {
             </button>
           ) : (
             <div className="navbar__item--right">
-              <Button className="button__signIn" onClick={handleMenuLogged}>
+              <Button className="button__signIn" onClick={linkToLogged}>
                 Masuk
               </Button>
-              <Button className="button__signUp" onClick={handleLinkRegist}>
+              <Button className="button__signUp" onClick={linkToRegist}>
                 Daftar
               </Button>
             </div>
           )}
         </Container>
       </Navbar>
-      {!menuOptionLogged ? null : (
-        <div
-          className="w-25 position-absolute p-4"
-          style={{
-            right: "50px",
-            borderRadius: "24px",
-            backgroundColor: "#5e50a1"
-          }}
-        >
-          <Link to="/login-workers" className="d-block mb-3 text-decoration-none text-white">
-            Masuk Sebagai <b>Pekerja</b>
-          </Link>
-          <hr />
-          <Link to="/login-recruiters" className="d-block mb-3 text-decoration-none text-white">
-            Masuk Sebagai <b>Perekrut</b>
-          </Link>
-        </div>
-      )}
+
       {!show ? null : (
-        <div className="bg-light position-absolute w-25 p-2" style={{ right: "0px" }}>
+        <div className="bg-light position-absolute w-25 p-2">
           <div>
             {localStorage.getItem("role") === "Pekerja" ? (
               <Link

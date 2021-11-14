@@ -73,9 +73,9 @@
   padding: 24px;
 }
 .homepage__list-users-card-image {
-  width: 100px;
-  height: 100px;
-  object-fit: contain;
+  width: 150px;
+  height: 135px;
+  object-fit: cover;
 }
 .homepage__list-users-card-body {
   display: flex;
@@ -374,11 +374,14 @@
     display: flex;
     border-radius: 4px;
   }
+  .homepage__mobile-navigation-list-users-skill-more {
+    margin-top: 20px;
+  }
   .homepage__mobile-navigation-list-users-card-body-skills {
     background-color: #fbb017;
     text-align: center;
     border-radius: 4px;
-    margin: 0px 10px;
+    margin: 20px 10px;
     color: #ffffff;
     font-weight: 600;
     font-size: 10px;

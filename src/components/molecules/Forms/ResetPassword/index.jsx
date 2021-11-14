@@ -36,8 +36,8 @@ const ResetPassword = (props) => {
         <Image src={LogoPurple} className="logo__mobile" />
         <h1>Reset password</h1>
         <p>
-          Enter your user accounts verified email address and we will send you a password reset
-          link.
+          Masukkan alamat email anda yang sudah diverifikasi dan kami akan mengirimkan link reset
+          password.
         </p>
         <ToastContainer />
         <Form className="formResetPassword__formInput" onSubmit={handleCallbackForgotPassword}>

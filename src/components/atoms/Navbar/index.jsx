@@ -33,7 +33,6 @@ const Navigation = (props) => {
   };
 
   const handleLogout = () => {
-    setMenuOptionLogged(false);
     setShow(false);
     localStorage.clear();
     history.push("/");
@@ -115,7 +114,7 @@ const Navigation = (props) => {
       </Navbar>
 
       {!show ? null : (
-        <div className="bg-light position-absolute w-25 p-2">
+        <div className="bg-light position-absolute w-25 p-2" style={{ zIndex: 1, right: "0px" }}>
           <div>
             {localStorage.getItem("role") === "Pekerja" ? (
               <Link

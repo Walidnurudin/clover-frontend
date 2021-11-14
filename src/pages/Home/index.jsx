@@ -96,7 +96,6 @@ function Home(props) {
       setLoading(true);
 
       const response = await props.sortSkillUsers(role, sort, page, limit);
-      console.log(response);
       setLoading(false);
       setUser(response.value.data.data);
       setTotalPage(response.value.data.pagination.totalPage);

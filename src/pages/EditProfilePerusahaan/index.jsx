@@ -97,7 +97,6 @@ function EditProfilePerusahaan() {
       }
 
       dispatch(updateUserImage(formData)).then((res) => {
-        console.log("UPLOAD IMAGE", res);
         getUserProfile();
       });
       notifSuccess("Berhasil merubah gambar");
@@ -113,10 +112,7 @@ function EditProfilePerusahaan() {
 
   const handleSubmit = () => {
     dispatch(updateUser(form)).then((res) => {
-      console.log(res);
       dispatch(getUserById(userState.userProfile.id)).then((res) => {
-        console.log(res);
-
         notifSuccess("Berhasil Merubah Data");
         clearState();
       });

@@ -51,7 +51,7 @@ const FormConfirmPassword = (props) => {
       <div className="formConfirmPassword">
         <Image src={LogoPurple} className="logo__mobile" />
         <h1>Halo, Clovers</h1>
-        <p>You need to change your password to activate your account</p>
+        <p>Ubah password anda untuk mengaktifkan akun anda</p>
         <ToastContainer />
         <Form className="formConfirmPassword__formInput" onSubmit={handleResetPassword}>
           <Form.Group

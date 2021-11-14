@@ -16,6 +16,7 @@ import Footer from "../../components/atoms/Footer";
 import Hire from "../Hire";
 
 function ProfilePage(props) {
+  console.log("nav profile comp=>", props);
   const user_id =
     localStorage.getItem("role") === "Pekerja"
       ? localStorage.getItem("id")
@@ -40,10 +41,15 @@ function ProfilePage(props) {
     });
 
   const getPortoFolioUser = () => {
-    axios.get(`portfolio/${user_id}`).then((res) => {
-      // console.log(res);
-      setDataPortoUser(res.data.data);
-    });
+    axios
+      .get(`portfolio/${user_id}`)
+      .then((res) => {
+        // console.log(res);
+        setDataPortoUser(res.data.data);
+      })
+      .catch((err) => {
+        setDataPortoUser([]);
+      });
   };
 
   useEffect(() => {

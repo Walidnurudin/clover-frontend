@@ -30,7 +30,7 @@ function Opinion() {
       <div className="opinion__section">
         <div className="container">
           <h1 className="opinion__section--title open-sans-600 text-center">
-            Their opinion about peworld
+            Their opinion about clover hire
           </h1>
           <Carousel responsive={responsive}>
             <div className="opinion__section--div">
@@ -39,8 +39,8 @@ function Opinion() {
                 <h5 className="open-sans-600">Harry Styles</h5>
                 <p className="mb-3 text-secondary">Web Developer</p>
                 <p className="opinion__section--div--desc open-sans-400">
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit. In euismod ipsum et dui
-                  rhoncus auctor.
+                  Saat saya mencoba melamar pekerjaan melalui clover-hire, saya mendapatkan
+                  panggilan di 2 perusahaan yang berbeda.
                 </p>
               </div>
             </div>
@@ -50,8 +50,8 @@ function Opinion() {
                 <h5 className="open-sans-600">Niall Horan</h5>
                 <p className="mb-3 text-secondary">Web Developer</p>
                 <p className="opinion__section--div--desc open-sans-400">
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit. In euismod ipsum et dui
-                  rhoncus auctor.
+                  saya mendapat informasi kalau cari kerjaan lewat clover-hire saja, karena
+                  clover-hire sudah memiliki banyak partner perusahaan besar/sedang.
                 </p>
               </div>
             </div>
@@ -61,8 +61,7 @@ function Opinion() {
                 <h5 className="open-sans-600">Louis Tomlinson</h5>
                 <p className="mb-3 text-secondary">Web Developer</p>
                 <p className="opinion__section--div--desc open-sans-400">
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit. In euismod ipsum et dui
-                  rhoncus auctor.
+                  Mengapply lamaran kerjanya lebih mudah.
                 </p>
               </div>
             </div>
@@ -72,8 +71,8 @@ function Opinion() {
                 <h5 className="open-sans-600">Harry Styles</h5>
                 <p className="mb-3 text-secondary">Web Developer</p>
                 <p className="opinion__section--div--desc open-sans-400">
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit. In euismod ipsum et dui
-                  rhoncus auctor.
+                  Saya pernah mendaftar di beberapa situs untuk melamar kerjaan, tapi ternyata
+                  rezeki saya berada di clover-hire dan sekarang saya sudah mendapatkan kerjaan.
                 </p>
               </div>
             </div>

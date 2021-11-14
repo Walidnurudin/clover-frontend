@@ -13,7 +13,7 @@ import { useHistory } from "react-router-dom";
 import Navbar from "../../components/atoms/Navbar";
 import Footer from "../../components/atoms/Footer";
 
-function EditProfilePerusahaan() {
+function EditProfilePerusahaan(props) {
   const inputFile = useRef(null);
   const history = useHistory();
   const userState = useSelector((state) => state.user);
@@ -146,7 +146,7 @@ function EditProfilePerusahaan() {
         pauseOnHover
       />
 
-      <Navbar />
+      <Navbar {...props} />
 
       <div className="edit__profile__perusahaan">
         <div className="edit__profile__perusahaan--purple"></div>

@@ -95,7 +95,18 @@ function DataDiri(props) {
             className="p-2 col-12"
             value={jobDesk ? jobDesk : ""}
           />
-
+          <label htmlFor="" className="d-blok col-12 mt-4">
+            Job Status
+          </label>
+          <select
+            name="jobStatus"
+            className="p-2 col-12"
+            onChange={(event) => handleChangeData(event)}
+            id=""
+          >
+            <option value="Freelance">Freelance</option>
+            <option value="Fulltime">Fulltime</option>
+          </select>
           <label htmlFor="name" className="d-blok col-12 mt-4">
             Domisili
           </label>

@@ -7,15 +7,14 @@ import { getUserById } from "../../stores/actions/user";
 import Navbar from "../../components/atoms/Navbar";
 import Footer from "../../components/atoms/Footer";
 
-function ProfilePerusahaan() {
+function ProfilePerusahaan(props) {
   const history = useHistory();
-
   const userState = useSelector((state) => state.user);
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(getUserById(userState.userProfile.id)).then((res) => {
-      console.log(res);
+      // console.log(res);
     });
   }, []);
 
@@ -25,7 +24,7 @@ function ProfilePerusahaan() {
 
   return (
     <>
-      <Navbar />
+      <Navbar {...userState} {...props} />
       <div className="profile__perusahaan">
         <div className="container">
           <div className="profile__perusahaan--wrap">

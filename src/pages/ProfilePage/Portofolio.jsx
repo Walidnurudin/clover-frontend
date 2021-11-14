@@ -34,10 +34,15 @@ function Portofolio(props) {
   const [dataPortoUser, setDataPortoUser] = useState([]);
 
   const getPortoFolioUser = () => {
-    axios.get(`portfolio/${localStorage.getItem("id")}`).then((res) => {
-      // console.log(res);
-      setDataPortoUser(res.data.data);
-    });
+    axios
+      .get(`portfolio/${localStorage.getItem("id")}`)
+      .then((res) => {
+        // console.log(res);
+        setDataPortoUser(res.data.data);
+      })
+      .catch((err) => {
+        setDataPortoUser([]);
+      });
   };
 
   useEffect(() => {

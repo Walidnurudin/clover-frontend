@@ -57,7 +57,7 @@ function LandingPage(props) {
               <img src={LandingPage2} alt="image" />
             </div>
             <div className="col-12 col-md-6 order-1 order-md-2 align-self-center landing__page--2--desc mb-5">
-              <h1 className="open-sans-600">Kenapa harus mencari talent di Clover-hire</h1>
+              <h1 className="open-sans-600">Kenapa harus mencari talent di clover hire</h1>
               <div className="open-sans-400 d-flex flex-column">
                 <span className="mb-4">
                   <img src={TickPurple} alt="checklist" width="24px" className="me-4" />

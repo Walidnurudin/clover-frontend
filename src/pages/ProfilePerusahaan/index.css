@@ -29,6 +29,13 @@
   position: absolute;
 }
 
+.profile__perusahaan--main--img {
+  border-radius: 100%;
+  object-fit: cover;
+  width: 150px;
+  height: 150px;
+}
+
 .profile__perusahaan--main img {
   /* border-radius: 100%; */
 }

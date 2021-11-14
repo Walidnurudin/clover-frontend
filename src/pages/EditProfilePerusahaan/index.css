@@ -26,6 +26,13 @@
   padding: 30px;
 }
 
+.edit__profile__perusahaan--profile--img {
+  border-radius: 100%;
+  object-fit: cover;
+  width: 150px;
+  height: 150px;
+}
+
 .edit__profile__perusahaan--simpan {
   background: #5e50a1 !important;
   border-color: #5e50a1 !important;

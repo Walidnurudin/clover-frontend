@@ -44,7 +44,7 @@ function ProfilePerusahaan() {
                     : Opinion3
                 }
                 alt="profile"
-                width="150px"
+                className="profile__perusahaan--main--img"
               />
               <h5 className="open-sans-600 mt-3">{userState.users.nama}</h5>
               <p className="mb-3">{userState.users.bidangPerusahaan || "-"}</p>
@@ -58,25 +58,41 @@ function ProfilePerusahaan() {
               </button>
               <div className="d-flex justify-content-center">
                 <div className="d-flex flex-column">
-                  <span className="d-flex gap-3 mb-3">
-                    <img src={mail} alt="mail" width="24px" />
-                    <span className="text-secondary">{userState.users.email || "-"}</span>
-                  </span>
+                  {userState.users.email ? (
+                    <span className="d-flex gap-3 mb-3">
+                      <img src={mail} alt="mail" width="24px" />
+                      <span className="text-secondary">{userState.users.email}</span>
+                    </span>
+                  ) : (
+                    <div></div>
+                  )}
 
-                  <span className="d-flex gap-3 mb-3">
-                    <img src={ig} alt="instagram" width="24px" />
-                    <span className="text-secondary">{userState.users.instagram || "-"}</span>
-                  </span>
+                  {userState.users.instagram ? (
+                    <span className="d-flex gap-3 mb-3">
+                      <img src={ig} alt="instagram" width="24px" />
+                      <span className="text-secondary">{userState.users.instagram}</span>
+                    </span>
+                  ) : (
+                    <div></div>
+                  )}
 
-                  <span className="d-flex gap-3 mb-3">
-                    <img src={phone} alt="phone" width="24px" />
-                    <span className="text-secondary">{userState.users.noHandphone || "-"}</span>
-                  </span>
+                  {userState.users.noHandphone ? (
+                    <span className="d-flex gap-3 mb-3">
+                      <img src={phone} alt="phone" width="24px" />
+                      <span className="text-secondary">{userState.users.noHandphone}</span>
+                    </span>
+                  ) : (
+                    <div></div>
+                  )}
 
-                  <span className="d-flex gap-3 mb-3">
-                    <img src={linkedin} alt="linkedin" width="24px" />
-                    <span className="text-secondary">{userState.users.linkedin || "-"}</span>
-                  </span>
+                  {userState.users.linkedin ? (
+                    <span className="d-flex gap-3 mb-3">
+                      <img src={linkedin} alt="linkedin" width="24px" />
+                      <span className="text-secondary">{userState.users.linkedin}</span>
+                    </span>
+                  ) : (
+                    <div></div>
+                  )}
                 </div>
               </div>
             </div>

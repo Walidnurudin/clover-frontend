@@ -9,27 +9,35 @@ import {
   getUserProfile
 } from "../../stores/actions/user";
 import { ToastContainer, toast } from "react-toastify";
+import { useHistory } from "react-router-dom";
 import Navbar from "../../components/atoms/Navbar";
 import Footer from "../../components/atoms/Footer";
 
-const initialState = {
-  nama: "",
-  bidangPerusahaan: "",
-  domisili: "",
-  description: "",
-  email: "",
-  instagram: "",
-  noHandphone: "",
-  linkedin: ""
-};
-
 function EditProfilePerusahaan() {
-  const [form, setForm] = useState(initialState);
-  const [image, setImage] = useState(null);
-
   const inputFile = useRef(null);
+  const history = useHistory();
   const userState = useSelector((state) => state.user);
   const dispatch = useDispatch();
+
+  const initialState = {
+    nama: userState.users.nama,
+    bidangPerusahaan: userState.users.bidangPerusahaan,
+    domisili: userState.users.domisili,
+    description: userState.users.description,
+    email: userState.users.email,
+    instagram: userState.users.instagram,
+    noHandphone: userState.users.noHandphone,
+    linkedin: userState.users.linkedin
+  };
+
+  const [form, setForm] = useState(initialState);
+  const [image, setImage] = useState({ image: "" });
+
+  // const [imageTemp, setImageTemp] = useState(null);
+
+  const handleKembali = () => {
+    history.push("/profile-recruiters");
+  };
 
   const clearState = () => {
     setForm({ ...initialState });
@@ -72,15 +80,14 @@ function EditProfilePerusahaan() {
     getUserProfile();
   }, []);
 
-  const handleFile = (e) => {
-    setImage({
-      image: e.target.files[0]
-    });
-  };
+  useEffect(() => {
+    updateImage();
+    console.log("UPDATE IMAGE");
+  }, [image]);
 
   const updateImage = () => {
     if (image === null || !image.image) {
-      notifError("Masukan gambar");
+      // notifError("Masukan gambar");
     } else {
       const formData = new FormData();
       for (const data in image) {
@@ -96,10 +103,16 @@ function EditProfilePerusahaan() {
         console.log(data[0] + ", " + data[1]);
       }
 
-      dispatch(updateUserImage(formData)).then((res) => {
-        getUserProfile();
-      });
-      notifSuccess("Berhasil merubah gambar");
+      dispatch(updateUserImage(formData))
+        .then((res) => {
+          getUserProfile();
+          notifSuccess("Berhasil merubah gambar");
+        })
+        .catch((err) => {
+          if (userState.isError) {
+            notifError(userState.message);
+          }
+        });
     }
   };
 
@@ -114,7 +127,7 @@ function EditProfilePerusahaan() {
     dispatch(updateUser(form)).then((res) => {
       dispatch(getUserById(userState.userProfile.id)).then((res) => {
         notifSuccess("Berhasil Merubah Data");
-        clearState();
+        // clearState();
       });
     });
   };
@@ -155,7 +168,7 @@ function EditProfilePerusahaan() {
                           : Opinion3
                       }
                       alt="profile"
-                      width="150px"
+                      className="edit__profile__perusahaan--profile--img"
                     />
 
                     <div className="mt-3" style={{ cursor: "pointer" }} onClick={onButtonClick}>
@@ -167,17 +180,21 @@ function EditProfilePerusahaan() {
                       type="file"
                       id="file"
                       name="image"
-                      onChange={handleFile}
+                      onChange={(e) =>
+                        setImage({
+                          image: e.target.files[0]
+                        })
+                      }
                       ref={inputFile}
-                      // style={{ display: "none" }}
+                      style={{ display: "none" }}
                     />
 
-                    <button
+                    {/* <button
                       className="btn open-sans-700 mt-3 edit__profile__perusahaan--simpan"
                       onClick={updateImage}
                     >
                       Update Image
-                    </button>
+                    </button> */}
                   </div>
 
                   <h5 className="open-sans-600 mt-3">{userState.users.nama}</h5>
@@ -203,9 +220,9 @@ function EditProfilePerusahaan() {
                   </button>
                   <button
                     className="btn open-sans-700 mt-2 edit__profile__perusahaan--batal"
-                    onClick={clearState}
+                    onClick={handleKembali}
                   >
-                    Batal
+                    Kembali
                   </button>
                 </div>
               </div>

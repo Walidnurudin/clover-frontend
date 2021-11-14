@@ -106,7 +106,9 @@ class FormLogin extends Component {
               />
             </Form.Group>
             <div className="d-flex justify-content-between">
-              <div></div>
+              <Link to="/login-recruiters" className="formLogin__forgotPass">
+                Login Sebagai Rekruter
+              </Link>
               <Link to="/reset-password" className="formLogin__forgotPass">
                 Lupa kata sandi?
               </Link>

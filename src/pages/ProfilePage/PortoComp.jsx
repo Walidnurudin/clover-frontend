@@ -1,20 +1,5 @@
 import React from "react";
-import {
-  userImage,
-  Porto1,
-  Porto2,
-  Porto3,
-  Porto4,
-  Porto5,
-  Porto6,
-  MapPin,
-  Phone,
-  Mail,
-  Instagram,
-  Github,
-  Gitlab,
-  Suitcase
-} from "../../assets/images/ProfilePageImage";
+import { Link } from "react-router-dom";
 
 function PortoComp(props) {
   // console.log(props.dataPortoUser);
@@ -34,7 +19,9 @@ function PortoComp(props) {
             }images/${item.image}`}
             alt=""
           />
-          <p className="ack-fsize-14 ack-fw-400 my-2">{item.nama_aplikasi}</p>
+          <Link to={item.link_repository} style={{ textDecoration: "none", color: "black" }}>
+            <p className="ack-fsize-14 ack-fw-400 my-2">{item.nama_aplikasi}</p>
+          </Link>
         </div>
       ))}
     </div>

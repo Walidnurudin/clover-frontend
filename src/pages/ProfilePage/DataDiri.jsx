@@ -7,17 +7,20 @@ import "react-toastify/dist/ReactToastify.css";
 function DataDiri(props) {
   const submitDataDiri = (event) => {
     event.preventDefault();
-    axios
-      .patch("user", dataDiriBaru)
-      .then((res) => {
-        toast.success(res.data.msg);
-        props.getDataUser();
-      })
-      .catch(
-        (err) => toast.error(err.data.msg)
+    console.log(dataDiriBaru.description.length);
+    dataDiriBaru.description.length > 255
+      ? toast.error("Deskripsi tidak boleh lebih dari 255 huruf")
+      : axios
+          .patch("user", dataDiriBaru)
+          .then((res) => {
+            toast.success(res.data.msg);
+            props.getDataUser();
+          })
+          .catch(
+            (err) => toast.error(err.msg)
 
-        // window.alert(err)
-      );
+            // window.alert(err)
+          );
   };
 
   const [dataDiriBaru, setDataDiriBaru] = useState({});
@@ -67,7 +70,6 @@ function DataDiri(props) {
 
   return (
     <>
-      <ToastContainer></ToastContainer>
       <div className="user-profile__porto-exp mb-4 ack-bg-white">
         <p className="p-4 updateForm__header margin-reset ack-fw-600 ack-fsize-22">Data Diri</p>
         <form className="px-4 formDataDiri" onSubmit={(event) => submitDataDiri(event)}>

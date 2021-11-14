@@ -39,7 +39,8 @@ function ExpComp() {
             {moment(item.tanggal_keluar).format("MMMM YYYY")}
           </span>
           <span className="ack-fcolor2 me-3 d-lg-inline d-block">
-            {moment(item.tanggal_keluar).format("M") - moment(item.tanggal_masuk).format("M")}{" "}
+            {moment(item.tanggal_keluar).format("YYYY") - moment(item.tanggal_masuk).format("YYYY")}{" "}
+            Years {moment(item.tanggal_keluar).format("M") - moment(item.tanggal_masuk).format("M")}{" "}
             Months
           </span>
           <p className="my-4 ack-fw-400 ack-fsize-400 ack-lh-24">

@@ -9,12 +9,26 @@ function Portofolio(props) {
   const submitDataDiri = (event) => {
     event.preventDefault();
 
-    setDataNewPorto({ ...dataNewPorto, user_id: localStorage.getItem("id") });
-    setDataNewPorto({ ...dataNewPorto, user_id: localStorage.getItem("id") });
+    if (!dataNewPorto.nama_aplikasi || !dataNewPorto.image || !dataNewPorto.link_repository) {
+      toast.error(
+        `Tolong Isi Kolom ${
+          !dataNewPorto.nama_aplikasi
+            ? "Nama Aplikasi"
+            : !dataNewPorto.link_repository
+            ? "Link Repository Aplikasi"
+            : !dataNewPorto.image
+            ? "Gambar Aplikasi"
+            : ""
+        }`
+      );
+    } else {
+      setDataNewPorto({ ...dataNewPorto, user_id: localStorage.getItem("id") });
+      setDataNewPorto({ ...dataNewPorto, user_id: localStorage.getItem("id") });
 
-    setTimeout(() => {
-      postPorto();
-    }, 100);
+      setTimeout(() => {
+        postPorto();
+      }, 100);
+    }
   };
 
   const [dataPortoUser, setDataPortoUser] = useState([]);
@@ -31,25 +45,38 @@ function Portofolio(props) {
   }, []);
 
   const postPorto = () => {
-    const formData = new FormData();
+    if (
+      dataNewPorto.image.type == "image/jpeg" ||
+      dataNewPorto.image.type == "image/png" ||
+      dataNewPorto.image.type == "image/jpg"
+    ) {
+      if (dataNewPorto.image.size > 1024 * 1024 * 3) {
+        toast.error("Ukuran File Terlalu Besar ( Max 3 MB )");
+      } else {
+        const formData = new FormData();
 
-    for (const data in dataNewPorto) {
-      formData.append(data, dataNewPorto[data]);
+        for (const data in dataNewPorto) {
+          formData.append(data, dataNewPorto[data]);
+        }
+
+        for (const pair of formData.entries()) {
+          // console.log(pair[0] + ", " + pair[1]);
+        }
+
+        axios
+          .post("portfolio", formData)
+          .then((res) => {
+            toast.success(res.data.msg);
+            setDataNewPorto({});
+            getPortoFolioUser();
+          })
+          .catch((err) => {
+            toast.error(err.msg);
+          });
+      }
+    } else {
+      toast.error("Hanya File Bertipe Gambar Yang Diperbolehkan");
     }
-
-    for (const pair of formData.entries()) {
-      // console.log(pair[0] + ", " + pair[1]);
-    }
-
-    axios
-      .post("portfolio", formData)
-      .then((res) => {
-        toast.success(res.data.msg);
-        getPortoFolioUser();
-      })
-      .catch((err) => {
-        toast.error(err.msg);
-      });
   };
 
   const [dataNewPorto, setDataNewPorto] = useState({});
@@ -96,28 +123,53 @@ function Portofolio(props) {
   const updatePorto = (event) => {
     event.preventDefault();
 
-    const formData = new FormData();
+    if (dataNewPorto.image) {
+      if (
+        dataNewPorto.image.type == "image/jpeg" ||
+        dataNewPorto.image.type == "image/png" ||
+        dataNewPorto.image.type == "image/jpg"
+      ) {
+        if (dataNewPorto.image.size > 1024 * 1024 * 3) {
+          toast.error("Ukuran File Terlalu Besar ( Max 3 MB )");
+        } else {
+          const formData = new FormData();
 
-    for (const data in dataNewPorto) {
-      formData.append(data, dataNewPorto[data]);
+          for (const data in dataNewPorto) {
+            formData.append(data, dataNewPorto[data]);
+          }
+
+          for (const pair of formData.entries()) {
+            // console.log(pair[0] + ", " + pair[1]);
+          }
+
+          axios.patch(`portfolio/${id}`, formData).then((res) => {
+            toast.success("Success Update Portofolio");
+            setIsUpdate(false);
+            setDataNewPorto({});
+            getPortoFolioUser();
+          });
+        }
+      } else {
+        toast.error("Data Harus Berupa Gambar");
+      }
+    } else {
+      console.log("dataNewPorto");
+      console.log(dataNewPorto);
+      delete dataNewPorto.image;
+      console.log(dataNewPorto);
+
+      axios.patch(`portfolio/${id}`, dataNewPorto).then((res) => {
+        toast.success("Success Update Portofolio");
+        setIsUpdate(false);
+        setDataNewPorto({});
+        getPortoFolioUser();
+      });
     }
-
-    for (const pair of formData.entries()) {
-      // console.log(pair[0] + ", " + pair[1]);
-    }
-
-    axios.patch(`portfolio/${id}`, formData).then((res) => {
-      toast.success("Success Update Portofolio");
-      setIsUpdate(false);
-      setDataNewPorto({});
-      getPortoFolioUser();
-    });
   };
 
   const { link_repository, nama_aplikasi, id } = dataNewPorto;
   return (
     <>
-      <ToastContainer />
       <div className="user-profile__porto-exp mb-4 ack-bg-white">
         <p className="p-4 updateForm__header margin-reset ack-fw-600 ack-fsize-22">Portofolio</p>
         <form
@@ -135,6 +187,7 @@ function Portofolio(props) {
               className="p-2 col-12"
               value={nama_aplikasi ? nama_aplikasi : ""}
               onChange={(event) => handleInputPorto(event)}
+              // required
             />
 
             <label htmlFor="name" className="d-blok col-12 mt-4">
@@ -147,6 +200,7 @@ function Portofolio(props) {
               className="p-2 col-12"
               value={link_repository ? link_repository : ""}
               onChange={(event) => handleInputPorto(event)}
+              // required
             />
           </div>
 
@@ -166,34 +220,8 @@ function Portofolio(props) {
                   height: "100%",
                   width: "100%"
                 }}
+                // required
               />
-              <div className="col-10 text-center justify-content-center">
-                <img src={Cloud} alt="" />
-                <p className="my-4 ack-fsize-14 col-12">
-                  Drag & Drop untuk Upload Gambar Aplikasi Mobile
-                </p>
-                <p className="my-4 ack-fsize-12 col-12">
-                  Atau cari untuk mengupload file dari direktorimu.
-                </p>
-                <div className="row col-12 justify-content-center  margin-reset">
-                  <div className="col-lg-6 mb-3 mb-lg-0 col-12 inputPortoImage__cond align-items-center row text-start">
-                    <div className="col-lg-3 text-center col-12">
-                      <img src={Expand} alt="" />
-                    </div>
-                    <span className="col-lg-9 text-center text-lg-start col-12 ack-fsize-12">
-                      High-Res Image PNG, JPG or GIF{" "}
-                    </span>
-                  </div>
-                  <div className="col-lg-6 mb-3 mb-lg-0 col-12 inputPortoImage__cond row align-items-center text-start">
-                    <div className="col-lg-3 text-center col-12">
-                      <img src={Photo} alt="" />
-                    </div>
-                    <span className="col-lg-9 text-center text-lg-start col-12 ack-fsize-12">
-                      Size 1080x1920 or 600x800
-                    </span>
-                  </div>
-                </div>
-              </div>
             </div>
           </div>
 
@@ -214,7 +242,7 @@ function Portofolio(props) {
 
         <div className="row container margin-reset">
           {dataPortoUser.map((item, index) => (
-            <div key={index} className="col-lg-4 col-12 text-center my-3 " style={{}}>
+            <div key={index} className="col-lg-4 col-12 text-center my-3 ">
               <div
                 className="col-12 text-center p-2"
                 style={{

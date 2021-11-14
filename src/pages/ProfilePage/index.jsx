@@ -70,6 +70,7 @@ function ProfilePage(props) {
                 setShow={setShow}
                 dataUser={dataUser}
                 getDataUser={getDataUser}
+                getPortoFolioUser={getPortoFolioUser}
                 role={role}
                 userId={user_id}
               />
@@ -78,7 +79,7 @@ function ProfilePage(props) {
                 <>
                   <div className="col-lg-8 col-12 data-diri position-relative">
                     <DataDiri dataUser={dataUser} getDataUser={() => getDataUser()} />
-                    <Skill Skills={dataUser.skill !== null ? dataUser.skill.split(",") : null} />
+                    <Skill Skills={dataUser.skill != null ? dataUser.skill.split(", ") : []} />
                     <PengalamanKerja />
                     <Portofolio />
                   </div>
@@ -94,9 +95,14 @@ function ProfilePage(props) {
                             : "me-4 ack-fsize-22 ack-fw-600 hover-pointer"
                         }
                         onClick={() => setShowExp(false)}
-                        style={{}}
+                        style={
+                          !showExp
+                            ? { borderBottom: "4px solid #5e50a1", position: "relative" }
+                            : {}
+                        }
                       >
                         Portofolio
+                        {/* <span className="uderlineHeader"></span> */}
                       </span>
                       <span
                         className={
@@ -105,8 +111,14 @@ function ProfilePage(props) {
                             : "me-4 ack-fsize-22 ack-fw-600 ack-fcolor2 hover-pointer"
                         }
                         onClick={() => setShowExp(true)}
+                        style={
+                          !showExp
+                            ? {}
+                            : { borderBottom: "4px solid #5e50a1", position: "relative" }
+                        }
                       >
                         Pengalaman Kerja
+                        {/* <span className="uderlineHeader"></span> */}
                       </span>
                     </div>
 

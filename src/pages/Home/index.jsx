@@ -24,9 +24,11 @@ import {
 import { connect, useSelector } from "react-redux";
 import { toast, ToastContainer } from "react-toastify";
 import { useHistory } from "react-router-dom";
+import axios from "../../utils/axios";
 
 function Home(props) {
   const history = useHistory();
+  const [userProfile, setUserProfile] = useState({});
   const [user, setUser] = useState([]);
   const [show, setShow] = useState(false);
   const [filterShow, setFilterShow] = useState(false);
@@ -163,6 +165,17 @@ function Home(props) {
     }
   };
 
+  const getUserProfile = () => {
+    axios
+      .get(`user/${props.user.userProfile.id}`)
+      .then((res) => {
+        setUserProfile(res.data.data[0]);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
   const linkToProfile = (user_id) => {
     history.push("/profile", { user_id });
   };
@@ -171,12 +184,16 @@ function Home(props) {
     listGetAllUsers();
   }, [role, page, limit, sort, search]);
 
+  useEffect(() => {
+    getUserProfile();
+  }, []);
+
   return (
     <>
       {!show ? (
         <>
           <div className="d-none d-md-block">
-            <Navbar {...props} />
+            <Navbar image={userProfile.image} {...props} />
           </div>
           <section className="homepage__container homepage__spacing homepage__banner">
             <section className="d-block d-md-none homepage__topmenu">

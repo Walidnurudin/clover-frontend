@@ -30,6 +30,7 @@ function ProfilePage(props) {
   const [role, setRole] = useState("");
   const [dataPortoUser, setDataPortoUser] = useState([]);
   const [dataUser, setDataUser] = useState({});
+  const [userProfile, setUserProfile] = useState({});
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
@@ -52,15 +53,27 @@ function ProfilePage(props) {
       });
   };
 
+  const getUserProfile = () => {
+    axios
+      .get(`user/${localStorage.getItem("id")}`)
+      .then((res) => {
+        setUserProfile(res.data.data[0]);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
   useEffect(() => {
     getPortoFolioUser();
     document.title = "Clover Hire | Profile";
     getDataUser();
+    getUserProfile();
   }, []);
 
   return (
     <>
-      <Navbar {...props} />
+      <Navbar image={userProfile.image} {...props} />
       <main className="container-fluid profile-main padding-reset ack-f-open-sans">
         <div className="dec-bg-blue d-none d-lg-block"></div>
 

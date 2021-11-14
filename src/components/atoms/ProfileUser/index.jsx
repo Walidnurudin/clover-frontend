@@ -211,7 +211,7 @@ function ProfileUser(props) {
                 )
               ) : null}
               <div className="user-profile__skils my-5">
-                <h3>Skils</h3>
+                <h3>Skills</h3>
                 <div className="user-profile__skils-container d-flex flex-wrap">
                   {skill
                     ? skill.split(",").map((item, index) => (

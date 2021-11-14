@@ -137,7 +137,7 @@ function EditProfilePerusahaan(props) {
         pauseOnHover
       />
 
-      <Navbar {...props} />
+      <Navbar {...props} {...userState} />
 
       <div className="edit__profile__perusahaan">
         <div className="edit__profile__perusahaan--purple"></div>

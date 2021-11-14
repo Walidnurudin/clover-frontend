@@ -37,8 +37,9 @@ class FormLogin extends Component {
         localStorage.setItem("token", res.value.data.data.token);
         localStorage.setItem("id", res.value.data.data.id);
         this.props.getUserProfile(res.value.data.data.id).then((res) => {
+          console.log("user logged =>", res);
           localStorage.setItem("role", res.value.data.data[0].role);
-          if (res.action.payload.data.data[0].role === "Perekrut") {
+          if (res.value.data.data[0].role === "Perekrut") {
             this.props.history.push("/home");
           } else {
             this.props.history.push("/profile");

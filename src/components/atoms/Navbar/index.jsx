@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Container, Navbar, Button } from "react-bootstrap";
 import { Bell, Envelope } from "react-bootstrap-icons";
 import { Profile } from "../../../assets/images";
+import { defaultImage } from "../../../assets/images/ProfilePageImage";
 import "./index.css";
 import { LogoPurple } from "../../../assets/images";
 import { Link, useHistory } from "react-router-dom";
@@ -85,7 +86,7 @@ const Navigation = (props) => {
                           ? process.env.REACT_APP_DEV
                           : process.env.REACT_APP_PROD
                       }uploads/user/${props.image}`
-                    : Profile
+                    : defaultImage
                 }
                 alt="Profile"
                 className="user__pic"

@@ -31,13 +31,13 @@ function Home(props) {
   const [show, setShow] = useState(false);
   const [filterShow, setFilterShow] = useState(false);
   const [search, setSearch] = useState("");
-  let [sort] = useState("DESC");
-  const [jobFreelance] = useState("Freelance");
-  const [jobFulltime] = useState("Fulltime");
   const [page, setPage] = useState(1);
   let [limit] = useState(3);
   const [totalPage, setTotalPage] = useState("");
   const [isLoading, setLoading] = useState(false);
+  const [jobFreelance] = useState("Freelance");
+  const [jobFulltime] = useState("Fulltime");
+  let [sort] = useState("DESC");
   const [role] = useState("Pekerja");
 
   const listGetAllUsers = () => {
@@ -64,12 +64,13 @@ function Home(props) {
     }
   };
 
-  const findUser = async (event) => {
+  const findUser = async () => {
     try {
       setLoading(true);
       const response = await props.searchUsers(role, search, page, limit);
       setLoading(false);
       setUser(response.value.data.data);
+      setTotalPage(response.value.data.pagination.totalPage);
       history.push(`/home?search=${search}`);
       toast.success("Pencarian Ditemukan");
     } catch (error) {
@@ -94,9 +95,7 @@ function Home(props) {
   const findSortBySkill = async () => {
     try {
       setLoading(true);
-
       const response = await props.sortSkillUsers(role, sort, page, limit);
-      console.log(response);
       setLoading(false);
       setUser(response.value.data.data);
       setTotalPage(response.value.data.pagination.totalPage);
@@ -151,6 +150,19 @@ function Home(props) {
     }
   };
 
+  const searchMobile = async (e) => {
+    setSearch(e.target.value);
+    try {
+      if (e.key === "Enter") {
+        const response = await props.searchUsers(role, search, page, limit);
+        setUser(response.value.data.data);
+      }
+    } catch (error) {
+      toast.error("Keywoard yang anda cari tidak ditemukan...");
+      new Error(error);
+    }
+  };
+
   const linkToProfile = (user_id) => {
     history.push("/profile", { user_id });
   };
@@ -164,15 +176,15 @@ function Home(props) {
       {!show ? (
         <>
           <div className="d-none d-md-block">
-            <Navbar {...props} />
+            <Navbar {...user} {...props} />
           </div>
           <section className="homepage__container homepage__spacing homepage__banner">
             <section className="d-block d-md-none homepage__topmenu">
               <img src={Union} className="img-fluid" alt="Union" />
               <div className="homepage__topmenu-column">
                 <div>
-                  <p className="homepage__topmenu-date">Sen, 21 April 2021</p>
-                  <h4 className="homepage__topmenu-name">Hai, Mohammad!</h4>
+                  <p className="homepage__topmenu-date">{new Date(Date.now()).toDateString()}</p>
+                  <h4 className="homepage__topmenu-name">Hai, {props.user.userProfile.nama}!</h4>
                 </div>
                 <div>
                   <img src={Bell} className="homepage__topmenu-bell img-fluid" alt="Bell" />
@@ -273,16 +285,16 @@ function Home(props) {
                     <div className="homepage__list-users-card" key={idx}>
                       <img
                         src={`${
-                          user.image
+                          users.image
                             ? `${
                                 process.env.REACT_APP_NAME === "dev"
                                   ? process.env.REACT_APP_DEV
                                   : process.env.REACT_APP_PROD
-                              }uploads/user/${user.image}`
+                              }uploads/user/${users.image}`
                             : "https://www.a1hosting.net/wp-content/themes/arkahost/assets/images/default.jpg"
                         }`}
-                        alt=""
-                        className="homepage__list-users-card-image img-fluid"
+                        alt={`Profile ${users.nama}`}
+                        className="homepage__list-users-card-image img-fluid rounded-circle"
                       />
                       <div className="homepage__list-users-card-body">
                         <div className="homepage__list-users-card-body-left">
@@ -330,9 +342,10 @@ function Home(props) {
                 nextLabel={">"}
                 pageCount={totalPage}
                 onPageChange={changePagination}
+                activeClassName="homepage__pagination-active"
                 previousClassName="homepage__pagination-previous"
                 nextClassName="homepage__pagination-next"
-                pageClassName="homepage__pagination-page"
+                // pageClassName="homepage__pagination-page"
               />
             </section>
           </section>
@@ -340,12 +353,18 @@ function Home(props) {
       ) : (
         <section
           className={`homepage__mobile-navigation-main ${
-            !filterShow ? null : "homepage__mobile-navigation-fade"
+            !filterShow ? "" : "homepage__mobile-navigation-fade"
           }`}
         >
-          <section className="homepage__mobile-navigation-search-main d-flex d-md-none">
+          <section className="homepage__mobile-navigation-search-main d-flex d-md-none position-relative">
             <div className="homepage__mobile-navigation-search">
-              <input type="text" placeholder="Golang Java React" />
+              <input
+                type="text"
+                placeholder="Golang Java React"
+                onKeyPress={searchMobile}
+                onChange={(e) => setSearch(e.target.value)}
+                name="search"
+              />
             </div>
             <div className="homepage__mobile-navigation-filter">
               <button onClick={handleFilterMobile}>
@@ -354,39 +373,84 @@ function Home(props) {
             </div>
           </section>
           {/* CARD USERS MOBILE */}
-          {/* <div className="homepage__mobile-navigation-list-users">
+          <div className="homepage__mobile-navigation-list-users">
             <h5>Android Developer</h5>
+
+            <ToastContainer
+              style={{
+                width: "79%",
+                height: "120px",
+                fontSize: "14px",
+                margin: "80px 0px",
+                justifyContent: "right"
+              }}
+            />
             <div className="homepage__mobile-navigation-list-users-container">
-              <div className="homepage__mobile-navigation-list-users-card">
-                <div className="homepage__mobile-navigation-list-users-card-parent-image">
-                  <p>
-                    Lorem, ipsum dolor sit amet consectetur adipisicing elit. Debitis qui, libero
-                    similique saepe animi consequuntur exercitationem mollitia eaque totam facilis
-                    veniam vero optio cumque voluptate aut possimus amet repellat dolores.
-                  </p>
-                </div>
-              </div>
+              {user.length > 0 && props.user.users !== null ? (
+                user.map((users) => {
+                  return (
+                    <div
+                      className={`${
+                        !filterShow
+                          ? "homepage__mobile-navigation-list-users-card"
+                          : "homepage__mobile-navigation-list-users-fade"
+                      } `}
+                      key={users.id}
+                    >
+                      <div className="homepage__mobile-navigation-list-users-card-parent-image">
+                        <img
+                          src={Profile}
+                          alt="Profile"
+                          className="homepage__mobile-navigation-list-image"
+                        />
+                      </div>
+                      <div className="homepage__mobile-navigation-list-users-card-body">
+                        <h4 className="homepage__mobile-navigation-list-users-card-body-title">
+                          {users.nama}
+                        </h4>
+                        <p className="homepage__mobile-navigation-list-users-card-body-title-job">
+                          {users.jobDesk ? users.jobDesk : "-"}
+                        </p>
+
+                        <div className="homepage__mobile-navigation-list-users-card-body-list-skills">
+                          {users.skill.map((skill, idx) => (
+                            <div
+                              className="homepage__mobile-navigation-list-users-card-body-skills"
+                              key={idx}
+                            >
+                              {skill}
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+                    </div>
+                  );
+                })
+              ) : (
+                <p className="text-center fw-bold">Belum ada pekerja</p>
+              )}
             </div>
-          </div> */}
-          <div className="homepage__mobile-navigation"></div>
+          </div>
           {!filterShow ? null : (
-            <div className="homepage__mobile-rectangle">
+            <div className="homepage__mobile-rectangle position-absolute">
               <div>
-                <button className="homepage__mobile-rectangle-link">Sortir Berdasarkan nama</button>
+                <button className="homepage__mobile-rectangle-link" onClick={findSortByName}>
+                  Sortir Berdasarkan nama
+                </button>
                 <hr />
-                <button className="homepage__mobile-rectangle-link">
+                <button className="homepage__mobile-rectangle-link" onClick={findSortBySkill}>
                   Sortir Berdasarkan Skill
                 </button>
                 <hr />
-                <button className="homepage__mobile-rectangle-link">
+                <button className="homepage__mobile-rectangle-link" onClick={findSortByLocation}>
                   Sortir Berdasarkan Lokasi
                 </button>
                 <hr />
-                <button className="homepage__mobile-rectangle-link">
+                <button className="homepage__mobile-rectangle-link" onClick={findFreelance}>
                   Sortir Berdasarkan Freelance
                 </button>
                 <hr />
-                <button className="homepage__mobile-rectangle-link">
+                <button className="homepage__mobile-rectangle-link" onClick={findFulltime}>
                   Sortir Berdasarkan Fulltime
                 </button>
               </div>

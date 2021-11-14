@@ -16,6 +16,7 @@ import Footer from "../../components/atoms/Footer";
 import Hire from "../Hire";
 
 function ProfilePage(props) {
+  console.log("nav profile comp=>", props);
   const user_id =
     localStorage.getItem("role") === "Pekerja"
       ? localStorage.getItem("id")

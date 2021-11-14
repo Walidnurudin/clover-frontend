@@ -23,7 +23,7 @@ const initialState = {
   linkedin: ""
 };
 
-function EditProfilePerusahaan() {
+function EditProfilePerusahaan(props) {
   const [form, setForm] = useState(initialState);
   const [image, setImage] = useState(null);
 
@@ -137,7 +137,7 @@ function EditProfilePerusahaan() {
         pauseOnHover
       />
 
-      <Navbar />
+      <Navbar {...props} />
 
       <div className="edit__profile__perusahaan">
         <div className="edit__profile__perusahaan--purple"></div>

@@ -23,12 +23,18 @@ function Skill(props) {
     if (!inputSkill) {
       toast.error("Masukkan Skill");
     } else {
-      setUserSkills([...userSkills, `${inputSkill}`]);
-      axios.patch("user", { skill: [...userSkills, `${inputSkill}`].join(", ") }).then((res) => {
-        toast.success("Success add skill");
-        getUserSkill();
+      const test = [...userSkills, inputSkill];
+      if (test.length <= 8) {
+        setUserSkills([...userSkills, `${inputSkill}`]);
+        axios.patch("user", { skill: [...userSkills, `${inputSkill}`].join(", ") }).then((res) => {
+          toast.success("Success add skill");
+          getUserSkill();
+          setInputSkill("");
+        });
+      } else {
+        toast.error("Maximum Number of Skill is 8 Skill");
         setInputSkill("");
-      });
+      }
     }
 
     // setUserSkills([userSkills, `${inputSkill}`]);
@@ -73,19 +79,21 @@ function Skill(props) {
   const deleteSkill = (index) => {
     // delete userSkills[index];
     // console.log(userSkills.length);
+    if (userSkills.length <= 1) {
+      toast.warning("Can't delete last skill, edit it instead");
+    } else {
+      userSkills.splice(index, 1);
+      axios
+        .patch("user", { skill: userSkills.join(", ") })
+        .then((res) => {
+          getUserSkill();
+        })
+        .catch((err) => {
+          // setUserSkills([]);
+        });
 
-    userSkills.splice(index, 1);
-
-    axios
-      .patch("user", { skill: userSkills.join(", ") })
-      .then((res) => {
-        getUserSkill();
-      })
-      .catch((err) => {
-        // setUserSkills([]);
-      });
-
-    toast.success("Success delete skill");
+      toast.success("Success delete skill");
+    }
   };
 
   // GET DATA USER

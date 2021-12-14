@@ -40,7 +40,6 @@ class FormLogin extends Component {
         localStorage.setItem("id", res.value.data.data.id);
         this.props.getUserProfile(res.value.data.data.id).then((res) => {
           localStorage.setItem("role", res.value.data.data[0].role);
-
           if (res.action.payload.data.data[0].role === "Pekerja") {
             this.props.history.push("/profile");
           } else {
@@ -49,6 +48,7 @@ class FormLogin extends Component {
         });
       })
       .catch((err) => {
+        console.log(this.props.auth);
         this.setState({
           isError: true
         });

@@ -107,7 +107,7 @@ const Navigation = (props) => {
                 padding: "12px 24px"
               }}
             >
-              Profil
+              Profile
             </button>
           ) : (
             <div className="navbar__item--right">

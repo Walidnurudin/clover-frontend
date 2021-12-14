@@ -27,7 +27,7 @@ function PengalamanKerja() {
         }
       })
       .catch((err) => {
-        console.log(err);
+        // console.log(err);
         // console.log(err);
         // toast.error(err.msg);
       });
@@ -269,18 +269,10 @@ function PengalamanKerja() {
             ></textarea>
           </div>
 
-          <div className="col-12">
-            <hr className="my-5" />
-          </div>
-
-          <div className="col-12 d-flex justify-content-end ">
+          <div className="my-3 mb-4 col-12 d-flex justify-content-end ">
             <button type="submit" className="p-3 col-12 btn-add-exp">
               {isUpdate ? "Perbarui Pengalaman Kerja" : "Tambah Pengalaman Kerja"}
             </button>
-          </div>
-
-          <div className="col-12">
-            <hr className="my-5" />
           </div>
         </form>
 

@@ -251,7 +251,7 @@ function Portofolio(props) {
             <label htmlFor="" className="mt-4 col-12">
               Upload Gambar
             </label>
-            <div className="col-12 portoInput p-5 d-flex justify-content-center">
+            <div className="col-12 portoInput d-flex justify-content-center">
               <input
                 type="file"
                 name="image"
@@ -268,11 +268,7 @@ function Portofolio(props) {
             </div>
           </div>
 
-          <div className="col-12">
-            <hr className="my-5" />
-          </div>
-
-          <div className="col-12 d-flex justify-content-end ">
+          <div className="mt-3 col-12 d-flex justify-content-end ">
             <button
               type="submit"
               // onClick={() => uploadNewDataPorto()}

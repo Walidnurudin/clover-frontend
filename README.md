@@ -11,6 +11,7 @@
 - [Screenshoots](#screenshoots)
 - [Demo Project](#demo-project)
 - [Backend Repository](#backend-repository)
+- [Contributors](#contributors)
 
 ## Description
 
@@ -45,3 +46,32 @@ For the website you can try it in [[here](https://clover-hire.netlify.app)]
 ## Backend Repository
 
 For the backend repository, you can check it in [[here](https://github.com/AhmadZaky19/clover-backend)]
+
+## Contributors
+
+#### Fullstack
+
+  <a href="https://github.com/riyaraa">
+  <img src="https://github.com/riyaraa.png?size=50">
+  </a>
+  <a href="https://github.com/Walidnurudin">
+  <img src="https://github.com/Walidnurudin.png?size=50">
+  </a>
+
+#### Frontend
+
+  <a href="https://github.com/AhmadZaky19">
+  <img src="https://github.com/AhmadZaky19.png?size=50">
+  </a>
+  <a href="https://github.com/AndreasCKurniawan">
+  <img src="https://github.com/AndreasCKurniawan.png?size=50">
+  </a>
+
+#### Backend
+
+  <a href="https://github.com/mrfachri19">
+  <img src="https://github.com/mrfachri19.png?size=50">
+  </a>
+  <a href="https://github.com/Novianaa">
+  <img src="https://github.com/Novianaa.png?size=50">
+  </a>
